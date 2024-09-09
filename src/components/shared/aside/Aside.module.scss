@@ -1,0 +1,57 @@
+.root {
+	@apply absolute  left-0 top-0 z-9999 flex h-screen w-72 flex-col overflow-y-hidden bg-[#1C2434] duration-300 ease-linear lg:static lg:translate-x-0 translate-x-0;
+
+	//
+	// @media only screen and (max-width: 600px) {
+	// 	@apply bg-white;
+	// }
+	.top {
+		@apply flex gap-2 items-center px-6 py-3 cursor-pointer shadow-md h-16;
+		h1 {
+			@apply text-white text-2xl font-bold;
+		}
+	}
+
+	@media only screen and (max-width: 64rem) {
+		@apply -translate-x-full;
+
+		// &.active {
+		// 	@apply translate-x-0;
+		// }
+	}
+	.center {
+		@apply flex flex-col overflow-y-auto duration-300 ease-linear;
+		&::-webkit-scrollbar {
+			width: 5px;
+		}
+
+		/* Track */
+
+		/* Handle */
+		&::-webkit-scrollbar-thumb {
+			background: #888;
+			border-radius: 5px;
+		}
+
+		/* Handle on hover */
+		&::-webkit-scrollbar-thumb:hover {
+			background: #555;
+		}
+	}
+	nav {
+		@apply mt-5 py-3 px-2;
+	}
+}
+
+.overlay {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	@apply bg-slate-900 opacity-50;
+	@media only screen and (max-width: 64rem) {
+		display: block;
+	}
+}
