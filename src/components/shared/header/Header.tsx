@@ -12,7 +12,6 @@ import {
 	DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { ROUTES } from "@/constants/routes";
 import { useRouteName } from "@/hooks/useRouteName.hook";
 
 interface HeaderProps {
