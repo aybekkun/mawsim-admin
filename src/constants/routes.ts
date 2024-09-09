@@ -1,4 +1,6 @@
 export const ROUTES = {
-    HOME: "/",
-    ACCEPT_ORDER: "/accept-order",
-}
+	HOME: "/",
+	FINANCE: "/finance",
+    WAREHOUSE_STATS: "/warehouse-stats",
+	ACCEPT_ORDER: "/accept-order",
+};

@@ -15,7 +15,9 @@ const MainLayout: FC<MainLayoutProps> = ({ className = `` }) => {
 			<AsideMenu />
 			<div className={styles.main}>
 				<Header className="w-full " />
-				<Outlet />
+				<div className={styles.content}>
+					<Outlet />
+				</div>
 			</div>
 		</div>
 	);
