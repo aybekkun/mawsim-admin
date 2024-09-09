@@ -12,6 +12,8 @@ import {
 	DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants/routes";
+import { useRouteName } from "@/hooks/useRouteName.hook";
 
 interface HeaderProps {
 	className?: string;
@@ -19,12 +21,14 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({ className = `` }) => {
 	const { setActiveMenu } = useActiveMenu();
+	const routeName = useRouteName();
 	return (
 		<header className={cn(styles.root, className)}>
-			<div>
+			<div className="flex items-center gap-5">
 				<button onClick={() => setActiveMenu(true)} className={styles.menu}>
 					<MenuIcon />
 				</button>
+				<h2 className="text-xl font-bold text-slate-800">{routeName}</h2>
 			</div>
 
 			<div>

@@ -6,25 +6,25 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 		title: "Статистика",
 		items: [
 			{
-				link: ROUTES.FINANCE,
+				link: ROUTES.FINANCE.route,
 				icon: HandCoins,
-				text: "Финансы",
+				text: ROUTES.FINANCE.name,
 			},
 			{
-				link: ROUTES.WAREHOUSE_STATS,
+				link: ROUTES.WAREHOUSE_STATS.route,
 				icon: Package,
-				text: "Товары на складе",
+				text: ROUTES.WAREHOUSE_STATS.name,
 			},
 			{
-				link: "/",
+				link: ROUTES.ORDER_STATS.route,
 				icon: Logs,
-				text: "Заказы",
+				text: ROUTES.ORDER_STATS.name,
 			},
 
 			{
-				link: "/",
+				link:ROUTES.PRODUCT_LIST.route,
 				icon: AlignJustify,
-				text: "Список товаров",
+				text: ROUTES.PRODUCT_LIST.name,
 			},
 		],
 	},
@@ -42,9 +42,9 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 		title: "Заказы",
 		items: [
 			{
-				link: ROUTES.ACCEPT_ORDER,
+				link: ROUTES.ACCEPT_ORDER.route,
 				icon: ArrowRightToLine,
-				text: "Принять заказ",
+				text: ROUTES.ACCEPT_ORDER.name,
 			},
 			{
 				link: "/",
