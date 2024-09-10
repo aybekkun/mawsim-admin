@@ -1,5 +1,15 @@
 import { ROUTES } from "@/constants/routes";
-import { HandCoins, Package,AlignJustify, Logs, LucideIcon, ReceiptText, ArrowRightToLine } from "lucide-react";
+import {
+	HandCoins,
+	Warehouse,
+	TrendingDown,
+	Package,
+	AlignJustify,
+	Logs,
+	LucideIcon,
+	ReceiptText,
+	ArrowRightToLine,
+} from "lucide-react";
 
 export const menuItems: { title: string; items: { link: string; icon: LucideIcon; text: string }[] }[] = [
 	{
@@ -22,7 +32,7 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 			},
 
 			{
-				link:ROUTES.PRODUCT_LIST.route,
+				link: ROUTES.PRODUCT_LIST.route,
 				icon: AlignJustify,
 				text: ROUTES.PRODUCT_LIST.name,
 			},
@@ -32,9 +42,9 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 		title: "Касса",
 		items: [
 			{
-				link: "/",
+				link: ROUTES.PAYMENT.route,
 				icon: ReceiptText,
-				text: "Оплата",
+				text: ROUTES.PAYMENT.name,
 			},
 		],
 	},
@@ -47,9 +57,35 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 				text: ROUTES.ACCEPT_ORDER.name,
 			},
 			{
-				link: "/",
+				link: ROUTES.ORDERS.route,
 				icon: Logs,
-				text: "Заказы",
+				text: ROUTES.ORDERS.name,
+			},
+		],
+	},
+	{
+		title: "Админстараторская",
+		items: [
+			{
+				link: ROUTES.ORDER_LIST.route,
+				icon: Logs,
+				text: ROUTES.ORDER_LIST.name,
+			},
+			{
+				link: ROUTES.PRODUCT.route,
+				icon: Package,
+				text: ROUTES.PRODUCT.name,
+			},
+
+			{
+				link: ROUTES.WAREHOUSE.route,
+				icon: Warehouse,
+				text: ROUTES.WAREHOUSE.name,
+			},
+			{
+				link: ROUTES.EXPENSE.route,
+				icon: TrendingDown,
+				text: ROUTES.EXPENSE.name,
 			},
 		],
 	},
