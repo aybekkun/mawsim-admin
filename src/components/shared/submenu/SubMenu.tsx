@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import cn from "classnames";
 import { LucideIcon } from "lucide-react";
 import styles from "./SubMenu.module.scss";
@@ -20,9 +20,9 @@ const SubMenu: FC<SubmenuProps> = ({ title, items, className = `` }) => {
 			<h3>{title}</h3>
 			{items.map(({ link, icon: Icon, text }, index) => (
 				<li key={index + title}>
-					<Link to={link}>
+					<NavLink className={({ isActive }) => (isActive ? styles.active : "")} to={link}>
 						<Icon /> {text}
-					</Link>
+					</NavLink>
 				</li>
 			))}
 		</ul>
