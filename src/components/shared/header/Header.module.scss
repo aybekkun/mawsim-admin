@@ -1,6 +1,7 @@
 .root {
 	@apply h-16 flex gap-2 items-center justify-between px-6 py-3 shadow-xl bg-slate-50;
-
+	position: sticky;
+	top: 0;
 	.menu {
 		display: none;
 		@apply cursor-pointer w-8 min-h-8;

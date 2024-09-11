@@ -29,7 +29,7 @@ const AsideMenu: FC = () => {
 						</ul>
 					</nav>
 				</div>
-				<div className={styles.modal}></div>
+			
 			</div>
 			{active && <div onClick={() => setActiveMenu(false)} className={styles.overlay}></div>}
 		</>
