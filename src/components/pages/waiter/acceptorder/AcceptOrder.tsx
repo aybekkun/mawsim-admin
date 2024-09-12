@@ -3,8 +3,8 @@ import cn from "classnames";
 import MenuList from "./menulist/MenuList";
 
 import SearchInput from "@/components/shared/search/SearchInput";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import styles from "./AcceptOrder.module.scss";
+import OrderList from "./orderlist/OrderList";
 
 interface AcceptOrderProps {
 	className?: string;
@@ -16,12 +16,7 @@ const AcceptOrder: FC<AcceptOrderProps> = ({ className = `` }) => {
 			<SearchInput />
 			<div className={styles.content}>
 				<MenuList />
-				<Card className={styles.right}>
-					<CardHeader>
-						<CardTitle>Заказ</CardTitle>
-					</CardHeader>
-					<CardContent></CardContent>
-				</Card>
+				<OrderList />
 			</div>
 		</div>
 	);
