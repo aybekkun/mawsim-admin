@@ -1,15 +1,16 @@
-import { FC } from 'react'
+import { FC } from "react";
+import AddProductName from "./addproductname/AddProductName";
 
 interface ProductProps {
-  className?: string
+	className?: string;
 }
 
 const Product: FC<ProductProps> = ({ className = `` }) => {
-  return (
-    <div className = {className}>
-     Product
-    </div>
-  )
-}
+	return (
+		<div className={className}>
+			<AddProductName />
+		</div>
+	);
+};
 
 export default Product;

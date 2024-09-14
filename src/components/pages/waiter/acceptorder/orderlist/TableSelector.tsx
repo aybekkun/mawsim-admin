@@ -6,7 +6,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { useState } from "react";
 import cn from "classnames";
 
-const frameworks = [
+const tables = [
 	{
 		value: "собой",
 		label: "собой",
@@ -37,7 +37,7 @@ const TableSelector = () => {
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
 				<Button variant="outline" role="combobox" aria-expanded={open} className="w-[100px] justify-between">
-					{value ? frameworks.find((framework) => framework.value === value)?.label : "Столы"}
+					{value ? tables.find((table) => table.value === value)?.label : "Столы"}
 					<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 				</Button>
 			</PopoverTrigger>
@@ -45,19 +45,19 @@ const TableSelector = () => {
 				<Command>
 					<CommandInput placeholder="Поиск столов..." />
 					<CommandList>
-						<CommandEmpty>No framework found.</CommandEmpty>
+						<CommandEmpty>No table found.</CommandEmpty>
 						<CommandGroup>
-							{frameworks.map((framework) => (
+							{tables.map((table) => (
 								<CommandItem
-									key={framework.value}
-									value={framework.value}
+									key={table.value}
+									value={table.value}
 									onSelect={(currentValue) => {
 										setValue(currentValue === value ? "" : currentValue);
 										setOpen(false);
 									}}
 								>
-									<Check className={cn("mr-2 h-4 w-4", value === framework.value ? "opacity-100" : "opacity-0")} />
-									{framework.label}
+									<Check className={cn("mr-2 h-4 w-4", value === table.value ? "opacity-100" : "opacity-0")} />
+									{table.label}
 								</CommandItem>
 							))}
 						</CommandGroup>

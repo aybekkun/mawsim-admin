@@ -13,6 +13,7 @@ interface Order {
 interface MenuStore {
 	orders: Order[];
 	setQuantity: (id: number, quantity: number) => void;
+	setClear: () => void;
 }
 
 export const useMenuStore = create<MenuStore>((set) => ({
@@ -29,4 +30,5 @@ export const useMenuStore = create<MenuStore>((set) => ({
 					: order
 			),
 		})),
+	setClear: () => set((state) => ({ orders: state.orders.map((order) => ({ ...order, quantity: 0 })) })),
 }));
