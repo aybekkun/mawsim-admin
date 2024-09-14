@@ -6,6 +6,9 @@ export type TProductList = {
 
 export type TProduct = {
     id: number;
-    name: string;
+    productName: string;
     type: string;
+    count: number;
+    onePrice: number;
+    totalPrice: number;
 };

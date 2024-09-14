@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { TProductList } from "./product.types";
+import { TProduct, TProductList } from "./product.types";
 
 export const ProdcutListService = {
 	async getAll() {
@@ -16,3 +16,10 @@ export const ProdcutListService = {
 		return api.delete(`/productslist/${id}`);
 	},
 };
+
+export const ProdcutService = {
+	async getAll() {
+		const { data } = await api.get<TProduct[]>("/products");
+		return data;
+	},
+}

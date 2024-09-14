@@ -6,7 +6,7 @@ import { useMemo } from "react";
 
 export const useProducts = () => {
 	const queryData = useQuery({
-		queryKey: ["products"],
+		queryKey: ["productslist"],
 		queryFn: () => ProdcutListService.getAll(),
 	});
 	const { mutate: create, isPending: isCreating } = useMutation({
