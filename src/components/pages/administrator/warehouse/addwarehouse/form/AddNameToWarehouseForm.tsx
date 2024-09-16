@@ -6,50 +6,52 @@ import { Button } from "@/components/ui/button";
 
 import MyInput from "@/components/shared/MyInput/MyInput";
 import MySelect from "@/components/shared/MySelect/MySelect";
+import { useCreateProductsListMutation } from "@/services/administrator/product/product.api";
+import { addNameSchema } from "@/config/formSchema";
 
 interface AddNameToWarehouseFormProps {
 	className?: string;
 }
 
-const formSchema = z.object({
-	productName: z
-		.string()
-		.min(2, {
-			message: "Минимум два символа",
-		})
-		.max(20, {
-			message: "Максимум 20 символов",
-		}),
-	type: z.enum(["unit", "kg", "litres"]),
-});
+const selectValues = [
+	{ value: "unit", text: "Единицы" },
+	{ value: "kg", text: "Килограммы" },
+	{ value: "liter", text: "Литры" },
+];
 const AddNameToWarehouseForm: FC<AddNameToWarehouseFormProps> = ({ className = `` }) => {
 	const {
 		reset,
 		register,
+		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<z.infer<typeof formSchema>>({
-		resolver: zodResolver(formSchema),
+	} = useForm<z.infer<typeof addNameSchema>>({
+		resolver: zodResolver(addNameSchema),
 		defaultValues: {
 			productName: "",
 			type: "unit",
 		},
 	});
 
-	function onSubmit(values: FieldValues) {
-		console.log(values);
+	const { mutate: createProdcutName, isPending } = useCreateProductsListMutation();
+
+	const onSubmit = async (values: FieldValues) => {
+		await createProdcutName({ productName: values.productName, type: values.type });
 		reset();
-	}
+	};
 	return (
-		<div className={className}>
-			<form onSubmit={handleSubmit(onSubmit)} className="flex items-center gap-4">
-				<MyInput name="productName" label="Название продукта" register={register} error={errors.productName?.message} />
-				<MySelect name="type" label="Тип" register={register} error={errors.type?.message} />
-				<Button className="" type="submit">
-					Submit
-				</Button>
-			</form>
-		</div>
+		<form onSubmit={handleSubmit(onSubmit)} className={"flex items-center gap-4 " + className}>
+			<MyInput
+				name="productName"
+				label="Название&nbsp;продукта"
+				register={register}
+				error={errors.productName?.message}
+			/>
+			<MySelect values={selectValues} label="Тип" control={control} name="type" error={errors.type?.message} />
+			<Button disabled={isPending} className="" type="submit">
+				Submit
+			</Button>
+		</form>
 	);
 };
 

@@ -1,16 +1,18 @@
-import { FC } from 'react'
-import AddNameToWarehouseForm from './form/AddNameToWarehouseForm';
+import { FC } from "react";
+import AddNameToWarehouseForm from "./form/AddNameToWarehouseForm";
+import AddNameToWareHouseList from "./AddNameToWareHouseList";
 
 interface AddNameToWarehouseProps {
-  className?: string
+	className?: string;
 }
 
 const AddNameToWarehouse: FC<AddNameToWarehouseProps> = ({ className = `` }) => {
-  return (
-	<div className = {className}>
-	 <AddNameToWarehouseForm/>
-	</div>
-  )
-}
+	return (
+		<div className={className}>
+			<AddNameToWarehouseForm />
+			<AddNameToWareHouseList />
+		</div>
+	);
+};
 
 export default AddNameToWarehouse;

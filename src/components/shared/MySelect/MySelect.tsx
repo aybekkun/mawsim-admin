@@ -1,35 +1,40 @@
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { UseFormRegister } from "react-hook-form";
+import {  useController, Control } from "react-hook-form";
+
 type MySelectProps = {
+	values: {
+		value: string;
+		text: string;
+	}[];
 	className?: string;
 	label: string;
 	name: string;
-	register: UseFormRegister<any>; // Типизация регистра из react-hook-form
+	control: Control<any>; // Используем control из react-hook-form
 	error?: string;
 	defaultValue?: string;
 };
 
-const MySelect = ({
-	label,
-	name,
-	register,
-	error,
-	defaultValue = "",
-	className = "",
-}: MySelectProps) => {
+const MySelect = ({ values, label, name, control, error, defaultValue = "", className = "" }: MySelectProps) => {
+	const { field } = useController({
+		name,
+		control,
+		defaultValue,
+	});
+
 	return (
 		<div className={"pb-6 relative " + className}>
 			<Label>{label}</Label>
-			<Select defaultValue={defaultValue} {...register(name, { required: true })}>
+			<Select defaultValue={field.value} onValueChange={field.onChange}>
 				<SelectTrigger>
 					<SelectValue placeholder="Select a verified email to display" />
 				</SelectTrigger>
-
 				<SelectContent>
-					<SelectItem value="m@example.com">m@example.com</SelectItem>
-					<SelectItem value="m@google.com">m@google.com</SelectItem>
-					<SelectItem value="m@support.com">m@support.com</SelectItem>
+					{values.map((value) => (
+						<SelectItem key={value.value} value={value.value}>
+							{value.text}
+						</SelectItem>
+					))}
 				</SelectContent>
 			</Select>
 			<p className="absolute l-0 b-0 text-sm text-red-600">{error}</p>
