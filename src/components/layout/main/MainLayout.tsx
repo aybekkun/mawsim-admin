@@ -1,24 +1,20 @@
-import AsideMenu from "@/components/shared/aside/AsideMenu";
 import { FC } from "react";
-import styles from "./MainLayout.module.scss";
-import cn from "classnames";
+import Aside from "./aside/Aside";
+import Header from "./header/Header";
 import { Outlet } from "react-router-dom";
-import Header from "@/components/shared/header/Header";
 
-interface MainLayoutProps {
-	className?: string;
-}
+import "./MainLayout.scss";
 
-const MainLayout: FC<MainLayoutProps> = ({ className = `` }) => {
+const MainLayout: FC = () => {
 	return (
-		<div className={cn(styles.root, className)}>
-			<AsideMenu />
-			<div className={styles.main}>
-				<Header className="w-full " />
-				<div className={styles.content}>
+		<div className="layout">
+			<Aside />
+			<main className="main">
+				<Header />
+				<div className="content">
 					<Outlet />
 				</div>
-			</div>
+			</main>
 		</div>
 	);
 };

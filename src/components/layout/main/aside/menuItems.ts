@@ -16,7 +16,7 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 		title: "Статистика",
 		items: [
 			{
-				link: ROUTES.FINANCE.route,
+				link: "/",
 				icon: HandCoins,
 				text: ROUTES.FINANCE.name,
 			},

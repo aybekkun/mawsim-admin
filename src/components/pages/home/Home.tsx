@@ -1,17 +1,15 @@
-
-import { FC } from "react";
+import { FC } from 'react'
 
 interface HomeProps {
-	className?: string;
+  className?: string
 }
 
 const Home: FC<HomeProps> = ({ className = `` }) => {
-	
-	return (
-		<div className={className}>
-	
-		</div>
-	);
-};
+  return (
+    <div className = {className}>
+     Home
+    </div>
+  )
+}
 
 export default Home;

@@ -1,15 +1,16 @@
-import { FC } from 'react'
+import { FC } from "react";
+import AddNameToWarehouse from "./addwarehouse/AddNameToWarehouse";
 
 interface WarehouseProps {
-  className?: string
+	className?: string;
 }
 
 const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
-  return (
-    <div className = {className}>
-     Warehouse
-    </div>
-  )
-}
+	return (
+		<div className={className}>
+			<AddNameToWarehouse />
+		</div>
+	);
+};
 
 export default Warehouse;

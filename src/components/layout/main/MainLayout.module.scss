@@ -1,9 +1,0 @@
-.root {
-	@apply  bg-muted flex h-screen overflow-hidden;
-	.main {
-		@apply relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden;
-	}
-	.content {
-		@apply py-6 px-4;
-	}
-}

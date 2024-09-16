@@ -1,0 +1,81 @@
+.layout {
+	@apply flex h-screen overflow-hidden;
+	.aside {
+		@apply absolute left-0 top-0 z-9999 flex h-screen w-72 flex-col bg-white overflow-y-hidden border-r-2 duration-300 ease-linear  lg:static lg:translate-x-0 -translate-x-full;
+
+		&.active {
+			@apply translate-x-0;
+		}
+		&__content {
+			@apply flex flex-col overflow-y-auto duration-300 ease-linear;
+			&::-webkit-scrollbar {
+				width: 5px;
+			}
+
+			/* Track */
+
+			/* Handle */
+			&::-webkit-scrollbar-thumb {
+				background: #888;
+				border-radius: 5px;
+			}
+
+			/* Handle on hover */
+			&::-webkit-scrollbar-thumb:hover {
+				background: #555;
+			}
+		}
+		&__top {
+			@apply flex items-center gap-4 px-4 py-2 justify-between;
+			button {
+				display: none;
+				@media (max-width: 1024px) {
+					display: block;
+				}
+			}
+		}
+		nav {
+			@apply py-4 px-4;
+		}
+
+		h3 {
+			@apply text-sm font-medium text-gray-400 pt-2;
+		}
+		a {
+			@apply flex gap-4 mt-2 text-sm text-gray-500 p-2 rounded-lg items-center;
+			&.active {
+				@apply text-primary bg-green-100;
+			}
+		}
+	}
+	.main {
+		@apply flex-1;
+	}
+
+	.header {
+		@apply flex flex-grow items-center justify-between px-4 py-2 md:px-6 2xl:px-11 shadow-md;
+
+		&__menu {
+			display: none;
+			@media (max-width: 1024px) {
+				display: block;
+			}
+		}
+	}
+	.overlay {
+		display: none;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 999;
+		@apply bg-slate-900 opacity-50;
+		@media (max-width: 1024px) {
+			display: block;
+		}
+	}
+	.content {
+		@apply p-4;
+	}
+}

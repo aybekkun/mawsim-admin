@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 
-
-
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -63,7 +60,6 @@
   }
 }
 
-
 @layer base {
   * {
     @apply border-border;
@@ -74,6 +70,6 @@
   }
 }
 
-body{
-  font-family: "Roboto", sans-serif;
+body {
+  font-family: "Nunito", sans-serif;
 }
