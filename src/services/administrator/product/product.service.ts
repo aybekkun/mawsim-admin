@@ -17,7 +17,7 @@ export const ProdcutListService = {
 	},
 };
 
-export const ProdcutService = {
+export const ProductService = {
 	async getAll() {
 		const { data } = await api.get<TProduct[]>("/products");
 		return data;

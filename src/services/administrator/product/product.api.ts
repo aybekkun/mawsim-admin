@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProdcutListService } from "./product.service";
+import { ProdcutListService, ProductService } from "./product.service";
 import { toast } from "../../../hooks/use-toast";
 
 export const useGetAllProductsListQuery = () => {
@@ -48,5 +48,12 @@ export const useUpdateProductsListMutation = () => {
 		onError: (error) => {
 			toast({ title: "Update product", description: error.message, variant: "destructive", duration: 1500 });
 		},
+	});
+};
+
+export const useGetAllProductsQuery = () => {
+	return useQuery({
+		queryKey: ["products"],
+		queryFn: () => ProductService.getAll(),
 	});
 };

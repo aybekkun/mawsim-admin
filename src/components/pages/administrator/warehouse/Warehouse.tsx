@@ -1,5 +1,6 @@
 import { FC } from "react";
-import AddNameToWarehouse from "./addwarehouse/AddNameToWarehouse";
+//import AddNameToWarehouse from "./addnamewarehouse/AddNameToWarehouse";
+import AddToWarehouse from "./addtowarehouse/AddToWarehouse";
 
 interface WarehouseProps {
 	className?: string;
@@ -8,7 +9,8 @@ interface WarehouseProps {
 const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
-			<AddNameToWarehouse />
+			<AddToWarehouse/>
+			{/* <AddNameToWarehouse /> */}
 		</div>
 	);
 };
