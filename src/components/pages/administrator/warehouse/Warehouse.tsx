@@ -12,8 +12,8 @@ const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
 	return (
 		<Tabs defaultValue="add" className={className}>
 			<TabsList>
-				<TabsTrigger value="add">Добавить продукт</TabsTrigger>
-				<TabsTrigger value="addName">Добавить название продукта</TabsTrigger>
+				<TabsTrigger value="add">Добавить сырье</TabsTrigger>
+				<TabsTrigger value="addName">Добавить название сырья</TabsTrigger>
 			</TabsList>
 			<TabsContent value="add">
 				<AddToWarehouse />

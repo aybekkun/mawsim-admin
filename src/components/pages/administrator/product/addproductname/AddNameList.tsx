@@ -9,18 +9,18 @@ import {
 import { TProductList } from "@/services/administrator/product/product.types";
 import { Pencil, Trash2 } from "lucide-react";
 import { FC, useState } from "react";
-import EditNameToWarehouseForm from "./form/EditNameToWarehouseForm";
+import EditNameForm from "./form/EditNameForm";
 
-interface AddNameToWareHouseListProps {
+interface AddNameListProps {
 	className?: string;
 }
 
-const AddNameToWareHouseList: FC<AddNameToWareHouseListProps> = ({ className = `` }) => {
+const AddNameList: FC<AddNameListProps> = ({ className = `` }) => {
 	const [editItem, setEditItem] = useState<TProductList | null>(null);
 	const { data, isLoading, isError } = useGetAllProductsListQuery();
 	const list = data?.map((item, index) =>
 		editItem?.id === item.id ? (
-			<EditNameToWarehouseForm editItem={editItem} setEditItem={()=>setEditItem(null)} key={item.id} />
+			<EditNameForm editItem={editItem} setEditItem={()=>setEditItem(null)} key={item.id} />
 		) : (
 			<ProductNameListItem setEditItem={setEditItem} key={item.id} item={item} index={index + 1} />
 		)
@@ -34,7 +34,7 @@ const AddNameToWareHouseList: FC<AddNameToWareHouseListProps> = ({ className = `
 		<div className={className}>
 			<Card>
 				<CardHeader>
-					<CardTitle>Лист название сырьев</CardTitle>
+					<CardTitle>Лист название продукта</CardTitle>
 				</CardHeader>
 				<CardContent>{skeleton || list}</CardContent>
 			</Card>
@@ -75,4 +75,4 @@ const ProductNameListItem = ({ item, index, setEditItem }: ProductNameListItemPr
 	);
 };
 
-export default AddNameToWareHouseList;
+export default AddNameList;

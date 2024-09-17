@@ -1,25 +1,25 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { FC, useState } from "react";
-import AddToWarehouseListTable from "./table/AddToWarehouseListTable";
+import AddProductListTable from "./table/AddProductListTable";
 import { useGetAllProductsQuery } from "@/services/administrator/product/product.api";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import AddToWarehouseForm from "./form/AddToWarehouseForm";
+import AddProductForm from "./form/AddProductForm";
 import MyDialog from "@/components/shared/MyDialog/MyDialog";
 
-interface AddToWarehouseListProps {
+interface AddProductListProps {
 	className?: string;
 }
 
-const AddToWarehouseList: FC<AddToWarehouseListProps> = ({ className = `` }) => {
+const AddProductList: FC<AddProductListProps> = ({ className = `` }) => {
 	const { data } = useGetAllProductsQuery();
 	const [open, setOpen] = useState(false);
 	return (
 		<Card className={className}>
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
-					Список добавленных сырьев
+					Список добавленных продуктов{" "}
 					<Button onClick={() => setOpen(true)} size={"icon"}>
 						<Plus />
 					</Button>
@@ -27,12 +27,12 @@ const AddToWarehouseList: FC<AddToWarehouseListProps> = ({ className = `` }) => 
 			</CardHeader>
 			<CardContent>
 				<MyDialog onOpenChange={(val) => setOpen(val)} open={open} title="Доавить на склад">
-					<AddToWarehouseForm />
+					<AddProductForm />
 				</MyDialog>
-				<AddToWarehouseListTable items={data || []} />
+				<AddProductListTable items={data || []} />
 			</CardContent>
 		</Card>
 	);
 };
 
-export default AddToWarehouseList;
+export default AddProductList;

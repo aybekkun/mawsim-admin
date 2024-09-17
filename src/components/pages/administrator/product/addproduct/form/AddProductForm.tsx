@@ -31,11 +31,11 @@ const formSchema = z.object({
 		})
 		.transform((val) => new Intl.NumberFormat("ru-RU").format(Number(val))),
 });
-interface AddToWarehouseFormProps {
+interface AddProductFormProps {
 	className?: string;
 }
 
-const AddToWarehouseForm: FC<AddToWarehouseFormProps> = ({ className = `` }) => {
+const AddProductForm: FC<AddProductFormProps> = ({ className = `` }) => {
 	const { data } = useGetAllProductsListQuery();
 	const [selectedId, setSelectedId] = useState(0);
 
@@ -71,7 +71,7 @@ const AddToWarehouseForm: FC<AddToWarehouseFormProps> = ({ className = `` }) => 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
 					<div>
-						<Label>Сырье</Label>
+						<Label>Продукт</Label>
 						<SearchableSelect items={transformedData || []} setItem={setSelectedId} />
 					</div>
 					<div>
@@ -145,4 +145,4 @@ const AddToWarehouseForm: FC<AddToWarehouseFormProps> = ({ className = `` }) => 
 	);
 };
 
-export default AddToWarehouseForm;
+export default AddProductForm;
