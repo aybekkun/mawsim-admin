@@ -5,8 +5,9 @@ import AddToWarehouseListTable from "./table/AddToWarehouseListTable";
 import { useGetAllProductsQuery } from "@/services/administrator/product/product.api";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
-import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import AddToWarehouseForm from "./form/AddToWarehouseForm";
+import MyDialog from "@/components/shared/MyDialog/MyDialog";
+
 
 interface AddToWarehouseListProps {
 	className?: string;

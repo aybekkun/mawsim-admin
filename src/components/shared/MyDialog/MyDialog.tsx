@@ -14,8 +14,9 @@ const MyDialog: FC<MyDialogProps> = ({ title = "", open = false, onOpenChange, c
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
-					<DialogDescription>{children}</DialogDescription>
+					<DialogDescription></DialogDescription>
 				</DialogHeader>
+				{children}
 			</DialogContent>
 		</Dialog>
 	);

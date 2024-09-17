@@ -19,7 +19,7 @@ export const ProdcutListService = {
 
 export const ProductService = {
 	async getAll() {
-		const { data } = await api.get<TProduct[]>("/products");
+		const { data } = await api.get<TProduct[]>("/prodcuts");
 		return data;
 	},
 }
