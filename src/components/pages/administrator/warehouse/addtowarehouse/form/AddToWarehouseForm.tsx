@@ -50,8 +50,8 @@ const AddToWarehouseForm: FC<AddToWarehouseFormProps> = ({ className = `` }) => 
 		defaultValues: {
 			type: "unit",
 			productName: "",
-			quantity: "0",
-			price: "0",
+			quantity: "",
+			price: "",
 		},
 	});
 
@@ -98,18 +98,10 @@ const AddToWarehouseForm: FC<AddToWarehouseFormProps> = ({ className = `` }) => 
 									<FormLabel>Количество</FormLabel>
 									<FormControl>
 										<Input
-											type="text"
+											type="number"
 											{...field}
 											onChange={(e) => {
-												let value = e.target.value.replace(/\s/g, ""); // Удаляем пробелы для проверки
-												if (value.startsWith("0")) {
-													value = value.replace(/^0+/, "");
-												}
-												const isValid = /^[1-9]\d*$/.test(value);
-												if (isValid || value === "") {
-													const formattedValue = new Intl.NumberFormat("ru-RU").format(Number(value));
-													field.onChange(formattedValue);
-												}
+												field.onChange(e.target.value);
 											}}
 											min={1}
 										/>
@@ -128,18 +120,10 @@ const AddToWarehouseForm: FC<AddToWarehouseFormProps> = ({ className = `` }) => 
 									<FormLabel>Цена за один товар</FormLabel>
 									<FormControl>
 										<Input
-											type="text"
+											type="number"
 											{...field}
 											onChange={(e) => {
-												let value = e.target.value.replace(/\s/g, ""); // Удаляем пробелы для проверки
-												if (value.startsWith("0")) {
-													value = value.replace(/^0+/, "");
-												}
-												const isValid = /^[1-9]\d*$/.test(value);
-												if (isValid || value === "") {
-													const formattedValue = new Intl.NumberFormat("ru-RU").format(Number(value));
-													field.onChange(formattedValue);
-												}
+												field.onChange(e.target.value);
 											}}
 											min={1}
 										/>

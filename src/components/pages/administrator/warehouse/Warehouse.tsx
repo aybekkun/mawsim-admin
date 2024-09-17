@@ -10,7 +10,7 @@ interface WarehouseProps {
 
 const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
 	return (
-		<Tabs className={className}>
+		<Tabs defaultValue="add" className={className}>
 			<TabsList>
 				<TabsTrigger value="add">Добавить продукт</TabsTrigger>
 				<TabsTrigger value="addName">Добавить название продукта</TabsTrigger>
