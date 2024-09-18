@@ -20,7 +20,7 @@ const MenuCard: FC<MenuCardProps> = ({
 	className = ``,
 }) => {
 	return (
-		<div className="flex flex-col">
+		<div className={"flex flex-col "+className}>
 			<Card className={"relative flex flex-1 flex-col max-w-xs bg-white shadow-2xl rounded-2xl"}>
 				<CardContent className="flex flex-col flex-1">
 					<img
