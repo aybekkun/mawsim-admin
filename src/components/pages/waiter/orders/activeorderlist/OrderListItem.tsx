@@ -1,8 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ClipboardList, Clock, X } from "lucide-react";
 import { FC } from "react";
+import { ClipboardList, Clock, X } from "lucide-react";
 
 interface OrderListItemProps {
 	className?: string;
@@ -27,7 +27,7 @@ const OrderListItem: FC<OrderListItemProps> = ({ className = `` }) => {
 				<Button size={"icon"}>
 					<ClipboardList className="h-4 w-4" />
 				</Button>
-				<Button size={"sm"}>
+				<Button variant={"destructive"} size={"sm"}>
 					<X /> Закрыть
 				</Button>
 			</CardFooter>
