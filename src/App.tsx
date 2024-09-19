@@ -14,6 +14,7 @@ import Product from "./components/pages/administrator/product/Product";
 import Orders from "./components/pages/waiter/orders/Orders";
 import AcceptOrder from "./components/pages/waiter/acceptorder/AcceptOrder";
 import Payment from "./components/pages/cash/Payment";
+import Basket from "./components/pages/waiter/basket/Basket";
 
 function App() {
 	return (
@@ -26,6 +27,8 @@ function App() {
 					<Route path={ROUTES.PRODUCT_LIST.route} element={<ProductList />} />
 					<Route path={ROUTES.PAYMENT.route} element={<Payment />} />
 					<Route path={ROUTES.ACCEPT_ORDER.route} element={<AcceptOrder />} />
+					<Route path={"/basket"} element={<Basket />} />
+
 					<Route path={ROUTES.ORDERS.route} element={<Orders />} />
 					<Route path={ROUTES.PRODUCT.route} element={<Product />} />
 					<Route path={ROUTES.ORDER_LIST.route} element={<OrderList />} />

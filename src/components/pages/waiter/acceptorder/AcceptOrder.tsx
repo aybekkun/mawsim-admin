@@ -1,6 +1,7 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { FC } from "react";
 import MenuCard from "./menucard/MenuCard";
+import ShopCart from "./ShopCart";
 
 interface AcceptOrderProps {
 	className?: string;
@@ -10,10 +11,13 @@ const AcceptOrder: FC<AcceptOrderProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
 			<Tabs defaultValue="foods">
-				<TabsList className="">
-					<TabsTrigger value="foods">Еда</TabsTrigger>
-					<TabsTrigger value="drinks">Напитки</TabsTrigger>
-				</TabsList>
+				<div className="flex justify-between ">
+					<TabsList className="">
+						<TabsTrigger value="foods">Еда</TabsTrigger>
+						<TabsTrigger value="drinks">Напитки</TabsTrigger>
+					</TabsList>
+					<ShopCart />
+				</div>
 				<TabsContent value="foods">
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-4">
 						<MenuCard title="Пицца" price={55000} quantity={3} />

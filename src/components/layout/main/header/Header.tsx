@@ -25,6 +25,7 @@ const Header: FC<HeaderProps> = ({ className = `` }) => {
 					<AlignJustify />
 				</button>
 			</div>
+			
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
