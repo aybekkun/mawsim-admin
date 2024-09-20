@@ -1,10 +1,10 @@
-import {create} from "zustand";
+import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 import { api } from "../api";
 import { IAuthLogin, IAuthRegister, IAuthResponse } from "../services/auth/auth.types";
 
 interface AuthState {
-	user: IAuthResponse["data"] | null;
+	user: IAuthResponse["data"]["user"] | null;
 	isAuth: boolean;
 	token: string | null;
 	signOut: () => void;
@@ -33,20 +33,22 @@ export const useAuthPersistStore = create(
 				fetchRegister: async (params) => {
 					try {
 						const { data } = await api.post<IAuthResponse>("/register", params);
-						const token = data.token;
+						const token = data.data.token;
 						window.localStorage.setItem("token", token);
-						set({ isAuth: true, token: data.token, user: data.data });
+						set({ isAuth: true, token: token, user: data.data.user });
 					} catch (error) {
 						console.log(error);
 						set({ isAuth: false, token: null, user: null });
 					}
 				},
 				fetchLogin: async (params) => {
+					console.log(params);
+					
 					try {
-						const { data } = await api.post<IAuthResponse>("/auth", params);
-						const token = data.token;
+						const { data } = await api.post<IAuthResponse>("/auth/login", params);
+						const token = data.data.token;
 						window.localStorage.setItem("token", token);
-						set({ isAuth: true, token: data.token, user: data.data });
+						set({ isAuth: true, token: token, user: data.data.user });
 					} catch (error) {
 						console.log(error);
 						set({ isAuth: false, token: null, user: null });

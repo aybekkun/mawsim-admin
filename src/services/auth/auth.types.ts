@@ -1,19 +1,46 @@
 export interface IAuthRegister {
 	fullName: string;
-	email: string;
+	phone: string;
 	password: string;
+	role_id: number;
 }
 
 export interface IAuthLogin {
-	email: string;
+	phone: string;
 	password: string;
 }
 
 export interface IAuthResponse {
-	token: string;
 	data: {
-		id: string | number;
-		fullName: string;
-		email: string;
+		token: string;
+		user: {
+			id: number;
+			role_id: number;
+			name: string;
+			phone: string;
+			created_at: Date;
+			updated_at: Date;
+			role: {
+				id: number;
+				name: string;
+				created_at: Date;
+				updated_at: Date;
+			};
+		};
 	};
+}
+
+export interface IAuthGetAllResponse {
+	data: {
+		id: number;
+		name: string;
+		phone: string;
+		role_id: number;
+		role: {
+			id: number;
+			name: string;
+			created_at: Date;
+			updated_at: Date;
+		};
+	}[];
 }

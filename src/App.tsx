@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import { Toaster } from "@/components/ui/toaster";
 import MainLayout from "./components/layout/main/MainLayout";
@@ -15,12 +15,25 @@ import Orders from "./components/pages/waiter/orders/Orders";
 import AcceptOrder from "./components/pages/waiter/acceptorder/AcceptOrder";
 import Payment from "./components/pages/cash/Payment";
 import Basket from "./components/pages/waiter/basket/Basket";
+import AuthLayout from "./components/layout/auth/AuthLayout";
+import { useAuthPersistStore } from "./store";
+import { useEffect } from "react";
+import Settings from "./components/pages/director/settings/Settings";
 
 function App() {
+	const navigate = useNavigate();
+	const { isAuth } = useAuthPersistStore();
+
+	useEffect(() => {
+		if (!isAuth) navigate("/login");
+	}, [isAuth]);
+
 	return (
 		<>
 			<Routes>
+				<Route path="/login" element={<AuthLayout />} />
 				<Route path="/" element={<MainLayout />}>
+				<Route path="/settings" element={<Settings />} />
 					<Route path={ROUTES.FINANCE.route} element={<Finance />} />
 					<Route path={ROUTES.WAREHOUSE_STATS.route} element={<WarehouseStats />} />
 					<Route path={ROUTES.ORDER_STATS.route} element={<OrderStats />} />

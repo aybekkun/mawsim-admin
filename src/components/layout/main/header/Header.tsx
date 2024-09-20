@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { AlignJustify } from "lucide-react";
-import { useActiveMenu } from "@/store";
+import { useActiveMenu, useAuthPersistStore } from "@/store";
+import { Link } from "react-router-dom";
 interface HeaderProps {
 	className?: string;
 }
 
 const Header: FC<HeaderProps> = ({ className = `` }) => {
+	const { user, signOut } = useAuthPersistStore();
 	const { active, setActiveMenu } = useActiveMenu();
 	return (
 		<header className={cn(className, `header`)}>
@@ -25,20 +27,24 @@ const Header: FC<HeaderProps> = ({ className = `` }) => {
 					<AlignJustify />
 				</button>
 			</div>
-			
+
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
 					<Button variant="outline" size="icon" className="overflow-hidden rounded-full">
-						A
+						{user?.name ? user?.name[0] : "A"}
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
-					<DropdownMenuLabel>Мой Аккаунт</DropdownMenuLabel>
+					<DropdownMenuLabel> {user?.name ? user?.name : "A"}</DropdownMenuLabel>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem>Настройки</DropdownMenuItem>
-					<DropdownMenuItem>Поддержка</DropdownMenuItem>
+					<DropdownMenuItem asChild>
+						<Link to={"/settings"}>Настройки</Link>
+					</DropdownMenuItem>
+
 					<DropdownMenuSeparator />
-					<DropdownMenuItem>Выйти</DropdownMenuItem>
+					<DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
+						Выйти
+					</DropdownMenuItem>
 				</DropdownMenuContent>
 			</DropdownMenu>
 		</header>
