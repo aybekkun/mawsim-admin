@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC} from "react";
 import Aside from "./aside/Aside";
 import Header from "./header/Header";
 import { Outlet } from "react-router-dom";
