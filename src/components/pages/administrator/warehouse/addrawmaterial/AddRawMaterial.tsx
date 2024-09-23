@@ -3,11 +3,9 @@ import { FC, useState } from "react";
 import AddRawMaterialForm from "./AddRawMaterialForm";
 import AddRawMaterialTable from "./AddRawMaterialTable";
 
-interface AddRawMaterialProps {
-	className?: string;
-}
 
-const AddRawMaterial: FC<AddRawMaterialProps> = ({ className = `` }) => {
+
+const AddRawMaterial: FC = () => {
 	const [open, setOpen] = useState(false);
 
 	return (
