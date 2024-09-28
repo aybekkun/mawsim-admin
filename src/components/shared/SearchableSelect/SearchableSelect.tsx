@@ -4,20 +4,29 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useState, FC } from "react";
+import { useState, FC, useEffect } from "react";
 
 interface SearchableSelectProps {
 	items: { id: number; value: string; label: string }[];
+	defaultValue?: number;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	setItem?: (id: any) => void;
 	className?: string;
 }
 
-const SearchableSelect: FC<SearchableSelectProps> = ({ items = [], className = ``, setItem = () => undefined }) => {
+const SearchableSelect: FC<SearchableSelectProps> = ({
+	items = [],
+	className = ``,
+	setItem = () => undefined,
+	defaultValue = 0,
+}) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState("");
-
-
+	useEffect(() => {
+		if (defaultValue) {
+			setValue(items.find((item) => item.id === defaultValue)?.label || "");
+		}
+	}, []);
 	const onSelectItem = (id: number, currentValue: string) => {
 		setValue(currentValue === value ? "" : currentValue);
 		setItem(id);
@@ -44,7 +53,7 @@ const SearchableSelect: FC<SearchableSelectProps> = ({ items = [], className = `
 										value={item.value}
 										onSelect={(currentValue) => onSelectItem(item.id, currentValue)}
 									>
-										<Check className={cn("mr-2 h-4 w-4", value === item.value ? "opacity-100" : "opacity-0")} />
+										<Check className={cn("mr-2 h-4 w-4", value === item.label ? "opacity-100" : "opacity-0")} />
 										{item.label}
 									</CommandItem>
 								))}

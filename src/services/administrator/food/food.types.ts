@@ -1,26 +1,31 @@
-export type TProductsNameResponse = {
-	data: TProductsName[];
+export type TFoodNameResponse = {
+	data: TFoodName[];
 };
 
-export type TProductsName = {
+export type TFoodName = {
 	id: number;
 	name: string;
-	format_id: number;
+	category: {
+		id: number;
+		name: string;
+	};
 	format: {
 		id: number;
 		name: string;
-		created_at: Date;
-		updated_at: Date;
 	};
 };
 
-export type TProductsResponse = {
-	data: TProducts[];
+export type TFoodResponse = {
+	data: TFood[];
 };
 
-export type TProducts = {
+export type TFood = {
 	id: number;
 	name: string;
+	category: {
+		id: number;
+		name: string;
+	};
 	format: {
 		id: number;
 		name: string;
@@ -28,7 +33,7 @@ export type TProducts = {
 	stock: string | null;
 };
 
-export type TProductsOne = {
+export type TFoodOne = {
 	data: {
 		id: number;
 		name: string;
@@ -37,7 +42,7 @@ export type TProductsOne = {
 			id: number;
 			name: string;
 		};
-		expenses: {
+		expense: {
 			id: number;
 			quantity: string;
 			price: string;

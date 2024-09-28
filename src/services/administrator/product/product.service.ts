@@ -1,25 +1,36 @@
 import { api } from "@/api";
-import { TProduct, TProductList } from "./product.types";
+import {  TProductsNameResponse, TProductsOne, TProductsResponse } from "./product.types";
 
-export const ProdcutListService = {
+export const ProdcutsNameService = {
 	async getAll() {
-		const { data } = await api.get<TProductList[]>("/productslist");
+		const { data } = await api.get<TProductsNameResponse>("/admin/products");
 		return data;
 	},
-	async create(productName: string, type: string) {
-		return api.post("/productslist", { productName, type });
+
+	async create(name: string, format_id: number) {
+		return api.post("/admin/products", { name, format_id });
 	},
-	async update(id: number, productName: string, type: string) {
-		return api.patch(`/productslist/${id}`, { productName, type });
+	async update(id: number, name: string, format_id: number) {
+		return api.put(`/admin/products/${id}`, { name, format_id });
 	},
 	async delete(id: number) {
-		return api.delete(`/productslist/${id}`);
+		return api.delete(`/admin/products/${id}`);
 	},
 };
 
-export const ProductService = {
+export const ProductsService = {
 	async getAll() {
-		const { data } = await api.get<TProduct[]>("/prodcuts");
+		const { data } = await api.get<TProductsResponse>("/admin/warehouses/products");
 		return data;
 	},
-}
+	async getOne(id: number) {
+		const { data } = await api.get<TProductsOne>("/admin/warehouses/products/" + id);
+		return data;
+	},
+	async create(product_id: number, quantity: number, price: number) {
+		return api.post("/admin/warehouses/products", { product_id, price, quantity, warehouse_id: 2, expense_id: 2 });
+	},
+	async update(id: number, name: string, format_id: number) {
+		return api.put(`/admin/warehouses/products/${id}`, { name, format_id });
+	},
+};

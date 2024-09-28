@@ -19,12 +19,14 @@ import AuthLayout from "./components/layout/auth/AuthLayout";
 import { useAuthPersistStore } from "./store";
 import { useEffect } from "react";
 import Settings from "./components/pages/director/settings/Settings";
+import { useCategoriesPersistStore } from "./store/useCategoriesPersistStore";
 
 function App() {
 	const navigate = useNavigate();
 	const { isAuth } = useAuthPersistStore();
-
+	const { fetchCatergories } = useCategoriesPersistStore();
 	useEffect(() => {
+		fetchCatergories();
 		if (!isAuth) navigate("/login");
 	}, [isAuth]);
 
@@ -33,7 +35,7 @@ function App() {
 			<Routes>
 				<Route path="/login" element={<AuthLayout />} />
 				<Route path="/" element={<MainLayout />}>
-				<Route path="/settings" element={<Settings />} />
+					<Route path="/settings" element={<Settings />} />
 					<Route path={ROUTES.FINANCE.route} element={<Finance />} />
 					<Route path={ROUTES.WAREHOUSE_STATS.route} element={<WarehouseStats />} />
 					<Route path={ROUTES.ORDER_STATS.route} element={<OrderStats />} />

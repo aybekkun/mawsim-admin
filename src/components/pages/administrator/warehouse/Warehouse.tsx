@@ -1,10 +1,9 @@
 import { FC } from "react";
 
-// import AddToWarehouse from "./addtowarehouse/AddToWarehouse";
-// import AddNameToWarehouse from "./addnamewarehouse/AddNameToWarehouse";
 
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddRawMaterial from "./addrawmaterial/AddRawMaterial";
+import AddRawName from "./addrawname/AddRawName";
 interface WarehouseProps {
 	className?: string;
 }
@@ -12,7 +11,18 @@ interface WarehouseProps {
 const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
-			<AddRawMaterial />
+			<Tabs defaultValue="add" className={className}>
+				<TabsList>
+					<TabsTrigger value="add">Добавить сырье</TabsTrigger>
+					<TabsTrigger value="addName">Добавить название сырья</TabsTrigger>
+				</TabsList>
+				<TabsContent value="add">
+					<AddRawMaterial />
+				</TabsContent>
+				<TabsContent value="addName">
+					<AddRawName />
+				</TabsContent>
+			</Tabs>
 		</div>
 	);
 };

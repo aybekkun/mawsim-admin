@@ -1,69 +1,56 @@
 import MyTable, { TColumns } from "@/components/shared/MyTable/MyTable";
+import StockSheet from "@/components/shared/StockSheet/StockSheet";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { rawMaterialData } from "@/data/rawMaterial.data";
-import { Edit2 } from "lucide-react";
-import { FC } from "react";
 
-interface AddRawMaterialTableProps {
-	className?: string;
-}
+import { useGetOneProductsQuery, useGetAllProductsQuery } from "@/services/administrator/product/product.api";
+import { TProducts } from "@/services/administrator/product/product.types";
 
-const columns: TColumns<(typeof rawMaterialData)[0]>[] = [
+import { FC, useState } from "react";
+
+const columns: TColumns<TProducts>[] = [
 	{
 		title: "Название сырья",
-		dataIndex: "productName",
-	},
-	{
-		title: "Количество",
-		dataIndex: "quantity",
+		dataIndex: "name",
 	},
 	{
 		title: "Тип",
-		dataIndex: "type",
+		render: (_, record) => <>{record.format.name}</>,
 	},
 	{
-		title: "Цена за единицу",
-		dataIndex: "price",
+		title: "Количество",
+		render: (_, record) => <>{record.stock}</>,
 	},
 	{
-		title: "Цена",
-		dataIndex: "totalPrice",
-	},
-	{
-		title: "История поступления",
-		render: (_) => (
-			<Button variant={"outline"} size={"sm"}>
-				История
-			</Button>
-		),
-	},
-	{
-		title: "Actions",
-		render: (_) => (
-			<div className="flex gap-2 items-center">
-				<Button size={"icon"}>
-					<Edit2 />
-				</Button>
-				<Button variant={"destructive"} size={"sm"}>
-					Удалить
-				</Button>
-			</div>
-		),
+		title: "Действия",
+		render: (_, record) => <Actions record={record} />,
 	},
 ];
 
-const AddRawMaterialTable: FC<AddRawMaterialTableProps> = ({ className = `` }) => {
+const AddRawMaterialTable: FC = () => {
+	const { data, isLoading } = useGetAllProductsQuery();
 	return (
-		<Card className={className}>
-			<CardHeader>
-				<CardTitle>Список добавленных сырья</CardTitle>
-			</CardHeader>
-			<CardContent>
-				<MyTable source={rawMaterialData} columns={columns} />
-			</CardContent>
-		</Card>
+		<>
+			<MyTable loading={isLoading} columns={columns} source={data?.data || []} />
+		</>
 	);
 };
 
+const Actions = ({ record }: { record: TProducts }) => {
+	const { data } = useGetOneProductsQuery(record.id);
+
+	const [open, setOpen] = useState(false);
+	if (!record.stock) {
+		return <></>;
+	}
+	return (
+		<>
+			<Button onClick={() => setOpen(true)} variant={"outline"} size={"sm"}>
+				История
+			</Button>
+			<StockSheet data={data?.data.expenses} open={open} onOpenChange={(val) => setOpen(val)}>
+				<></>
+			</StockSheet>
+		</>
+	);
+};
 export default AddRawMaterialTable;

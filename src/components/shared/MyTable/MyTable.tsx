@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 export interface TColumns<T> {
 	title: string;
 	dataIndex?: keyof T;
@@ -14,20 +15,17 @@ interface MyTableProps<T> {
 	className?: string;
 }
 
-const MyTable = <T extends object>({
-	source,
-	columns,
-	currentPage = 1,
-	loading = false,
-}: MyTableProps<T>) => {
+const MyTable = <T extends object>({ source, columns, currentPage = 1, loading = false }: MyTableProps<T>) => {
 	const getCellValue = (value: unknown): React.ReactNode => {
-		console.log(loading);
-
 		if (React.isValidElement(value)) {
 			return value;
 		}
 		return String(value); // Convert value to string if it's not a ReactNode
 	};
+
+	if (loading) {
+		return <Skeleton className="w-full h-40" />;
+	}
 
 	return (
 		<>

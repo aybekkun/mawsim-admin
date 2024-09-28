@@ -6,28 +6,28 @@ import { z } from "zod";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { formRawMaterialSchema } from "@/config/formSchema";
+import { formFoodSchema } from "@/config/formSchema";
 import SearchableSelect from "@/components/shared/SearchableSelect/SearchableSelect";
-import { useCreateProductsMutation, useGetAllProductsNameQuery } from "@/services/administrator/product/product.api";
 import { Label } from "@/components/ui/label";
+import { useCreateFoodMutation, useGetAllFoodNameQuery } from "@/services/administrator/food/food.api";
 
-interface AddRawMaterialFormProps {
+interface AddFoodFormProps {
 	open?: boolean;
 	setOpen?: (open: boolean) => void;
 }
 
-const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen = () => undefined }) => {
-	const { data } = useGetAllProductsNameQuery();
-	const { mutate: createProduct, isPending, isSuccess } = useCreateProductsMutation();
+const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undefined }) => {
+	const { data } = useGetAllFoodNameQuery();
+	const { mutate: createFood, isPending, isSuccess } = useCreateFoodMutation();
 	const transformData = data?.data.map((item) => ({
 		id: item.id,
 		value: item.name,
 		label: item.name,
 	}));
-	const form = useForm<z.infer<typeof formRawMaterialSchema>>({
-		resolver: zodResolver(formRawMaterialSchema),
+	const form = useForm<z.infer<typeof formFoodSchema>>({
+		resolver: zodResolver(formFoodSchema),
 		defaultValues: {
-			product_id: "1",
+			food_id: "",
 			quantity: "",
 			price: "",
 		},
@@ -38,11 +38,14 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 			form.reset();
 			setOpen(false);
 		}
+		return () => {
+			form.reset();
+		};
 	}, [isSuccess]);
 
-	async function onSubmit(values: z.infer<typeof formRawMaterialSchema>) {
-		await createProduct({
-			product_id: Number(values.product_id),
+	async function onSubmit(values: z.infer<typeof formFoodSchema>) {
+		await createFood({
+			food_id: Number(values.food_id),
 			price: Number(values.price),
 			quantity: Number(values.quantity),
 		});
@@ -54,10 +57,10 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 					<div>
 						<Label>Продукт</Label>
 						<SearchableSelect
-							defaultValue={Number(form.getValues("product_id"))}
+							defaultValue={Number(form.getValues("food_id"))}
 							items={transformData || []}
 							setItem={(id) => {
-								form.setValue("product_id", String(id));
+								form.setValue("food_id", String(id));
 							}}
 						/>
 					</div>
@@ -99,4 +102,4 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 	);
 };
 
-export default AddRawMaterialForm;
+export default AddFoodForm;
