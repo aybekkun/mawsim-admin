@@ -6,6 +6,8 @@ import MenuListTable from "./MenuListTable";
 
 const MenuList = () => {
 	const [open, setOpen] = useState(false);
+  console.log(open);
+  
 	return (
 		<Card>
 			<CardHeader>

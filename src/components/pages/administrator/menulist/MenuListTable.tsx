@@ -62,6 +62,8 @@ const MenuImages = ({ record }: { record: TMenu }) => {
 	);
 };
 const Actions = ({ record }: { record: TMenu }) => {
+    console.log(record);
+    
 	return <></>;
 };
 
