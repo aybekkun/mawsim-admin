@@ -156,7 +156,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 											handleFileChange(e);
 										}}
 									/>
-									<FormDescription>еда, напитки</FormDescription>
+									<FormDescription>не более трех</FormDescription>
 									<FormMessage />
 								</FormItem>
 							)}

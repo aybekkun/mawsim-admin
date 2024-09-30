@@ -7,6 +7,9 @@ export function useHandleFiles() {
 	const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
 			const newFiles = Array.from(e.target.files);
+			if (files.length + newFiles.length > 3) {
+				return;
+			}
 			setFiles((prevFiles) => [...prevFiles, ...newFiles]);
 			const newPreviews = newFiles.map((file) => URL.createObjectURL(file));
 			setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);

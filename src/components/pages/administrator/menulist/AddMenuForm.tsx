@@ -1,8 +1,7 @@
 
 const AddMenuForm = () => {
-  return (
-    <div>AddMenuForm</div>
-  )
-}
 
-export default AddMenuForm
+	return <></>;
+};
+
+export default AddMenuForm;
