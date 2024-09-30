@@ -13,6 +13,10 @@ export type TFoodName = {
 		id: number;
 		name: string;
 	};
+	images: {
+		id: number;
+		image_url: string;
+	}[];
 };
 
 export type TFoodResponse = {

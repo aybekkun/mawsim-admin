@@ -9,7 +9,6 @@ import OrderStats from "./components/pages/director/orderstats/OrderStats";
 import ProductList from "./components/pages/director/prroductlist/ProductList";
 import Warehouse from "./components/pages/administrator/warehouse/Warehouse";
 import Expense from "./components/pages/administrator/expense/Expense";
-import OrderList from "./components/pages/administrator/orderlist/OrderList";
 import Product from "./components/pages/administrator/product/Product";
 import Orders from "./components/pages/waiter/orders/Orders";
 import AcceptOrder from "./components/pages/waiter/acceptorder/AcceptOrder";
@@ -20,13 +19,15 @@ import { useAuthPersistStore } from "./store";
 import { useEffect } from "react";
 import Settings from "./components/pages/director/settings/Settings";
 import { useCategoriesPersistStore } from "./store/useCategoriesPersistStore";
+import MenuList from "./components/pages/administrator/menulist/MenuList";
 
 function App() {
 	const navigate = useNavigate();
-	const { isAuth } = useAuthPersistStore();
+	const { isAuth, fetchCheckAuthMe } = useAuthPersistStore();
 	const { fetchCatergories } = useCategoriesPersistStore();
 	useEffect(() => {
 		fetchCatergories();
+		fetchCheckAuthMe();
 		if (!isAuth) navigate("/login");
 	}, [isAuth]);
 
@@ -46,7 +47,7 @@ function App() {
 
 					<Route path={ROUTES.ORDERS.route} element={<Orders />} />
 					<Route path={ROUTES.PRODUCT.route} element={<Product />} />
-					<Route path={ROUTES.ORDER_LIST.route} element={<OrderList />} />
+					<Route path={ROUTES.MENU_LIST.route} element={<MenuList />} />
 					<Route path={ROUTES.EXPENSE.route} element={<Expense />} />
 					<Route path={ROUTES.WAREHOUSE.route} element={<Warehouse />} />
 				</Route>

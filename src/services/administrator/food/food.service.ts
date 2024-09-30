@@ -12,8 +12,12 @@ export const FoodNameService = {
 		return data;
 	},
 
-	async create(name: string, format_id: number, category_id: number) {
-		return api.post("/admin/food-items", { name, format_id, category_id });
+	async create(fd: FormData) {
+		return api.post("/admin/food-items", fd, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
 	},
 
 	async update(id: number, name: string, format_id: number, category_id: number) {
@@ -24,7 +28,6 @@ export const FoodNameService = {
 		return api.delete(`/admin/food-items/${id}`);
 	},
 };
-
 
 export const FoodService = {
 	async getAll() {

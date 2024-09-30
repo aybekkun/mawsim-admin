@@ -23,7 +23,7 @@ export const useAuthPersistStore = create(
 				signOut: () => set({ isAuth: false, token: null }),
 				fetchCheckAuthMe: async () => {
 					try {
-						const { data } = await api.get("/auth_me");
+						const { data } = await api.get("/auth/user");
 						set({ isAuth: true, user: data });
 					} catch (e) {
 						console.log(e);

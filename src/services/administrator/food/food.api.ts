@@ -12,8 +12,7 @@ export const useGetAllFoodNameQuery = () => {
 export const useCreateFoodNameMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: (data: { name: string; format_id: number; category_id: number }) =>
-			FoodNameService.create(data.name, data.format_id, data.category_id),
+		mutationFn: (fd: FormData) => FoodNameService.create(fd),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["foodname"] });
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });

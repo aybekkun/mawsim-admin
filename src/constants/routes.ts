@@ -20,5 +20,5 @@ export const ROUTES = {
 	EXPENSE:createRoute("/expense","Расходы"),
 	PRODUCT:createRoute("/product","Товары"),
 	WAREHOUSE:createRoute("/warehouse","Склад"),
-	ORDER_LIST:createRoute("/order-list","Список заказов"),
+	MENU_LIST:createRoute("/menu-list","Список меню"),
 };

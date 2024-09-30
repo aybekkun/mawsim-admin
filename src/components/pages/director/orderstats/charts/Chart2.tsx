@@ -26,9 +26,9 @@ export default function Chart2() {
 	}, []);
 
 	return (
-		<Card className="flex flex-col">
+		<Card className="flex flex-col flex-1">
 			<CardHeader className="items-center pb-0">
-				<CardTitle>Доля продаж</CardTitle>
+				<CardTitle>Доля заказов</CardTitle>
 				<CardDescription>January - December 2024</CardDescription>
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
@@ -45,7 +45,7 @@ export default function Chart2() {
 													{totalVisitors.toLocaleString()}
 												</tspan>
 												<tspan x={viewBox.cx} y={(viewBox.cy || 0) + 24} className="fill-muted-foreground">
-													Visitors
+													Заказов
 												</tspan>
 											</text>
 										);

@@ -1,10 +1,10 @@
 import { FC } from 'react'
 
-interface OrderListProps {
+interface MenuListProps {
   className?: string
 }
 
-const OrderList: FC<OrderListProps> = ({ className = `` }) => {
+const MenuList: FC<MenuListProps> = ({ className = `` }) => {
   return (
     <div className = {className}>
      OrderList
@@ -12,4 +12,4 @@ const OrderList: FC<OrderListProps> = ({ className = `` }) => {
   )
 }
 
-export default OrderList;
+export default MenuList;

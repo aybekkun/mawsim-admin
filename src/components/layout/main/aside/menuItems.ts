@@ -67,9 +67,9 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 		title: "Админстараторская",
 		items: [
 			{
-				link: ROUTES.ORDER_LIST.route,
+				link: ROUTES.MENU_LIST.route,
 				icon: Logs,
-				text: ROUTES.ORDER_LIST.name,
+				text: ROUTES.MENU_LIST.name,
 			},
 			{
 				link: ROUTES.PRODUCT.route,

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddFoodName from "./addfoodname/AddFoodName";
 import AddFood from "./addfood/AddFood";
@@ -8,6 +8,7 @@ interface ProductProps {
 }
 
 const Product: FC<ProductProps> = ({ className = `` }) => {
+
 	return (
 		<Tabs defaultValue="add" className={className}>
 			<TabsList>
@@ -15,8 +16,8 @@ const Product: FC<ProductProps> = ({ className = `` }) => {
 				<TabsTrigger value="addName">Добавить название продукта</TabsTrigger>
 			</TabsList>
 			<TabsContent value="add">
-                <AddFood/>
-            </TabsContent>
+				<AddFood />
+			</TabsContent>
 			<TabsContent value="addName">
 				<AddFoodName />
 			</TabsContent>

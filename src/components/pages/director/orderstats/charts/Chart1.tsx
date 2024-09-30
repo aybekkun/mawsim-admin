@@ -12,6 +12,12 @@ const chartData = [
 	{ month: "April", order: 73 },
 	{ month: "May", order: 209 },
 	{ month: "June", order: 214 },
+	{ month: "July", order: 186 },
+	{ month: "August", order: 305 },
+	{ month: "September", order: 237 },
+	{ month: "October", order: 73 },
+	{ month: "November", order: 209 },
+	{ month: "December", order: 214 },
 ];
 
 const chartConfig = {
@@ -56,7 +62,7 @@ export default function Chart1({ className = " " }: { className?: string }) {
 					</ChartContainer>
 				</CardContent>
 				<CardFooter className="flex-col items-start gap-2 text-sm">
-				<div className="leading-none text-muted-foreground">Показаны общие заказы за последние 12 месяцев</div>
+					<div className="leading-none text-muted-foreground">Показаны общие заказы за последние 12 месяцев</div>
 				</CardFooter>
 			</Card>
 		);

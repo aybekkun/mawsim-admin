@@ -1,4 +1,4 @@
-import {  z } from "zod";
+import { z } from "zod";
 // export const addNameSchema = z.object({
 // 	productName: z
 // 		.string()
@@ -33,7 +33,6 @@ export const formRawMaterialSchema = z.object({
 		}
 	),
 });
-
 
 export const formFoodSchema = z.object({
 	food_id: z.string(),
@@ -70,6 +69,8 @@ export const formRawNameSchema = z.object({
 	format_id: z.enum(["1", "2", "3"]),
 });
 
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+
 export const formFoodNameSchema = z.object({
 	name: z
 		.string()
@@ -82,4 +83,5 @@ export const formFoodNameSchema = z.object({
 
 	format_id: z.string(),
 	category_id: z.string(),
+	image: z.any(),
 });
