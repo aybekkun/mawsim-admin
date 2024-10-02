@@ -35,12 +35,16 @@ export interface IAuthGetAllResponse {
 		id: number;
 		name: string;
 		phone: string;
-		role_id: number;
 		role: {
 			id: number;
 			name: string;
-			created_at: Date;
-			updated_at: Date;
 		};
 	}[];
+}
+
+export interface TUserUpdate {
+	name: string;
+	phone: string;
+	password: string;
+	role_id: number;
 }

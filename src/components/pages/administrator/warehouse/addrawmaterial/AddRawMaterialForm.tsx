@@ -70,7 +70,7 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 								<FormControl>
 									<Input type="number" placeholder="Название продукта" {...field} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше или равным нуля</FormDescription>
+								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -85,7 +85,7 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 								<FormControl>
 									<Input type="number" placeholder="Цена" {...field} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше или равным нуля</FormDescription>
+								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}

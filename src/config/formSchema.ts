@@ -56,6 +56,19 @@ export const formFoodSchema = z.object({
 	),
 });
 
+export const formMenuSchema = z.object({
+	food_id: z.number(),
+	price: z.string().refine(
+		(val) => {
+			const parsed = parseFloat(val);
+			return !Number.isNaN(parsed) && parsed > 0;
+		},
+		{
+			message: "Значение должно быть числом больше нуля",
+		}
+	),
+});
+
 export const formRawNameSchema = z.object({
 	name: z
 		.string()
@@ -68,8 +81,6 @@ export const formRawNameSchema = z.object({
 
 	format_id: z.enum(["1", "2", "3"]),
 });
-
-const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 
 export const formFoodNameSchema = z.object({
 	name: z
@@ -84,4 +95,28 @@ export const formFoodNameSchema = z.object({
 	format_id: z.string(),
 	category_id: z.string(),
 	image: z.any(),
+});
+
+export const formUserSchema = z.object({
+	name: z
+		.string()
+		.min(2, {
+			message: "Минимум два символа",
+		})
+		.max(50, {
+			message: "Максимум 50 символов",
+		}),
+
+	phone: z.string().regex(/^998\d{9}$/, {
+		message: "Номер телефона должен начинаться с цифры 998 и сопровождаться 9 цифрами.",
+	}),
+	password: z
+		.string()
+		.min(2, {
+			message: "Минимум два символа",
+		})
+		.max(50, {
+			message: "Максимум 50 символов",
+		}),
+	role_id: z.any(),
 });

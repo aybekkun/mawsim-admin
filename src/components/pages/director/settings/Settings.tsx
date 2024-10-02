@@ -1,13 +1,21 @@
 import { useGetAllUsersQuery } from "@/services/auth/auth.api";
 import UserCard from "./UserCard";
+import { useState } from "react";
+import UserEditForm from "./UserEditForm";
 
 const Settings = () => {
+	const [editId, setEditId] = useState(0);
 	const { data } = useGetAllUsersQuery();
-	console.log(data);
 
 	return (
-		<div className="grid grid-cols-1 gap-4 2xl:grid-cols-4  lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-2">
-			{data?.data.map((user) => <UserCard key={user.id} user={user} />)}
+		<div className="max-w-3xl mx-auto space-y-4">
+			{data?.data.map((user) =>
+				editId === user.id ? (
+					<UserEditForm key={user.id} user={user} setEditId={setEditId} />
+				) : (
+					<UserCard key={user.id} user={user} setEditId={setEditId} />
+				)
+			)}
 		</div>
 	);
 };

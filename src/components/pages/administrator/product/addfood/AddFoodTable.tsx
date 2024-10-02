@@ -4,6 +4,7 @@ import { useGetAllFoodQuery, useGetOneFoodQuery } from "@/services/administrator
 import { TFood } from "@/services/administrator/food/food.types";
 import { useState } from "react";
 import StockSheet from "@/components/shared/StockSheet/StockSheet";
+
 const columns: TColumns<TFood>[] = [
 	{
 		title: "Название сырья",

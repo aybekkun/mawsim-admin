@@ -33,7 +33,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 			name: "",
 			format_id: "3",
 			category_id: "1",
-			image: "",
+			image:null,
 		},
 	});
 	const onClean = () => {
@@ -152,6 +152,11 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 										type="file"
 										{...field}
 										onChange={(e) => {
+											const fileArray = Array.from(e.target.files || []); // Преобразуем FileList в массив
+											const limitedFiles = fileArray.slice(0, 3); // Ограничиваем до 3 файлов
+											const dataTransfer = new DataTransfer();
+											limitedFiles.forEach((file) => dataTransfer.items.add(file));
+											e.target.files = dataTransfer.files;
 											field.onChange(e);
 											handleFileChange(e);
 										}}

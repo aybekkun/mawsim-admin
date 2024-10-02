@@ -20,7 +20,10 @@ export const useAuthPersistStore = create(
 				user: null,
 				isAuth: false,
 				token: null,
-				signOut: () => set({ isAuth: false, token: null }),
+				signOut: () => {
+					set({ isAuth: false, token: null, user: null });
+					window.localStorage.clear();
+				},
 				fetchCheckAuthMe: async () => {
 					try {
 						const { data } = await api.get("/auth/user");
@@ -43,7 +46,7 @@ export const useAuthPersistStore = create(
 				},
 				fetchLogin: async (params) => {
 					console.log(params);
-					
+
 					try {
 						const { data } = await api.post<IAuthResponse>("/auth/login", params);
 						const token = data.data.token;

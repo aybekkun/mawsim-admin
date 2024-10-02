@@ -40,7 +40,9 @@ const Header: FC<HeaderProps> = ({ className = `` }) => {
 					<DropdownMenuItem asChild>
 						<Link to={"/settings"}>Настройки</Link>
 					</DropdownMenuItem>
-
+					<DropdownMenuItem asChild>
+						<Link to={"/"}>Категорий</Link>
+					</DropdownMenuItem>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
 						Выйти
