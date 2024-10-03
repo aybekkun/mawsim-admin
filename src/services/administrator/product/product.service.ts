@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import {  TProductsNameResponse, TProductsOne, TProductsResponse } from "./product.types";
+import { TProductsNameResponse, TProductsOne, TProductsResponse, TRawMaterialsResponse } from "./product.types";
 
 export const ProdcutsNameService = {
 	async getAll() {
@@ -32,5 +32,24 @@ export const ProductsService = {
 	},
 	async update(id: number, name: string, format_id: number) {
 		return api.put(`/admin/warehouses/products/${id}`, { name, format_id });
+	},
+};
+
+export const RawMaterialsService = {
+	async getAll(page: number) {
+		const { data } = await api.get<TRawMaterialsResponse>(`/admin/raw-materials?page=${page}&limit=10&date=desc`);
+		return data;
+	},
+	async create(product_id: number, quantity: number) {
+		const { data } = await api.post("/admin/raw-materials", { product_id, quantity });
+		return data;
+	},
+	async update(id: number, product_id: number, quantity: number) {
+		const { data } = await api.put(`/admin/raw-materials/${id}`, { product_id, quantity });
+		return data;
+	},
+	async delete(id: number) {
+		const { data } = await api.delete(`/admin/raw-materials/${id}`);
+		return data;
 	},
 };

@@ -46,3 +46,38 @@ export type TProductsOne = {
 		}[];
 	};
 };
+
+export type TRawMaterialsResponse = {
+	data: TRawMaterials[];
+	meta: TPaginationResponse;
+};
+
+export type TRawMaterials = {
+	id: number;
+	quantity: string;
+	date: Date;
+	product: {
+		id: number;
+		name: string;
+		format: {
+			id: number;
+			name: string;
+		};
+	};
+};
+
+export type TPaginationLink = {
+	url: string | null;
+	label: string;
+	active: boolean;
+};
+export type TPaginationResponse = {
+	current_page: number;
+	from: number | null;
+	last_page: number;
+	links: TPaginationLink[];
+	path: string;
+	per_page: number;
+	to: number | null;
+	total: number;
+};

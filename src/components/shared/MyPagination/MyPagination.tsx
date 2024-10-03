@@ -83,7 +83,7 @@ function MyPagination({
 					{renderPages()}
 
 					<PaginationItem>
-						<PaginationNext onClick={handleNextPage} />
+						<PaginationNext  onClick={handleNextPage} />
 					</PaginationItem>
 				</PaginationContent>
 			</Pagination>

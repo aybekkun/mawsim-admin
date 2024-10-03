@@ -1,6 +1,7 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { ProdcutsNameService, ProductsService } from "./product.service";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { ProdcutsNameService, ProductsService, RawMaterialsService } from "./product.service";
 import { toast } from "../../../hooks/use-toast";
+import { AxiosError } from "axios";
 
 export const useGetAllProductsNameQuery = () => {
 	return useQuery({
@@ -76,6 +77,44 @@ export const useCreateProductsMutation = () => {
 		},
 		onError: (error) => {
 			toast({ title: "Create product", description: error.message, variant: "destructive", duration: 1500 });
+		},
+	});
+};
+
+export const useGetAllRawMaterialsExpenseQuery = (page: number = 1) => {
+	return useQuery({
+		queryKey: ["rawmaterials", page],
+		queryFn: () => RawMaterialsService.getAll(page),
+		placeholderData: keepPreviousData,
+	});
+};
+
+export const useCreateRawMaterialsExpenseMutation = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (data: { product_id: number; quantity: number }) =>
+			RawMaterialsService.create(data.product_id, data.quantity),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["rawmaterials"] });
+			toast({ title: "Добавлено расход", description: "Сырье был успешно доавлен", duration: 500 });
+		},
+		onError: (error: AxiosError<any, any>) => {
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
+			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
+		},
+	});
+};
+
+export const useDeleteRawMaterialsExpenseMutation = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (id: number) => RawMaterialsService.delete(id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["rawmaterials"] });
+			toast({ title: "Удалено", description: "Сырье был успешно удален", duration: 500 });
+		},
+		onError: (error) => {
+			toast({ title: "Delete product", description: error.message, variant: "destructive", duration: 1500 });
 		},
 	});
 };

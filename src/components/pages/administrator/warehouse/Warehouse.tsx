@@ -1,9 +1,10 @@
 import { FC } from "react";
 
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AddRawMaterial from "./addrawmaterial/AddRawMaterial";
 import AddRawName from "./addrawname/AddRawName";
+import RawMaterialsExpense from "./expense/RawMaterialsExpense";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 interface WarehouseProps {
 	className?: string;
 }
@@ -12,15 +13,22 @@ const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
 			<Tabs defaultValue="add" className={className}>
-				<TabsList>
-					<TabsTrigger value="add">Добавить сырье</TabsTrigger>
-					<TabsTrigger value="addName">Добавить название сырья</TabsTrigger>
-				</TabsList>
+				<ScrollArea className="horizontal w-92">
+					<TabsList>
+						<TabsTrigger value="add">Добавить сырье</TabsTrigger>
+						<TabsTrigger value="addName">Добавить название сырья</TabsTrigger>
+						<TabsTrigger value="expenses">Расходы склада</TabsTrigger>
+						<ScrollBar orientation="horizontal" />
+					</TabsList>
+				</ScrollArea>
 				<TabsContent value="add">
 					<AddRawMaterial />
 				</TabsContent>
 				<TabsContent value="addName">
 					<AddRawName />
+				</TabsContent>
+				<TabsContent value="expenses">
+					<RawMaterialsExpense />
 				</TabsContent>
 			</Tabs>
 		</div>

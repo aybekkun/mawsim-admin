@@ -34,6 +34,19 @@ export const formRawMaterialSchema = z.object({
 	),
 });
 
+export const formRawMaterialExpenseSchema = z.object({
+	product_id: z.number(),
+	quantity: z.string().refine(
+		(val) => {
+			const parsed = parseFloat(val);
+			return !Number.isNaN(parsed) && parsed > 0;
+		},
+		{
+			message: "Значение должно быть числом больше нуля",
+		}
+	),
+});
+
 export const formFoodSchema = z.object({
 	food_id: z.string(),
 	quantity: z.string().refine(
