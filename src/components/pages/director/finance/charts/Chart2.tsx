@@ -12,7 +12,7 @@ const revenueData = [
 
 export default function Chart2() {
   return (
-    <Card className="">
+    <Card>
       <CardHeader>
         <CardTitle>Annual Revenue and Profit</CardTitle>
         <CardDescription>ACME Corp. financial performance over 5 years</CardDescription>
