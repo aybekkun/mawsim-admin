@@ -15,7 +15,7 @@ const stockData = [
 
 export default function Chart1() {
   return (
-    <Card className="flex-1">
+    <Card className="flex-1 ">
       <CardHeader>
         <CardTitle>Дохаоды</CardTitle>
         <CardDescription>ACME Corp. stock price over the last 8 months</CardDescription>

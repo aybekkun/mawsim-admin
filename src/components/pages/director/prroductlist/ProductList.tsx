@@ -9,6 +9,7 @@ const ProductList: FC<ProductListProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
 			<Chart1 />
+      {/* сщььуте */}
 		</div>
 	);
 };
