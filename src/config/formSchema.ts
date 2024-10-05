@@ -69,6 +69,25 @@ export const formFoodSchema = z.object({
 	),
 });
 
+export const formOtherExpenseSchema = z.object({
+	amount: z.string().refine(
+		(val) => {
+			const parsed = parseFloat(val);
+			return !Number.isNaN(parsed) && parsed > 0;
+		},
+		{
+			message: "Значение должно быть числом больше нуля",
+		}
+	),
+	comment: z
+		.string()
+		.min(2, {
+			message: "Минимум два символа",
+		})
+		.max(50, {
+			message: "Максимум 50 символов",
+		}),
+});
 export const formMenuSchema = z.object({
 	food_id: z.number(),
 	price: z.string().refine(
@@ -104,7 +123,14 @@ export const formFoodNameSchema = z.object({
 		.max(50, {
 			message: "Максимум 50 символов",
 		}),
-
+	description: z
+		.string()
+		.min(5, {
+			message: "Минимум два символа",
+		})
+		.max(50, {
+			message: "Максимум 50 символов",
+		}),
 	format_id: z.string(),
 	category_id: z.string(),
 	image: z.any(),

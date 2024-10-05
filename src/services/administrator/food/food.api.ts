@@ -42,8 +42,8 @@ export const useUpdateFoodNameMutation = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: (data: { id: number; name: string; format_id: number; category_id: number }) =>
-			FoodNameService.update(data.id, data.name, data.format_id, data.category_id),
+		mutationFn: (data: { id: number; name: string; description: string; format_id: number; category_id: number }) =>
+			FoodNameService.update(data.id, data.name, data.description, data.format_id, data.category_id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["foodname"] });
 			toast({ title: "Обнвалено", description: "Проудукт был успешно обнавлен", duration: 500 });

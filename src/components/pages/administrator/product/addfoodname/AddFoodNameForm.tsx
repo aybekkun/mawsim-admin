@@ -33,7 +33,8 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 			name: "",
 			format_id: "3",
 			category_id: "1",
-			image:null,
+			description: "",
+			image: "",
 		},
 	});
 	const onClean = () => {
@@ -50,6 +51,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 		if (type === "edit" && obj) {
 			form.setValue("name", obj.name);
 			form.setValue("format_id", String(obj.format.id) as "1" | "2" | "3");
+			form.setValue("description", obj.description);
 		}
 		return () => {
 			form.reset();
@@ -60,6 +62,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 		fd.append("name", values.name.replace(/ +/g, " ").trim());
 		fd.append("format_id", values.format_id);
 		fd.append("category_id", values.category_id);
+		fd.append("description", values.description.replace(/ +/g, " ").trim());
 		files.forEach((file) => {
 			fd.append("image[]", file);
 		});
@@ -69,6 +72,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 			await updateName({
 				id: obj.id,
 				name: values.name.replace(/ +/g, " ").trim(),
+				description: values.description.replace(/ +/g, " ").trim(),
 				format_id: Number(values.format_id),
 				category_id: Number(values.category_id),
 			});
@@ -89,6 +93,20 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 									<Input placeholder="Название продукта" {...field} />
 								</FormControl>
 								<FormDescription>Картошка, мука и тд</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="description"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Описание</FormLabel>
+								<FormControl>
+									<Input placeholder="Описание" {...field} />
+								</FormControl>
+								<FormDescription>Сомса с мясом</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}

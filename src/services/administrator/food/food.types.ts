@@ -1,3 +1,4 @@
+
 export type TFoodNameResponse = {
 	data: TFoodName[];
 };
@@ -5,6 +6,7 @@ export type TFoodNameResponse = {
 export type TFoodName = {
 	id: number;
 	name: string;
+	description: string;
 	category: {
 		id: number;
 		name: string;

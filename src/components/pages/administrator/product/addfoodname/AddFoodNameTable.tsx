@@ -17,6 +17,10 @@ const columns: TColumns<TFoodName>[] = [
 		render: (_, record) => <>{record.format.name}</>,
 	},
 	{
+		title: "Описание",
+		dataIndex: "description",
+	},
+	{
 		title: "Категория",
 		render: (_, record) => <>{record.category.name}</>,
 	},

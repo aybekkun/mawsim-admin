@@ -6,7 +6,6 @@ export const FoodNameService = {
 		const { data } = await api.get<TFoodNameResponse>("/admin/food-items");
 		return data;
 	},
-
 	async getOne(id: number) {
 		const { data } = await api.get(`/admin/food-items/${id}`);
 		return data;
@@ -20,8 +19,8 @@ export const FoodNameService = {
 		});
 	},
 
-	async update(id: number, name: string, format_id: number, category_id: number) {
-		return api.put(`/admin/food-items/${id}`, { name, format_id, category_id });
+	async update(id: number, name: string, description: string, format_id: number, category_id: number) {
+		return api.put(`/admin/food-items/${id}`, { name, format_id, category_id, description });
 	},
 
 	async delete(id: number) {
