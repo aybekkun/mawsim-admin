@@ -37,7 +37,7 @@ function App() {
 				<Route path="/login" element={<AuthLayout />} />
 				<Route path="/" element={<MainLayout />}>
 					<Route path="/settings" element={<Settings />} />
-					<Route path={ROUTES.FINANCE.route} element={<Finance />} />
+					<Route path={"/"} element={<Finance />} />
 					<Route path={ROUTES.WAREHOUSE_STATS.route} element={<WarehouseStats />} />
 					<Route path={ROUTES.ORDER_STATS.route} element={<OrderStats />} />
 					<Route path={ROUTES.PRODUCT_LIST.route} element={<ProductList />} />

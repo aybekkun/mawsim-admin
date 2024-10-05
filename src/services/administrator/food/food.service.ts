@@ -19,8 +19,15 @@ export const FoodNameService = {
 		});
 	},
 
-	async update(id: number, name: string, description: string, format_id: number, category_id: number) {
-		return api.put(`/admin/food-items/${id}`, { name, format_id, category_id, description });
+	async update(
+		id: number,
+		name: string,
+		description: string,
+		sell_price: number,
+		format_id: number,
+		category_id: number
+	) {
+		return api.put(`/admin/food-items/${id}`, { name, format_id, category_id, sell_price, description });
 	},
 
 	async delete(id: number) {

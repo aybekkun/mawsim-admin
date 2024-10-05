@@ -1,13 +1,17 @@
 import { FC } from "react";
+import Chart1 from "./charts/Chart1";
+import Chart2 from "./charts/Chart2";
+import Chart3 from "./charts/Chart3";
 
-interface FinanceProps {
-	className?: string;
-}
 
-const Finance: FC<FinanceProps> = ({ className = `` }) => {
+const Finance: FC = () => {
 	return (
-		<div className={className}>
-			<h2 className="text-xl font-bold text-slate-800">Расходы</h2>
+		<div className={"grid gap-4"}>
+			<Chart3 />
+			<div className="flex gap-4 justify-between">
+				<Chart1 />
+				<Chart2 />
+			</div>
 		</div>
 	);
 };

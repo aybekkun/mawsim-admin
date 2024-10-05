@@ -31,6 +31,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 		resolver: zodResolver(formFoodNameSchema),
 		defaultValues: {
 			name: "",
+			price: "",
 			format_id: "3",
 			category_id: "1",
 			description: "",
@@ -63,6 +64,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 		fd.append("format_id", values.format_id);
 		fd.append("category_id", values.category_id);
 		fd.append("description", values.description.replace(/ +/g, " ").trim());
+		fd.append("sell_pirce", Number(values.price).toString());
 		files.forEach((file) => {
 			fd.append("image[]", file);
 		});
@@ -73,6 +75,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 				id: obj.id,
 				name: values.name.replace(/ +/g, " ").trim(),
 				description: values.description.replace(/ +/g, " ").trim(),
+				sell_price: Number(values.price),
 				format_id: Number(values.format_id),
 				category_id: Number(values.category_id),
 			});
@@ -93,6 +96,20 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 									<Input placeholder="Название продукта" {...field} />
 								</FormControl>
 								<FormDescription>Картошка, мука и тд</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="price"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Цена продажы</FormLabel>
+								<FormControl>
+									<Input type="number" placeholder="Цена" {...field} />
+								</FormControl>
+								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
