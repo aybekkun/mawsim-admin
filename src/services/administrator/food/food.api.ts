@@ -46,10 +46,10 @@ export const useUpdateFoodNameMutation = () => {
 			id: number;
 			name: string;
 			description: string;
-			sell_price: number;
 			format_id: number;
 			category_id: number;
-		}) => FoodNameService.update(data.id, data.name, data.description, data.sell_price, data.format_id, data.category_id),
+		}) =>
+			FoodNameService.update(data.id, data.name, data.description,  data.format_id, data.category_id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["foodname"] });
 			toast({ title: "Обнвалено", description: "Проудукт был успешно обнавлен", duration: 500 });
@@ -77,8 +77,8 @@ export const useGetOneFoodQuery = (id: number) => {
 export const useCreateFoodMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: (data: { quantity: number; price: number; food_id: number }) =>
-			FoodService.create(data.food_id, data.quantity, data.price),
+		mutationFn: (data: { quantity: number; price: number; food_id: number; sell_price: number }) =>
+			FoodService.create(data.food_id, data.quantity, data.price, data.sell_price),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["food"] });
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });

@@ -67,6 +67,15 @@ export const formFoodSchema = z.object({
 			message: "Значение должно быть числом больше нуля",
 		}
 	),
+	sell_price: z.string().refine(
+		(val) => {
+			const parsed = parseFloat(val);
+			return !Number.isNaN(parsed) && parsed > 0;
+		},
+		{
+			message: "Значение должно быть числом больше нуля",
+		}
+	),
 });
 
 export const formOtherExpenseSchema = z.object({
@@ -123,15 +132,7 @@ export const formFoodNameSchema = z.object({
 		.max(50, {
 			message: "Максимум 50 символов",
 		}),
-	price: z.string().refine(
-		(val) => {
-			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
-		},
-		{
-			message: "Значение должно быть числом больше нуля",
-		}
-	),
+
 	description: z
 		.string()
 		.min(5, {

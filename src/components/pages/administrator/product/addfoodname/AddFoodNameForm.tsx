@@ -31,7 +31,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 		resolver: zodResolver(formFoodNameSchema),
 		defaultValues: {
 			name: "",
-			price: "",
+
 			format_id: "3",
 			category_id: "1",
 			description: "",
@@ -53,18 +53,21 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 			form.setValue("name", obj.name);
 			form.setValue("format_id", String(obj.format.id) as "1" | "2" | "3");
 			form.setValue("description", obj.description);
+			form.setValue("category_id", String(obj.category.id) as "1" | "2" | "3");
 		}
 		return () => {
 			form.reset();
 		};
 	}, [open]);
 	async function onSubmit(values: z.infer<typeof formFoodNameSchema>) {
+		
+		
 		const fd = new FormData();
 		fd.append("name", values.name.replace(/ +/g, " ").trim());
 		fd.append("format_id", values.format_id);
 		fd.append("category_id", values.category_id);
 		fd.append("description", values.description.replace(/ +/g, " ").trim());
-		fd.append("sell_pirce", Number(values.price).toString());
+		// fd.append("sell_pirce", Number(values.price).toString());
 		files.forEach((file) => {
 			fd.append("image[]", file);
 		});
@@ -75,7 +78,6 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 				id: obj.id,
 				name: values.name.replace(/ +/g, " ").trim(),
 				description: values.description.replace(/ +/g, " ").trim(),
-				sell_price: Number(values.price),
 				format_id: Number(values.format_id),
 				category_id: Number(values.category_id),
 			});
@@ -100,20 +102,7 @@ const AddFoodNameForm: FC<AddFoodNameFormProps> = ({
 							</FormItem>
 						)}
 					/>
-					<FormField
-						control={form.control}
-						name="price"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Цена продажы</FormLabel>
-								<FormControl>
-									<Input type="number" placeholder="Цена" {...field} />
-								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+			
 					<FormField
 						control={form.control}
 						name="description"

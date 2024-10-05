@@ -30,6 +30,7 @@ const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undef
 			food_id: "",
 			quantity: "",
 			price: "",
+			sell_price: "",
 		},
 	});
 
@@ -48,6 +49,7 @@ const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undef
 			food_id: Number(values.food_id),
 			price: Number(values.price),
 			quantity: Number(values.quantity),
+			sell_price: Number(values.sell_price),
 		});
 	}
 	return (
@@ -71,7 +73,21 @@ const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undef
 							<FormItem>
 								<FormLabel>Количество</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Название продукта" {...field} />
+									<Input type="number" placeholder="Количество" {...field} />
+								</FormControl>
+								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
+								<FormMessage />
+							</FormItem>
+						)}
+					/>
+					<FormField
+						control={form.control}
+						name="sell_price"
+						render={({ field }) => (
+							<FormItem>
+								<FormLabel>Цена на прожажу</FormLabel>
+								<FormControl>
+									<Input type="number" placeholder="Цена" {...field} />
 								</FormControl>
 								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
