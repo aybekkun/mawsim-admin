@@ -12,7 +12,7 @@ const AddFoodName = () => {
 			<Card>
 				<CardHeader>
 					<CardTitle className="flex flex-wrap items-center justify-between">
-						Список названия{" "}
+						Список названия
 						<Button size={"icon"} onClick={() => setOpen(true)}>
 							<Plus />
 						</Button>

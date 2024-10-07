@@ -1,8 +1,30 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Plus } from "lucide-react";
+import SalariesTable from "./SalariesTable";
+import { useState } from "react";
+import SalariesForm from "./SalariesForm";
 
 const Salaries = () => {
-  return (
-    <div>Salaries</div>
-  )
-}
+	const [open, setOpen] = useState(false);
+	return (
+		<>
+			<Card>
+				<CardHeader>
+					<CardTitle className="flex flex-wrap items-center justify-between">
+						Список зарплат
+						<Button size={"icon"} onClick={() => setOpen(true)}>
+							<Plus />
+						</Button>
+					</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<SalariesTable />
+				</CardContent>
+			</Card>
+			<SalariesForm open={open} setOpen={setOpen} type="create" />
+		</>
+	);
+};
 
-export default Salaries
+export default Salaries;

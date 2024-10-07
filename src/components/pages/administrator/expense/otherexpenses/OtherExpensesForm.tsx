@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formOtherExpenseSchema } from "@/config/formSchema";
-import { useCreateOtherExpenseMutation } from "@/services/administrator/expense/expense.api";
+import {
+	useCreateOtherExpenseMutation,
+	useUpdateOtherExpenseMutation,
+} from "@/services/administrator/expense/expense.api";
 import { TOtherExpense } from "@/services/administrator/expense/expense.types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect } from "react";
@@ -24,6 +27,7 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 	setOpen = () => undefined,
 }) => {
 	const { mutate: createExpense, isPending: isCreating, isSuccess: isCreated } = useCreateOtherExpenseMutation();
+	const { mutate: updateExpense, isPending: isUpdating, isSuccess: isUpdated } = useUpdateOtherExpenseMutation();
 	const form = useForm<z.infer<typeof formOtherExpenseSchema>>({
 		resolver: zodResolver(formOtherExpenseSchema),
 		defaultValues: {
@@ -32,11 +36,11 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 		},
 	});
 	useEffect(() => {
-		if (isCreated) {
+		if (isCreated || isUpdated) {
 			form.reset();
 			setOpen(false);
 		}
-	}, [isCreated]);
+	}, [isCreated, isUpdated]);
 
 	useEffect(() => {
 		if (type === "edit" && obj) {
@@ -55,7 +59,11 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 				comment: values.comment.replace(/ +/g, " ").trim(),
 			});
 		} else if (obj && window.confirm("Вы действительно хотите изменить расход?")) {
-			console.log("da");
+			await updateExpense({
+				id: obj.id,
+				amount: Number(values.amount),
+				comment: values.comment.replace(/ +/g, " ").trim(),
+			});
 		}
 	}
 	return (
@@ -94,7 +102,7 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 							</FormItem>
 						)}
 					/>
-					<Button disabled={isCreating} type="submit">
+					<Button disabled={isCreating || isUpdating} type="submit">
 						{type === "create" ? "Добавить" : "Изменить"}
 					</Button>
 				</form>

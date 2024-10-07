@@ -11,6 +11,18 @@ import { z } from "zod";
 // 		.refine((val) => !/^\s/.test(val), { message: "Поле не должно начинаться с пробела" }),
 // 	format_id: z.enum(["unit", "kg", "liter"]),
 // });
+export const formSalaryExpenseSchema = z.object({
+	user_id: z.number(),
+	amount: z.string().refine(
+		(val) => {
+			const parsed = parseFloat(val);
+			return !Number.isNaN(parsed) && parsed > 0;
+		},
+		{
+			message: "Значение должно быть числом больше нуля",
+		}
+	),
+});
 
 export const formRawMaterialSchema = z.object({
 	product_id: z.string(),
@@ -59,15 +71,6 @@ export const formFoodSchema = z.object({
 		}
 	),
 	price: z.string().refine(
-		(val) => {
-			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
-		},
-		{
-			message: "Значение должно быть числом больше нуля",
-		}
-	),
-	sell_price: z.string().refine(
 		(val) => {
 			const parsed = parseFloat(val);
 			return !Number.isNaN(parsed) && parsed > 0;

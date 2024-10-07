@@ -17,3 +17,23 @@ export type TOtherExpense = {
 		updated_at: Date;
 	};
 };
+
+export type TSalaryResponse = {
+	data: TSalaryExpense[];
+	meta: TPaginationResponse;
+};
+
+export type TSalaryExpense = {
+	id: number;
+	amount: string;
+	date: Date;
+	expense: {
+		id: number;
+		name: string;
+	};
+	user: {
+		id: number;
+		name: string;
+		phone: string;
+	};
+};

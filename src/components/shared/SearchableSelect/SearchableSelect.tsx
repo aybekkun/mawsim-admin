@@ -43,7 +43,7 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
 				</PopoverTrigger>
 				<PopoverContent className="w-full p-0">
 					<Command>
-						<CommandInput placeholder="Search item..." />
+						<CommandInput placeholder="Поиск.." />
 						<CommandEmpty>No item found.</CommandEmpty>
 						<CommandGroup>
 							<CommandList>

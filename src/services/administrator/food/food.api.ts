@@ -77,8 +77,8 @@ export const useGetOneFoodQuery = (id: number) => {
 export const useCreateFoodMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: (data: { quantity: number; price: number; food_id: number; sell_price: number }) =>
-			FoodService.create(data.food_id, data.quantity, data.price, data.sell_price),
+		mutationFn: (data: { quantity: number; price: number; food_id: number;}) =>
+			FoodService.create(data.food_id, data.quantity, data.price),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["food"] });
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });

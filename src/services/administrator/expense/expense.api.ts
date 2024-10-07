@@ -23,6 +23,7 @@ export const useCreateOtherExpenseMutation = () => {
 		},
 	});
 };
+
 export const useUpdateOtherExpenseMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
@@ -37,6 +38,7 @@ export const useUpdateOtherExpenseMutation = () => {
 		},
 	});
 };
+
 export const useDeleteOtherExpenseMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
@@ -72,6 +74,7 @@ export const useCreateSalaryMutation = () => {
 		},
 	});
 };
+
 export const useUpdateSalaryMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
@@ -99,3 +102,4 @@ export const useDeleteSalaryMutation = () => {
 		},
 	});
 };
+

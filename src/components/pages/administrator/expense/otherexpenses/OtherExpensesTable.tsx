@@ -22,6 +22,7 @@ const columns: TColumns<TOtherExpense>[] = [
 	{
 		title: "Дата",
 		dataIndex: "date",
+		render: (row, record) => <p className="text-nowrap">{String(row)}</p>,
 	},
 	{
 		title: "Действия",

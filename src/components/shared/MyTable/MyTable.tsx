@@ -2,7 +2,7 @@ import React from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 export interface TColumns<T> {
-	title: string;
+	title: string | React.ReactNode;
 	dataIndex?: keyof T;
 	render?: (value: T[keyof T], record: T) => React.ReactNode;
 }
@@ -43,7 +43,7 @@ const MyTable = <T extends object>({ source, columns, currentPage = 1, loading =
 				<TableBody>
 					{source.map((row: T, i: number) => (
 						<TableRow key={i}>
-							<TableCell>{(currentPage - 1) * 10 + i + 1}</TableCell>
+							<TableCell className="p-2 w-[70px]">{(currentPage - 1) * 10 + i + 1}</TableCell>
 							{columns.map((column, j) => (
 								<TableCell key={j}>
 									{column.render

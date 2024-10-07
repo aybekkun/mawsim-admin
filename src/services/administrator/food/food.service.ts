@@ -44,11 +44,10 @@ export const FoodService = {
 		const { data } = await api.get<TFoodOne>("/admin/warehouses/food-items/" + id);
 		return data;
 	},
-	async create(food_id: number, quantity: number, price: number, sell_price: number) {
+	async create(food_id: number, quantity: number, price: number) {
 		return api.post("/admin/warehouses/food-items", {
 			food_id,
 			price,
-			sell_price,
 			quantity,
 			warehouse_id: 1,
 			expense_id: 1,

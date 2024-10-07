@@ -1,9 +1,9 @@
 import { api } from "@/api";
-import { TOtherExpenseResponse } from "./expense.types";
+import { TOtherExpenseResponse, TSalaryResponse } from "./expense.types";
 
 export const OtherExpenseService = {
 	async getAll(page: number = 1) {
-		const { data } = await api.get<TOtherExpenseResponse>(`/admin/other-expenses?page=${page}&date=desc`);
+		const { data } = await api.get<TOtherExpenseResponse>(`/admin/other-expenses?page=${page}&sort_date=desc`);
 		return data;
 	},
 	async create(comment: string, amount: number) {
@@ -19,7 +19,7 @@ export const OtherExpenseService = {
 
 export const SalaryService = {
 	async getAll(page: number = 1) {
-		const { data } = await api.get<TOtherExpenseResponse>(`/admin/salaries?page=${page}&date=desc`);
+		const { data } = await api.get<TSalaryResponse>(`/admin/salaries?page=${page}&date=desc`);
 		return data;
 	},
 	async create(user_id: number, amount: number) {
