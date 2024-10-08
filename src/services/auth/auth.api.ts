@@ -35,3 +35,34 @@ export const useUpdateUserMutation = () => {
 		},
 	});
 };
+
+export const useCreateeUserMutation = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: ({ name, phone, password }: { name: string; phone: string; password: string }) =>
+			AuthService.create(name, phone, password),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["users"] });
+			toast({ title: "Добавлен", description: "Пользователь был успешно добавлен", duration: 500 });
+		},
+		onError: (error) => {
+			toast({ title: "Update user", description: error.message, variant: "destructive", duration: 1500 });
+		},
+	});
+};
+
+export const useDeleteUserMutation = () => {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: (id: number) => AuthService.delete(id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["users"] });
+			toast({ title: "Добавлен", description: "Пользователь был успешно удален", duration: 500 });
+		},
+		onError: (error) => {
+			toast({ title: "Delete user", description: error.message, variant: "destructive", duration: 1500 });
+		},
+	});
+};

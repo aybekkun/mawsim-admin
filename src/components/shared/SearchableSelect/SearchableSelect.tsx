@@ -37,7 +37,9 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
 			<Popover open={open} onOpenChange={setOpen}>
 				<PopoverTrigger asChild>
 					<Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
-						{value ? items.find((item) => item.label === value)?.label : "Выберите значение..."}
+						{value
+							? items.find((item, index) => index + 1 + ". " + item.label == value)?.label
+							: "Выберите значение..."}
 						<ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
 					</Button>
 				</PopoverTrigger>
@@ -47,14 +49,14 @@ const SearchableSelect: FC<SearchableSelectProps> = ({
 						<CommandEmpty>No item found.</CommandEmpty>
 						<CommandGroup>
 							<CommandList>
-								{items.map((item) => (
+								{items.map((item, index) => (
 									<CommandItem
-										key={item.value}
-										value={item.value}
+										key={item.value + item.id}
+										value={index + 1 + ". " + item.value}
 										onSelect={(currentValue) => onSelectItem(item.id, currentValue)}
 									>
 										<Check className={cn("mr-2 h-4 w-4", value === item.label ? "opacity-100" : "opacity-0")} />
-										{item.label}
+										{index + 1 + ". " + item.value}
 									</CommandItem>
 								))}
 							</CommandList>

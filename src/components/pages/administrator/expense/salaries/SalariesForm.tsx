@@ -6,12 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { formSalaryExpenseSchema } from "@/config/formSchema";
 import {
-	useCreateOtherExpenseMutation,
 	useCreateSalaryMutation,
-	useUpdateOtherExpenseMutation,
 	useUpdateSalaryMutation,
 } from "@/services/administrator/expense/expense.api";
-import { TOtherExpense, TSalaryExpense } from "@/services/administrator/expense/expense.types";
+import {  TSalaryExpense } from "@/services/administrator/expense/expense.types";
 import { useGetAllUsersQuery } from "@/services/auth/auth.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect } from "react";
@@ -99,7 +97,7 @@ const SalariesForm: FC<SalariesFormProps> = ({
 							<FormItem>
 								<FormLabel>Расход</FormLabel>
 								<FormControl>
-									<Input placeholder="Сумма" {...field} />
+									<Input type="number" placeholder="Сумма" {...field} />
 								</FormControl>
 								<FormDescription>Сколько вы потратили</FormDescription>
 								<FormMessage />

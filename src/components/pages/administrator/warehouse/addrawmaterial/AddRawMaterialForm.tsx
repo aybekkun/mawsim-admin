@@ -68,7 +68,7 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 							<FormItem>
 								<FormLabel>Количество</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Название продукта" {...field} />
+									<Input type="number" placeholder="Количество купленных продуктов" {...field} />
 								</FormControl>
 								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />

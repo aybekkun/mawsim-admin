@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl,  FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formUserSchema } from "@/config/formSchema";
 import { useUpdateUserMutation } from "@/services/auth/auth.api";
@@ -60,7 +60,7 @@ const UserEditForm: FC<UserEditFormProps> = ({ user, className = ``, setEditId }
 								name="name"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Должность</FormLabel>
+										<FormLabel>Имя</FormLabel>
 										<FormControl>
 											<Input className="w-full" placeholder="name" {...field} />
 										</FormControl>
@@ -95,9 +95,14 @@ const UserEditForm: FC<UserEditFormProps> = ({ user, className = ``, setEditId }
 								)}
 							/>
 
-							<Button disabled={isPending} type="submit" className="">
-								Сбросить
-							</Button>
+							<div className="flex gap-4">
+								<Button disabled={isPending} type="submit" className="">
+									Сбросить
+								</Button>
+								<Button onClick={() => setEditId(-1)} variant="destructive" className="">
+									Отмена
+								</Button>
+							</div>
 						</div>
 					</CardContent>
 				</Card>

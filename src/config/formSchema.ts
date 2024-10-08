@@ -164,11 +164,11 @@ export const formUserSchema = z.object({
 	}),
 	password: z
 		.string()
-		.min(2, {
-			message: "Минимум два символа",
+		.min(4, {
+			message: "Минимум 4 символа",
 		})
-		.max(50, {
-			message: "Максимум 50 символов",
+		.max(4, {
+			message: "Максимум 4 символов",
 		}),
 	role_id: z.any(),
 });

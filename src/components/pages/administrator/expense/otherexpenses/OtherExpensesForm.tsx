@@ -95,7 +95,7 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 							<FormItem>
 								<FormLabel>Расход</FormLabel>
 								<FormControl>
-									<Input placeholder="Название расхода" {...field} />
+									<Input type="number" placeholder="Название расхода" {...field} />
 								</FormControl>
 								<FormDescription>Сколько вы потратили</FormDescription>
 								<FormMessage />
