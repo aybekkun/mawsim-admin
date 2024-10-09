@@ -1,14 +1,13 @@
 import MyDialog from "@/components/shared/MyDialog/MyDialog";
-import { formSalaryExpenseSchema, formUserSchema } from "@/config/formSchema";
+import {  formUserSchema } from "@/config/formSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
-import SearchableSelect from "@/components/shared/SearchableSelect/SearchableSelect";
 import { useCreateeUserMutation } from "@/services/auth/auth.api";
 interface AddUserProps {
 	open?: boolean;

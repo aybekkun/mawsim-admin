@@ -9,7 +9,6 @@ import { useState, FC, useEffect } from "react";
 interface SearchableSelectProps {
 	items: { id: number; value: string; label: string }[];
 	defaultValue?: number;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	setItem?: (id: any) => void;
 	className?: string;
 }

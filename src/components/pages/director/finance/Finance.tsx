@@ -1,16 +1,21 @@
 import { FC } from "react";
-import Chart1 from "./charts/Chart1";
-import Chart2 from "./charts/Chart2";
-import Chart3 from "./charts/Chart3";
+import AnnualProfit from "./charts/AnnualProfit";
 
+import FinanceCards from "./charts/FinanceCards";
+import RevenueExpenseProfit from "./charts/RevenueExpenseProfit";
+import RecentTransactions from "./charts/RecentTransactions";
+import WeeklyProfit from "./charts/WeeklyProfit";
 
 const Finance: FC = () => {
 	return (
 		<div className={"grid gap-4"}>
-			<Chart3 />
-			<div className="flex gap-4 justify-between">
-				<Chart1 />
-				<Chart2 />
+	
+			<FinanceCards />
+			<WeeklyProfit />
+			<RecentTransactions />
+			<div className="grid gap-4 grid-cols-1 xl:grid-cols-9">
+				<AnnualProfit className="xl:col-span-5" />
+				<RevenueExpenseProfit className="xl:col-span-4" />
 			</div>
 		</div>
 	);
