@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
+import { LoaderCircle } from "lucide-react";
 export interface TColumns<T> {
 	title: string | React.ReactNode;
 	dataIndex?: keyof T;
@@ -12,10 +13,17 @@ interface MyTableProps<T> {
 	source: T[];
 	currentPage?: number;
 	loading?: boolean;
+	fetching?: boolean;
 	className?: string;
 }
 
-const MyTable = <T extends object>({ source, columns, currentPage = 1, loading = false }: MyTableProps<T>) => {
+const MyTable = <T extends object>({
+	source,
+	columns,
+	currentPage = 1,
+	loading = false,
+	fetching = false,
+}: MyTableProps<T>) => {
 	const getCellValue = (value: unknown): React.ReactNode => {
 		if (React.isValidElement(value)) {
 			return value;
@@ -29,7 +37,12 @@ const MyTable = <T extends object>({ source, columns, currentPage = 1, loading =
 
 	return (
 		<>
-			<Table>
+			<Table className="relative">
+				{fetching && (
+					<div className="absolute top-0 left-0 right-0 bottom-0 justify-center items-center flex bg-muted opacity-35">
+						<LoaderCircle className="w-10 h-10 animate-spin" />
+					</div>
+				)}
 				<TableHeader>
 					<TableRow>
 						<TableHead className="p-3 text-left">№</TableHead>

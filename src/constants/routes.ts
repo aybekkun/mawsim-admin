@@ -9,6 +9,7 @@ export const ROUTES = {
 	//Директорская
 	FINANCE: createRoute("/finance", "Финансы"),
 	WAREHOUSE_STATS: createRoute("/warehouse-stats", "Товары на складе"),
+	EXPENSE_STATS: createRoute("/expense-stats", "Статистика расходов"),
 	ORDER_STATS: createRoute("/order-stats", "Статистика заказов"),
 	PRODUCT_LIST: createRoute("/product-list", "Список товаров"),
 	//Касса

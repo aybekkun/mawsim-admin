@@ -1,6 +1,7 @@
 import { toast } from "@/hooks/use-toast";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { OtherExpenseService, SalaryService } from "./expense.service";
+import { TGetParams } from "@/services/types/global.types";
 
 export const useGetAllOtherExpenseQuery = (page: number = 1) => {
 	return useQuery({
@@ -53,10 +54,10 @@ export const useDeleteOtherExpenseMutation = () => {
 	});
 };
 
-export const useGetAllSalaryQuery = (page: number = 1) => {
+export const useGetAllSalaryQuery = (params: TGetParams) => {
 	return useQuery({
-		queryKey: ["salary", page],
-		queryFn: () => SalaryService.getAll(page),
+		queryKey: ["salary", ...Object.values(params)],
+		queryFn: () => SalaryService.getAll(params),
 		placeholderData: keepPreviousData,
 	});
 };
@@ -102,4 +103,3 @@ export const useDeleteSalaryMutation = () => {
 		},
 	});
 };
-

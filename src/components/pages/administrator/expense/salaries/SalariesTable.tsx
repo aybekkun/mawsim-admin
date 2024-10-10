@@ -1,7 +1,6 @@
 import MyPagination from "@/components/shared/MyPagination/MyPagination";
 import MyTable, { TColumns } from "@/components/shared/MyTable/MyTable";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { useDeleteSalaryMutation, useGetAllSalaryQuery } from "@/services/administrator/expense/expense.api";
 import { TSalaryExpense } from "@/services/administrator/expense/expense.types";
 import { Pencil, Trash2 } from "lucide-react";
@@ -27,7 +26,7 @@ const columns: TColumns<TSalaryExpense>[] = [
 
 const SalariesTable = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data, isLoading } = useGetAllSalaryQuery(currentPage);
+	const { data, isLoading } = useGetAllSalaryQuery({ page: currentPage });
 
 	return (
 		<>
@@ -58,7 +57,7 @@ const Actions = ({ record }: { record: TSalaryExpense }) => {
 					<Trash2 className="h-4 w-4" />
 				</Button>
 			</div>
-			<SalariesForm type="edit" obj={record} open={open} setOpen={setOpen}/>
+			<SalariesForm type="edit" obj={record} open={open} setOpen={setOpen} />
 		</>
 	);
 };

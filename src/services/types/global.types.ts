@@ -13,3 +13,10 @@ export type TPaginationResponse = {
 	to: number | null;
 	total: number;
 };
+
+export type TGetParams = {
+	page?: number;
+	search?: string;
+	date?: string;
+	limit?: number
+}

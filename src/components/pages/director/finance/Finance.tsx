@@ -9,7 +9,7 @@ import WeeklyProfit from "./charts/WeeklyProfit";
 const Finance: FC = () => {
 	return (
 		<div className={"grid gap-4"}>
-	
+
 			<FinanceCards />
 			<WeeklyProfit />
 			<RecentTransactions />

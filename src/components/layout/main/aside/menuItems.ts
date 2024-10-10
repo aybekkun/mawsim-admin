@@ -9,6 +9,7 @@ import {
 	LucideIcon,
 	ReceiptText,
 	ArrowRightToLine,
+	ChartColumnDecreasing,
 } from "lucide-react";
 
 export const menuItems: { title: string; items: { link: string; icon: LucideIcon; text: string }[] }[] = [
@@ -19,6 +20,11 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 				link: "/",
 				icon: HandCoins,
 				text: ROUTES.FINANCE.name,
+			},
+			{
+				link: ROUTES.EXPENSE_STATS.route,
+				icon: ChartColumnDecreasing,
+				text: ROUTES.EXPENSE_STATS.name,
 			},
 			{
 				link: ROUTES.WAREHOUSE_STATS.route,

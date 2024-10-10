@@ -1,5 +1,6 @@
 import { api } from "@/api";
 import { TOtherExpenseResponse, TSalaryResponse } from "./expense.types";
+import { TGetParams } from "@/services/types/global.types";
 
 export const OtherExpenseService = {
 	async getAll(page: number = 1) {
@@ -18,8 +19,10 @@ export const OtherExpenseService = {
 };
 
 export const SalaryService = {
-	async getAll(page: number = 1) {
-		const { data } = await api.get<TSalaryResponse>(`/admin/salaries?page=${page}&date=desc`);
+	async getAll(params: TGetParams) {
+		const { data } = await api.get<TSalaryResponse>(`/admin/salaries`, {
+			params
+		});
 		return data;
 	},
 	async create(user_id: number, amount: number) {
