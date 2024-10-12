@@ -5,11 +5,8 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { formSalaryExpenseSchema } from "@/config/formSchema";
-import {
-	useCreateSalaryMutation,
-	useUpdateSalaryMutation,
-} from "@/services/administrator/expense/expense.api";
-import {  TSalaryExpense } from "@/services/administrator/expense/expense.types";
+import { useCreateSalaryMutation, useUpdateSalaryMutation } from "@/services/administrator/expense/expense.api";
+import { TSalaryExpense } from "@/services/administrator/expense/expense.types";
 import { useGetAllUsersQuery } from "@/services/auth/auth.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect } from "react";

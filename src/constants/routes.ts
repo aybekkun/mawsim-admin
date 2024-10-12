@@ -8,6 +8,9 @@ export const ROUTES = {
 	HOME: createRoute("/", "Главная"),
 	//Директорская
 	FINANCE: createRoute("/finance", "Финансы"),
+	PROFIT_STATS: createRoute("/profit-stats", "Прибыль"),
+	SALARY_STATS: createRoute("/salary-stats", "Зарплата"),
+
 	WAREHOUSE_STATS: createRoute("/warehouse-stats", "Товары на складе"),
 	EXPENSE_STATS: createRoute("/expense-stats", "Статистика расходов"),
 	ORDER_STATS: createRoute("/order-stats", "Статистика заказов"),
@@ -18,8 +21,8 @@ export const ROUTES = {
 	ORDERS: createRoute("/orders", "Заказы"),
 	ACCEPT_ORDER: createRoute("/accept-order", "Принять заказ"),
 	//Админстараторская
-	EXPENSE:createRoute("/expense","Расходы"),
-	PRODUCT:createRoute("/product","Товары"),
-	WAREHOUSE:createRoute("/warehouse","Склад"),
-	MENU_LIST:createRoute("/menu-list","Список меню"),
+	EXPENSE: createRoute("/expense", "Расходы"),
+	PRODUCT: createRoute("/product", "Товары"),
+	WAREHOUSE: createRoute("/warehouse", "Склад"),
+	MENU_LIST: createRoute("/menu-list", "Список меню"),
 };

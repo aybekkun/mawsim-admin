@@ -1,22 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Input, MyInputMask } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PhoneIcon, LockIcon } from "lucide-react";
 import { useAuthPersistStore } from "@/store";
-import { Navigate } from "react-router-dom";
-
+import { Navigate, useNavigate } from "react-router-dom";
 const AuthLayout = () => {
-	const [tel, setTel] = useState("");
+	const navigate = useNavigate();
+	const [tel, setTel] = useState("998");
 	const [password, setPassword] = useState("");
 	const { fetchLogin, isAuth } = useAuthPersistStore();
+	useEffect(() => {
+		if (isAuth) navigate("/");
+	}, [isAuth]);
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		await fetchLogin({ phone: tel, password: password });
-		// console.log("Login attempted with:", { tel, password });
+		await fetchLogin({ phone: tel.replace(/\D+/g, ""), password: password });
 	};
-	if (isAuth) return <Navigate to={"/"} replace />;
+
 	return (
 		<div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
 			<Card className="w-full max-w-md">
@@ -30,13 +32,14 @@ const AuthLayout = () => {
 							<Label htmlFor="tel">Телефон</Label>
 							<div className="relative">
 								<PhoneIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-								<Input
+								<MyInputMask
+									mask={"+\\9\\98 (99) 999-99-99"}
 									id="tel"
 									type="tel"
-									placeholder="998911234567"
+									className="pl-10"
+									placeholder="+998 (__) ___-__-__"
 									value={tel}
 									onChange={(e) => setTel(e.target.value)}
-									className="pl-10"
 									required
 								/>
 							</div>

@@ -20,7 +20,9 @@ import { useEffect } from "react";
 import Settings from "./components/pages/director/settings/Settings";
 import { useCategoriesPersistStore } from "./store/useCategoriesPersistStore";
 import MenuList from "./components/pages/administrator/menulist/MenuList";
-import ExpenseStats from "./components/pages/director/expense/ExpenseStats";
+import ExpenseStats from "./components/pages/director/finance/expense/ExpenseStats";
+import Salary from "./components/pages/director/finance/salary/Salary";
+import Profit from "./components/pages/director/finance/profit/Profit";
 
 function App() {
 	const navigate = useNavigate();
@@ -39,9 +41,12 @@ function App() {
 				<Route path="/" element={<MainLayout />}>
 					<Route path="/settings" element={<Settings />} />
 					<Route path={"/"} element={<Finance />} />
+					<Route path={ROUTES.EXPENSE_STATS.route} element={<ExpenseStats />} />
+					<Route path={ROUTES.SALARY_STATS.route} element={<Salary />} />
+					<Route path={ROUTES.PROFIT_STATS.route} element={<Profit />} />
+
 					<Route path={ROUTES.WAREHOUSE_STATS.route} element={<WarehouseStats />} />
 					<Route path={ROUTES.ORDER_STATS.route} element={<OrderStats />} />
-					<Route path={ROUTES.EXPENSE_STATS.route} element={<ExpenseStats />} />
 
 					<Route path={ROUTES.PRODUCT_LIST.route} element={<ProductList />} />
 					<Route path={ROUTES.PAYMENT.route} element={<Payment />} />

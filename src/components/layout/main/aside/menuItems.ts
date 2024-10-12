@@ -10,22 +10,49 @@ import {
 	ReceiptText,
 	ArrowRightToLine,
 	ChartColumnDecreasing,
+	ChartNoAxesCombined,
+	Handshake,
+	Archive
 } from "lucide-react";
 
-export const menuItems: { title: string; items: { link: string; icon: LucideIcon; text: string }[] }[] = [
+export type TMenuItem = {
+	title: string;
+	items: TMenuChild[];
+};
+
+export type TMenuChild = {
+	link?: string;
+	icon: LucideIcon;
+	text: string;
+	children?: TMenuChild[];
+};
+
+export const menuItems: TMenuItem[] = [
 	{
 		title: "Статистика",
 		items: [
 			{
-				link: "/",
 				icon: HandCoins,
 				text: ROUTES.FINANCE.name,
+				children: [
+					{
+						link: ROUTES.PROFIT_STATS.route,
+						icon: ChartNoAxesCombined,
+						text: ROUTES.PROFIT_STATS.name,
+					},
+					{
+						link: ROUTES.EXPENSE_STATS.route,
+						icon: ChartColumnDecreasing,
+						text: ROUTES.EXPENSE_STATS.name,
+					},
+					{
+						link: ROUTES.SALARY_STATS.route,
+						icon: Handshake,
+						text: ROUTES.SALARY_STATS.name,
+					},
+				],
 			},
-			{
-				link: ROUTES.EXPENSE_STATS.route,
-				icon: ChartColumnDecreasing,
-				text: ROUTES.EXPENSE_STATS.name,
-			},
+
 			{
 				link: ROUTES.WAREHOUSE_STATS.route,
 				icon: Package,
@@ -73,14 +100,21 @@ export const menuItems: { title: string; items: { link: string; icon: LucideIcon
 		title: "Админстараторская",
 		items: [
 			{
-				link: ROUTES.MENU_LIST.route,
-				icon: Logs,
-				text: ROUTES.MENU_LIST.name,
-			},
-			{
-				link: ROUTES.PRODUCT.route,
-				icon: Package,
-				text: ROUTES.PRODUCT.name,
+	
+				icon: Archive,
+				text: "Склад кафе",
+				children: [
+					{
+						link: ROUTES.MENU_LIST.route,
+						icon: Logs,
+						text: ROUTES.MENU_LIST.name,
+					},
+					{
+						link: ROUTES.PRODUCT.route,
+						icon: Package,
+						text: ROUTES.PRODUCT.name,
+					},
+				],
 			},
 
 			{

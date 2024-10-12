@@ -6,6 +6,7 @@ import { useActiveMenu } from "@/store";
 
 import cn from "classnames";
 import { ChevronLeft } from "lucide-react";
+
 const Aside: FC = () => {
 	const { active, setActiveMenu } = useActiveMenu();
 	return (

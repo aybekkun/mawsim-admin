@@ -47,6 +47,17 @@
 				@apply text-primary bg-green-100;
 			}
 		}
+		button {
+			@apply text-gray-500;
+			&.active {
+				@apply text-primary bg-green-100;
+			}
+		}
+		.submenu {
+			a {
+				@apply ml-2;
+			}
+		}
 	}
 	.main {
 		@apply flex-1 overflow-y-auto;
