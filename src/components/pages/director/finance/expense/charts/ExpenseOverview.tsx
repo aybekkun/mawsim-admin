@@ -1,6 +1,7 @@
 import { Cell, Pie, PieChart } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { SelectDate } from "@/components/shared/SelectDate/SelectDate";
 export const description = "A pie chart with a label list";
 const chartData = [
 	{ expense: "salary", amount: 275, fill: "var(--color-salary)" },
@@ -34,9 +35,10 @@ const chartConfig = {
 export default function ExpenseOverview({ className = "" }) {
 	return (
 		<Card className={"flex flex-col " + className}>
-			<CardHeader className="items-center pb-0">
+			<CardHeader className="">
 				<CardTitle>Распределение Финансов</CardTitle>
-				<CardDescription>За этот месяц</CardDescription>
+				<CardDescription>За этот день</CardDescription>
+				<SelectDate/>
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">

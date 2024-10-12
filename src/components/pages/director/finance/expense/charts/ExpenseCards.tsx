@@ -11,7 +11,7 @@ const ExpenseCards: FC<FinanceCardsProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
 			<div className="mb-4 flex justify-between gap-4 flex-wrap">
-				<h2 className="text-3xl font-bold tracking-tight">Расходы</h2>
+		
 				<MyDateSelect />
 			</div>
 

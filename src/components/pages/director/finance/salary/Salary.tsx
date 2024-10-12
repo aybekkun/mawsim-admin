@@ -1,15 +1,15 @@
-import { FC } from 'react'
+import SelectMonthYear from "@/components/shared/SelectDate/SelectMonthYear";
+import { FC } from "react";
 
-interface SalaryProps {
-  className?: string
-}
-
-const Salary: FC<SalaryProps> = ({ className = `` }) => {
-  return (
-    <div className = {className}>
-     Salary
-    </div>
-  )
-}
+const Salary: FC = () => {
+	return (
+		<div className="space-y-4">
+			<div className="flex flex-wrap gap-4 justify-between">
+				<h2 className="text-3xl font-bold tracking-tight">Зарплата</h2> <SelectMonthYear />
+			</div>
+			Здесь список зарплаты
+		</div>
+	);
+};
 
 export default Salary;

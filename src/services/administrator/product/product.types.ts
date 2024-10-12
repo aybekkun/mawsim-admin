@@ -27,14 +27,14 @@ export type TProducts = {
 		id: number;
 		name: string;
 	};
-	stock: string | null;
+	stock: string;
 };
 
 export type TProductsOne = {
 	data: {
 		id: number;
 		name: string;
-		stock: string | null;
+		stock: string;
 		format: {
 			id: number;
 			name: string;

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export default function MyDateSelect() {
+export default function SelectMonthYear() {
 	const [year, setYear] = React.useState<string>(new Date().getFullYear().toString());
 	const [month, setMonth] = React.useState<string>((new Date().getMonth() + 1).toString().padStart(2, "0"));
 	const years = Array.from({ length: 10 }, (_, i) => (new Date().getFullYear() - 5 + i).toString());
@@ -19,7 +19,7 @@ export default function MyDateSelect() {
 		{ value: "10", label: "Окт" },
 		{ value: "11", label: "Ноя" },
 		{ value: "12", label: "Дек" },
-	  ];
+	];
 	return (
 		<div className="flex  items-center gap-2">
 			<Select value={month} onValueChange={setMonth}>

@@ -36,14 +36,14 @@ export type TFood = {
 		id: number;
 		name: string;
 	};
-	stock: string | null;
+	stock: string ;
 };
 
 export type TFoodOne = {
 	data: {
 		id: number;
 		name: string;
-		stock: string | null;
+		stock: string ;
 		format: {
 			id: number;
 			name: string;
