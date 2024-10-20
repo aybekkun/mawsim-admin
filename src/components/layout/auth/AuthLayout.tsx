@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PhoneIcon, LockIcon } from "lucide-react";
 import { useAuthPersistStore } from "@/store";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 const AuthLayout = () => {
 	const navigate = useNavigate();
 	const [tel, setTel] = useState("998");

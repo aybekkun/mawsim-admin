@@ -18,5 +18,32 @@ export type TGetParams = {
 	page?: number;
 	search?: string;
 	date?: string;
-	limit?: number
-}
+	limit?: number;
+	sort_price?: "asc" | "desc";
+};
+
+export type TFood = {
+	id: number;
+	price: number;
+	food: {
+		id: number;
+		name: string;
+		stock: number;
+		images: {
+			id: number;
+			image_url: string;
+		}[];
+		format: TFormat;
+		category: TCategory;
+	};
+};
+
+export type TCategory = {
+	id: number;
+	name: string;
+};
+
+export type TFormat = {
+	id: number;
+	name: string;
+};

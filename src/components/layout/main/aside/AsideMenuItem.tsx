@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { NavLink } from "react-router-dom";
 import cn from "classnames";
 import { useActiveMenu } from "@/store";
-import { TMenuChild } from "./menuItems";
+import { TMenuChild } from "../../../../constants/menuItems";
 import { ChevronRight } from "lucide-react";
 
 interface AsideMenuItemProps {
@@ -13,6 +13,7 @@ interface AsideMenuItemProps {
 
 const AsideMenuItem: FC<AsideMenuItemProps> = ({ title, items, className = `` }) => {
 	const { setActiveMenu } = useActiveMenu();
+
 	const [openIndex, setOpenIndex] = useState<number | null>(null);
 
 	const toggle = (idx: number) => {

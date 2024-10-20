@@ -1,14 +1,15 @@
 import { FC } from "react";
 import logoSvg from "../../../../assets/logo.svg";
-import { menuItems } from "./menuItems";
+import { menuItems } from "../../../../constants/menuItems";
 import AsideMenuItem from "./AsideMenuItem";
-import { useActiveMenu } from "@/store";
+import { useActiveMenu, useAuthPersistStore } from "@/store";
 
 import cn from "classnames";
 import { ChevronLeft } from "lucide-react";
 
 const Aside: FC = () => {
 	const { active, setActiveMenu } = useActiveMenu();
+	const { user } = useAuthPersistStore();
 	return (
 		<>
 			<aside className={cn("aside", { active: active })}>
@@ -23,11 +24,13 @@ const Aside: FC = () => {
 				<div className="aside__content">
 					<nav>
 						<ul>
-							{menuItems.map(({ title, items }, index) => (
-								<li key={title + index}>
-									<AsideMenuItem title={title} items={items} />
-								</li>
-							))}
+							{menuItems
+								.filter((item) => item.role === user?.role_id)
+								.map(({ title, items }, index) => (
+									<li key={title + index}>
+										<AsideMenuItem title={title} items={items} />
+									</li>
+								))}
 						</ul>
 					</nav>
 				</div>

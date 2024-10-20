@@ -12,11 +12,13 @@ import {
 	ChartColumnDecreasing,
 	ChartNoAxesCombined,
 	Handshake,
-	Archive
+	Archive,
 } from "lucide-react";
+import { ReactNode } from "react";
 
 export type TMenuItem = {
 	title: string;
+	role: number;
 	items: TMenuChild[];
 };
 
@@ -30,6 +32,7 @@ export type TMenuChild = {
 export const menuItems: TMenuItem[] = [
 	{
 		title: "Статистика",
+		role: 2,
 		items: [
 			{
 				icon: HandCoins,
@@ -73,6 +76,7 @@ export const menuItems: TMenuItem[] = [
 	},
 	{
 		title: "Касса",
+		role: 4,
 		items: [
 			{
 				link: ROUTES.PAYMENT.route,
@@ -83,6 +87,7 @@ export const menuItems: TMenuItem[] = [
 	},
 	{
 		title: "Заказы",
+		role: 3,
 		items: [
 			{
 				link: ROUTES.ACCEPT_ORDER.route,
@@ -98,9 +103,9 @@ export const menuItems: TMenuItem[] = [
 	},
 	{
 		title: "Админстараторская",
+		role: 1,
 		items: [
 			{
-	
 				icon: Archive,
 				text: "Склад кафе",
 				children: [

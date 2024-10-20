@@ -2,10 +2,12 @@ export default function MyOrderList() {
 	return (
 		<table>
 			<thead>
-				<th className="text-left">№</th>
-				<th className="text-left">Название</th>
-				<th className="text-center w-[70px]">Количество</th>
-				<th className="text-right">Цена</th>
+				<tr className="border-b">
+					<th className="text-left">№</th>
+					<th className="text-left">Название</th>
+					<th className="text-center w-[70px]">Количество</th>
+					<th className="text-right">Цена</th>
+				</tr>
 			</thead>
 			<tbody>
 				<tr className="border-b">

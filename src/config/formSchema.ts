@@ -146,7 +146,9 @@ export const formFoodNameSchema = z.object({
 		}),
 	format_id: z.string(),
 	category_id: z.string(),
-	image: z.any(),
+	image: z.any().refine((value) => value !== undefined && value !== null, {
+		message: "Фото обязательно для загрузки",
+	}),
 });
 
 export const formUserSchema = z.object({
