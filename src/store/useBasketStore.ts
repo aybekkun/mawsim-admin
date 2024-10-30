@@ -1,7 +1,7 @@
 import { TFood } from "@/services/types/global.types";
 import { create } from "zustand";
 
-type TBasket = {
+export type TBasket = {
 	items: {
 		price: number;
 		food: TFood["food"];

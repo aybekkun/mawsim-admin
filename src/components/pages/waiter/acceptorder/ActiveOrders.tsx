@@ -13,6 +13,7 @@ import {
 
 import { useGetActiveOrderQuery } from "@/services/waiter/menu/menu.api";
 import { TOrder } from "@/services/waiter/menu/menu.types";
+import { TBasket, useBasketStore } from "@/store/useBasketStore";
 
 import { ListOrdered, Waypoints, X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
@@ -23,6 +24,7 @@ const ActiveOrders: FC = () => {
 	const [activeOrderId, setActiveOrderId] = useState<number>(0);
 	const [activeOrders, setActiveOrders] = useState<{ orderId: number; tableId: number; tableName: string }[]>([]);
 
+	const { items } = useBasketStore();
 	useEffect(() => {
 		if (data?.data) {
 			const activeOrders = data?.data.map((item) => {
@@ -43,10 +45,14 @@ const ActiveOrders: FC = () => {
 				<Badge className="ml-1 bg-orange-500 hover:bg-orange-200">{data?.meta.total}</Badge>
 			</Button>
 			<MyDialog title="Корзина" open={open} onOpenChange={(open) => setOpen(open)}>
-				<TableList activeOrders={activeOrders || []} onChangeValue={(id: number) => setActiveOrderId(id)} />
+				<TableList
+					defaultValue={String(activeOrderId)}
+					activeOrders={activeOrders || []}
+					onChangeValue={(id: number) => setActiveOrderId(id)}
+				/>
 				<OrderList foods={data?.data?.find((item) => item.id == activeOrderId)?.foods || []} />
+				<NewOrderList foods={items || []} />
 				<div className="flex justify-between">
-					<Button>Очистить</Button>
 					<Button>Заказать</Button>
 				</div>
 			</MyDialog>
@@ -55,6 +61,7 @@ const ActiveOrders: FC = () => {
 };
 const TableList = ({
 	activeOrders = [],
+	defaultValue = "0",
 	onChangeValue = () => {},
 }: {
 	activeOrders: {
@@ -62,10 +69,11 @@ const TableList = ({
 		tableId: number;
 		tableName: string;
 	}[];
+	defaultValue: string;
 	onChangeValue?: (value: number) => void;
 }) => {
 	return (
-		<Select onValueChange={(val) => onChangeValue(Number(val))}>
+		<Select defaultValue={defaultValue ? defaultValue : undefined} onValueChange={(val) => onChangeValue(Number(val))}>
 			<SelectTrigger className="w-full">
 				<SelectValue placeholder="Выберите стол" />
 			</SelectTrigger>
@@ -105,8 +113,36 @@ const OrderList = ({ foods }: { foods: TOrder["foods"] }) => {
 		</table>
 	);
 };
-const ActiveOrderList: FC = () => {
-	return <></>;
+const NewOrderList = ({ foods }: { foods: TBasket["items"] }) => {
+	const {  removeItem } = useBasketStore();
+	return (
+		<table>
+			<thead>
+				<tr className="border-b">
+					<th className="text-center" colSpan={3}>
+						<h2>Новые заказы</h2>
+					</th>
+					<th>
+						<Waypoints className="w-5 h-5" />
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foods.map((item, index) => (
+					<tr key={item.id} className="border-b">
+						<td className="text-left">{index + 1}</td>
+						<td>{item.food.name}</td>
+						<td className="text-center w-[70px]">{Number(item.quantity)}</td>
+						<td className="flex justify-center items-center">
+							<Button onClick={() => removeItem(item.id)} variant="destructive" size={`icon`} className="w-5 h-5">
+								<X />
+							</Button>
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	);
 };
 
 export default ActiveOrders;

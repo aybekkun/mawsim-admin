@@ -21,7 +21,7 @@ const AcceptOrder: FC<AcceptOrderProps> = ({ className = `` }) => {
 	return (
 		<div className={className}>
 			<Tabs defaultValue="foods">
-				<div className="flex justify-between ">
+				<div className="flex justify-between flex-wrap gap-2">
 					<TabsList className="">
 						<TabsTrigger value="foods">Еда</TabsTrigger>
 						<TabsTrigger value="drinks">Напитки</TabsTrigger>
