@@ -3,9 +3,9 @@ import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { CurrencyInput, Input } from "@/components/ui/input";
 import { formRawMaterialSchema } from "@/config/formSchema";
 import SearchableSelect from "@/components/shared/SearchableSelect/SearchableSelect";
 import { useCreateProductsMutation, useGetAllProductsNameQuery } from "@/services/administrator/product/product.api";
@@ -70,7 +70,6 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 								<FormControl>
 									<Input type="number" placeholder="Количество купленных продуктов" {...field} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -83,9 +82,8 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 							<FormItem>
 								<FormLabel>Общая цена</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Цена" {...field} />
+									<CurrencyInput placeholder="Цена" {...field} onAccept={(value: any) => field.onChange(value)}/>
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}

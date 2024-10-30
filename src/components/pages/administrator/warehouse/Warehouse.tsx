@@ -15,9 +15,9 @@ const Warehouse: FC<WarehouseProps> = ({ className = `` }) => {
 			<Tabs defaultValue="add" className={className}>
 				<ScrollArea className="horizontal w-92">
 					<TabsList>
+						<TabsTrigger value="expenses">Расходы склада</TabsTrigger>
 						<TabsTrigger value="add">Добавить сырье</TabsTrigger>
 						<TabsTrigger value="addName">Добавить название сырья</TabsTrigger>
-						<TabsTrigger value="expenses">Расходы склада</TabsTrigger>
 						<ScrollBar orientation="horizontal" />
 					</TabsList>
 				</ScrollArea>

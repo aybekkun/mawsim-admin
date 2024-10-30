@@ -21,15 +21,15 @@ export const OtherExpenseService = {
 export const SalaryService = {
 	async getAll(params: TGetParams) {
 		const { data } = await api.get<TSalaryResponse>(`/admin/salaries`, {
-			params
+			params,
 		});
 		return data;
 	},
-	async create(user_id: number, amount: number) {
-		return api.post("/admin/salaries", { user_id, amount, expense_id: 4 });
+	async create(user_id: number, amount: number, category_id: number) {
+		return api.post("/admin/salaries", { user_id, amount, expense_id: 4, category_id });
 	},
-	async update(id: number, user_id: number, amount: number) {
-		return api.put(`/admin/salaries/${id}`, { user_id, amount });
+	async update(id: number, user_id: number, amount: number, category_id: number) {
+		return api.put(`/admin/salaries/${id}`, { user_id, amount, category_id });
 	},
 	async delete(id: number) {
 		return api.delete(`/admin/salaries/${id}`);

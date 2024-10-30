@@ -16,12 +16,13 @@ export const formSalaryExpenseSchema = z.object({
 	amount: z.string().refine(
 		(val) => {
 			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
+			return !Number.isNaN(parsed) && parsed >= 0;
 		},
 		{
-			message: "Значение должно быть числом больше нуля",
+			message: "Значение должно быть больше или равно нулю",
 		}
 	),
+	category_id: z.number(),
 });
 
 export const formRawMaterialSchema = z.object({
@@ -38,10 +39,10 @@ export const formRawMaterialSchema = z.object({
 	price: z.string().refine(
 		(val) => {
 			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
+			return !Number.isNaN(parsed) && parsed >= 0;
 		},
 		{
-			message: "Значение должно быть числом больше нуля",
+			message: "Значение должно быть больше или равно нулю",
 		}
 	),
 });
@@ -64,7 +65,7 @@ export const formFoodSchema = z.object({
 	quantity: z.string().refine(
 		(val) => {
 			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
+			return !Number.isNaN(parsed) && parsed >= 0;
 		},
 		{
 			message: "Значение должно быть числом больше нуля",
@@ -73,7 +74,7 @@ export const formFoodSchema = z.object({
 	price: z.string().refine(
 		(val) => {
 			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
+			return !Number.isNaN(parsed) && parsed >= 0;
 		},
 		{
 			message: "Значение должно быть числом больше нуля",
@@ -85,7 +86,7 @@ export const formOtherExpenseSchema = z.object({
 	amount: z.string().refine(
 		(val) => {
 			const parsed = parseFloat(val);
-			return !Number.isNaN(parsed) && parsed > 0;
+			return !Number.isNaN(parsed) && parsed >= 0;
 		},
 		{
 			message: "Значение должно быть числом больше нуля",

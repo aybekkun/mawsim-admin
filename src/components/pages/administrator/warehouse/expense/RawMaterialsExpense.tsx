@@ -9,7 +9,6 @@ const RawMaterialsExpense = () => {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
-			{" "}
 			<Card>
 				<CardHeader>
 					<CardTitle className="flex flex-wrap items-center justify-between">

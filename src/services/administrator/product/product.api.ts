@@ -105,6 +105,21 @@ export const useCreateRawMaterialsExpenseMutation = () => {
 	});
 };
 
+export const useUpdateRawMaterialsExpenseMutation = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (data: { product_id: number; quantity: number }) =>
+			RawMaterialsService.create(data.product_id, data.quantity),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["rawmaterials"] });
+			toast({ title: "Добавлено расход", description: "Сырье был успешно доавлен", duration: 500 });
+		},
+		onError: (error: AxiosError<any, any>) => {
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
+			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
+		},
+	});
+};
 export const useDeleteRawMaterialsExpenseMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({

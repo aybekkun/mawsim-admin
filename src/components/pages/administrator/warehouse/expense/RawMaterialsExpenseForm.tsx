@@ -3,7 +3,7 @@ import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { formRawMaterialExpenseSchema } from "@/config/formSchema";
@@ -28,6 +28,7 @@ const RawMaterialsExpenseForm: FC<RawMaterialsExpenseFormProps> = ({
 	const [product_id, setProductId] = useState(1);
 	const { data } = useGetAllProductsNameQuery();
 	const { mutate: createRaw, isPending, isSuccess } = useCreateRawMaterialsExpenseMutation();
+	// const { mutate: updateRaw, isPending: isUpdating, isSuccess: isUpdated } = useRawMaterialsExpenseMutation();
 	const transformData = data?.data.map((item) => ({
 		id: item.id,
 		value: item.name,
@@ -50,16 +51,18 @@ const RawMaterialsExpenseForm: FC<RawMaterialsExpenseFormProps> = ({
 	}, [isSuccess]);
 
 	useEffect(() => {
-		if(type==="edit"){
-			form.setValue("product_id", product_id)
-			form.setValue("quantity", "1")
+		if (type === "edit") {
+			form.setValue("product_id", product_id);
+			form.setValue("quantity", "1");
 		}
-	},[])
+	}, []);
 	async function onSubmit(values: z.infer<typeof formRawMaterialExpenseSchema>) {
-		await createRaw({
-			product_id: Number(values.product_id),
-			quantity: Number(values.quantity),
-		});
+		if (type === "create") {
+			await createRaw({
+				product_id: Number(values.product_id),
+				quantity: Number(values.quantity),
+			});
+		}
 	}
 	return (
 		<MyDialog title="Добавить продукт" open={open} onOpenChange={(val) => setOpen(val)}>
@@ -89,7 +92,6 @@ const RawMaterialsExpenseForm: FC<RawMaterialsExpenseFormProps> = ({
 								<FormControl>
 									<Input type="number" placeholder="Количество" {...field} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}

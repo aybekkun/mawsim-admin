@@ -21,6 +21,7 @@ import MenuList from "./components/pages/administrator/menulist/MenuList";
 import ExpenseStats from "./components/pages/director/finance/expense/ExpenseStats";
 import Salary from "./components/pages/director/finance/salary/Salary";
 import Profit from "./components/pages/director/finance/profit/Profit";
+import Home from "./components/pages/home/Home";
 
 function App() {
 	const navigate = useNavigate();
@@ -36,7 +37,7 @@ function App() {
 				<Route path="/login" element={<AuthLayout />} />
 				<Route path="/" element={<MainLayout />}>
 					{/* Директор */}
-					<Route path={"/"} element={<Finance />} />
+					<Route path={"/"} element={<Home />} />
 					{user?.role_id === 2 && (
 						<>
 							<Route path={ROUTES.EXPENSE_STATS.route} element={<ExpenseStats />} />

@@ -27,6 +27,10 @@ export type TSalaryExpense = {
 	id: number;
 	amount: string;
 	date: Date;
+	category: {
+		id: number;
+		name: string;
+	};
 	expense: {
 		id: number;
 		name: string;

@@ -6,11 +6,16 @@ import { TSalaryExpense } from "@/services/administrator/expense/expense.types";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import SalariesForm from "./SalariesForm";
+import { SALARY_CATEGORIES } from "@/constants/appConstants";
 
 const columns: TColumns<TSalaryExpense>[] = [
 	{
 		title: "Пользователь",
 		render: (_, record) => <>{record.user.name}</>,
+	},
+	{
+		title: "Категория",
+		render: (_, record) => <>{SALARY_CATEGORIES.find((item) => item.id === record.category.id)?.name}</>,
 	},
 	{
 		title: "Сумма",

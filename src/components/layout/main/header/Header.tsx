@@ -37,13 +37,19 @@ const Header: FC<HeaderProps> = ({ className = `` }) => {
 				<DropdownMenuContent align="end">
 					<DropdownMenuLabel> {user?.name ? user?.name : "A"}</DropdownMenuLabel>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem asChild>
-						<Link to={"/settings"}>Настройки</Link>
-					</DropdownMenuItem>
-					<DropdownMenuItem asChild>
-						<Link to={"/"}>Категорий</Link>
-					</DropdownMenuItem>
-					<DropdownMenuSeparator />
+
+					{user?.role_id === 1 && (
+						<>
+							<DropdownMenuItem asChild>
+								<Link to={"/settings"}>Настройки</Link>
+							</DropdownMenuItem>
+							<DropdownMenuItem asChild>
+								<Link to={"/"}>Категорий</Link>
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+						</>
+					)}
+
 					<DropdownMenuItem className="cursor-pointer" onClick={() => signOut()}>
 						Выйти
 					</DropdownMenuItem>

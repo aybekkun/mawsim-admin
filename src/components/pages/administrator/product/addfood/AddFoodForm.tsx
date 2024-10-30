@@ -3,9 +3,9 @@ import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { CurrencyInput, Input } from "@/components/ui/input";
 import { formFoodSchema } from "@/config/formSchema";
 import SearchableSelect from "@/components/shared/SearchableSelect/SearchableSelect";
 import { Label } from "@/components/ui/label";
@@ -72,7 +72,6 @@ const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undef
 								<FormControl>
 									<Input type="number" placeholder="Количество" {...field} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -84,9 +83,9 @@ const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undef
 							<FormItem>
 								<FormLabel>Общая цена</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Цена" {...field} />
+									<CurrencyInput placeholder="Цена" {...field} onAccept={(value: any) => field.onChange(value)} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
+
 								<FormMessage />
 							</FormItem>
 						)}

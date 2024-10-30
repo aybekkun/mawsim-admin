@@ -65,3 +65,22 @@ export const USER_ROLES = [
 		name: "официант",
 	},
 ];
+
+export const SALARY_CATEGORIES = [
+	{
+		id: 1,
+		name: "Дневной",
+	},
+	{
+		id: 2,
+		name: "Месячный оклад",
+	},
+	{
+		id: 3,
+		name: "3-4 дневной",
+	},
+	{
+		id: 4,
+		name: "Процентый",
+	},
+];

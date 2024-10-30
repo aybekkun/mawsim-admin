@@ -14,7 +14,7 @@ const columns: TColumns<TMenu>[] = [
 	},
 	{
 		title: "Цена",
-		dataIndex: "price",
+		render: (_, record) => <>{Number(record.price).toLocaleString("ru-Ru")}</>,
 	},
 	{
 		title: "Категория",
@@ -95,7 +95,7 @@ const Actions = ({ record }: { record: TMenu }) => {
 			<Button onClick={onDelete} size={"icon"} variant="destructive">
 				<Trash2 className="h-4 w-4" />
 			</Button>
-			<AddMenuForm  obj={record} open={open} setOpen={setOpen} type="edit" />
+			<AddMenuForm obj={record} open={open} setOpen={setOpen} type="edit" />
 		</div>
 	);
 };

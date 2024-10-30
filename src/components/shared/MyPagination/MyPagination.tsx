@@ -1,4 +1,3 @@
-
 import {
 	Pagination,
 	PaginationContent,
@@ -10,11 +9,13 @@ import {
 } from "@/components/ui/pagination";
 function MyPagination({
 	totalPosts,
+	className = "",
 	postsPerPage,
 	currentPage,
 	setCurrentPage,
 }: {
 	totalPosts: number;
+	className?: string;
 	postsPerPage: number;
 	currentPage: number;
 	setCurrentPage: (i: number) => void;
@@ -73,7 +74,7 @@ function MyPagination({
 	};
 
 	return (
-		<div>
+		<div className={className}>
 			<Pagination>
 				<PaginationContent>
 					<PaginationItem>
@@ -83,7 +84,7 @@ function MyPagination({
 					{renderPages()}
 
 					<PaginationItem>
-						<PaginationNext  onClick={handleNextPage} />
+						<PaginationNext onClick={handleNextPage} />
 					</PaginationItem>
 				</PaginationContent>
 			</Pagination>

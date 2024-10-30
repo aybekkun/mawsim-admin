@@ -20,6 +20,8 @@ export type TGetParams = {
 	date?: string;
 	limit?: number;
 	sort_price?: "asc" | "desc";
+	status_id?: number;
+	is_takeaway?: number;
 };
 
 export type TFood = {
@@ -36,6 +38,7 @@ export type TFood = {
 		format: TFormat;
 		category: TCategory;
 	};
+	quantity: string;
 };
 
 export type TCategory = {

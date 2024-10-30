@@ -4,7 +4,7 @@ import { ShoppingCart, Waypoints, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import { useBasketStore } from "@/store/useBasketStore";
-import { useGetAllWaiterTableQuery } from "@/services/waiter/menu/menu.api";
+import { useCreateOrderMutation, useGetAllWaiterTableQuery } from "@/services/waiter/menu/menu.api";
 import {
 	Select,
 	SelectContent,
@@ -14,6 +14,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { toast } from "@/hooks/use-toast";
 interface ShopCartProps {
 	className?: string;
 }
@@ -22,12 +23,29 @@ const ShopCart: FC<ShopCartProps> = () => {
 	const [open, setOpen] = useState(false);
 	const [tableId, setTableId] = useState(0);
 	const { items, clearBasket } = useBasketStore();
+	const { mutate: createOrder, isPending } = useCreateOrderMutation();
 	const quantity = items?.reduce((acc, item) => acc + item.quantity, 0);
 	const badge = quantity != 0 && <Badge className="ml-1">{quantity}</Badge>;
 	const onClear = () => {
 		clearBasket();
 		setOpen(false);
 		setTableId(0);
+	};
+	const onCreateOrder = async () => {
+		if (tableId == 0) {
+			toast({
+				description: "Выберите стол",
+				duration: 1500,
+				variant:"destructive"
+			});
+			return;
+		}
+		
+		const foods = items.map((item) => {
+			return { food_id: item.id, quantity: item.quantity };
+		});
+		await createOrder({ cafe_table_id: tableId, foods: foods });
+		onClear();
 	};
 
 	return (
@@ -44,7 +62,9 @@ const ShopCart: FC<ShopCartProps> = () => {
 					<Button onClick={onClear} variant={"destructive"}>
 						Очистить
 					</Button>
-					<Button disabled={items.length == 0 && tableId == 0}>Заказать</Button>
+					<Button onClick={onCreateOrder} disabled={(items.length == 0 && tableId == 0) || isPending}>
+						Заказать
+					</Button>
 				</div>
 			</MyDialog>
 		</>

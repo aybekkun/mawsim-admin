@@ -1,13 +1,14 @@
 import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { CurrencyInput, Input } from "@/components/ui/input";
 import { formOtherExpenseSchema } from "@/config/formSchema";
 import {
 	useCreateOtherExpenseMutation,
 	useUpdateOtherExpenseMutation,
 } from "@/services/administrator/expense/expense.api";
 import { TOtherExpense } from "@/services/administrator/expense/expense.types";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -53,6 +54,8 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 	}, [open]);
 
 	async function onSubmit(values: z.infer<typeof formOtherExpenseSchema>) {
+		console.log(values);
+
 		if (type === "create") {
 			await createExpense({
 				amount: Number(values.amount),
@@ -95,7 +98,11 @@ const OtherExpensesForm: FC<OtherExpensesFormProps> = ({
 							<FormItem>
 								<FormLabel>Расход</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Название расхода" {...field} />
+									<CurrencyInput
+										placeholder="Сумма расхода"
+										{...field}
+										onAccept={(value: any) => field.onChange(value)}
+									/>
 								</FormControl>
 								<FormDescription>Сколько вы потратили</FormDescription>
 								<FormMessage />

@@ -3,6 +3,7 @@ import { FC } from "react";
 import MenuCard from "./menucard/MenuCard";
 import ShopCart from "./ShopCart";
 import { useGetAllWaiterMenuQuery } from "@/services/waiter/menu/menu.api";
+import ActiveOrders from "./ActiveOrders";
 
 interface AcceptOrderProps {
 	className?: string;
@@ -25,7 +26,10 @@ const AcceptOrder: FC<AcceptOrderProps> = ({ className = `` }) => {
 						<TabsTrigger value="foods">Еда</TabsTrigger>
 						<TabsTrigger value="drinks">Напитки</TabsTrigger>
 					</TabsList>
-					<ShopCart />
+					<div className="flex gap-2 flex-wrap">
+						<ActiveOrders />
+						<ShopCart />
+					</div>
 				</div>
 				<TabsContent value="foods">
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-4">{food}</div>

@@ -2,6 +2,7 @@ import { toast } from "@/hooks/use-toast";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { OtherExpenseService, SalaryService } from "./expense.service";
 import { TGetParams } from "@/services/types/global.types";
+import { da } from "date-fns/locale";
 
 export const useGetAllOtherExpenseQuery = (page: number = 1) => {
 	return useQuery({
@@ -65,7 +66,8 @@ export const useGetAllSalaryQuery = (params: TGetParams) => {
 export const useCreateSalaryMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: (data: { user_id: number; amount: number }) => SalaryService.create(data.user_id, data.amount),
+		mutationFn: (data: { user_id: number; amount: number; category_id: number }) =>
+			SalaryService.create(data.user_id, data.amount, data.category_id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["salary"] });
 			toast({ title: "Добавлено", description: "Зарплата был успешно добавлен", duration: 500 });
@@ -79,8 +81,8 @@ export const useCreateSalaryMutation = () => {
 export const useUpdateSalaryMutation = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: (data: { id: number; user_id: number; amount: number }) =>
-			SalaryService.update(data.id, data.user_id, data.amount),
+		mutationFn: (data: { id: number; user_id: number; amount: number; category_id: number }) =>
+			SalaryService.update(data.id, data.user_id, data.amount,data.category_id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["salary"] });
 			toast({ title: "Изменено", description: "Зарплата был успешно изменен", duration: 500 });

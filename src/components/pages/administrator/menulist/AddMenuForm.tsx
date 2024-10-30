@@ -3,14 +3,14 @@ import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 
 import { formMenuSchema } from "@/config/formSchema";
 import SearchableSelect from "@/components/shared/SearchableSelect/SearchableSelect";
 import { Label } from "@/components/ui/label";
 import { useGetAllFoodQuery } from "@/services/administrator/food/food.api";
-import { Input } from "@/components/ui/input";
+import { CurrencyInput } from "@/components/ui/input";
 import { TMenu } from "@/services/administrator/menu/menu.types";
 import { useCreateMenuMutation, useUpdateMenuMutation } from "@/services/administrator/menu/menu.api";
 
@@ -93,11 +93,10 @@ const AddMenuForm: FC<AddMenuFormProps> = ({
 						name="price"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Общая цена</FormLabel>
+								<FormLabel>Цена</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Цена" {...field} />
+									<CurrencyInput placeholder="Цена" {...field} onAccept={(value: any) => field.onChange(value)} />
 								</FormControl>
-								<FormDescription>Значение должно быть числом больше нуля</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}

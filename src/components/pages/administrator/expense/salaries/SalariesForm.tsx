@@ -2,7 +2,7 @@ import MyDialog from "@/components/shared/MyDialog/MyDialog";
 import SearchableSelect from "@/components/shared/SearchableSelect/SearchableSelect";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { CurrencyInput } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { formSalaryExpenseSchema } from "@/config/formSchema";
 import { useCreateSalaryMutation, useUpdateSalaryMutation } from "@/services/administrator/expense/expense.api";
@@ -12,7 +12,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SALARY_CATEGORIES } from "@/constants/appConstants";
+import { currencyFormat } from "@/utils/currencyFormat";
 interface SalariesFormProps {
 	type?: "create" | "edit";
 	obj?: TSalaryExpense;
@@ -36,6 +38,7 @@ const SalariesForm: FC<SalariesFormProps> = ({
 		defaultValues: {
 			user_id: 0,
 			amount: "",
+			category_id: 1,
 		},
 	});
 	useEffect(() => {
@@ -48,7 +51,8 @@ const SalariesForm: FC<SalariesFormProps> = ({
 	useEffect(() => {
 		if (type === "edit" && obj) {
 			form.setValue("user_id", Number(obj?.user.id));
-			form.setValue("amount", obj?.amount);
+			form.setValue("amount", currencyFormat(obj?.amount.replace(".00", "")));
+			form.setValue("category_id", obj?.category.id);
 		}
 		return () => {
 			form.reset();
@@ -58,13 +62,15 @@ const SalariesForm: FC<SalariesFormProps> = ({
 		if (type === "create") {
 			await createSalary({
 				user_id: Number(values.user_id),
-				amount: Number(values.amount.replace(/\s+/g, "")),
+				amount: Number(values.amount),
+				category_id: Number(values.category_id),
 			});
 		} else if (obj && window.confirm("Вы действительно хотите изменить зарплату?")) {
 			await updateSalary({
 				id: obj.id,
 				user_id: Number(values.user_id),
-				amount: Number(values.amount.replace(/\s+/g, "")),
+				amount: Number(values.amount),
+				category_id: Number(values.category_id),
 			});
 		}
 	}
@@ -87,6 +93,25 @@ const SalariesForm: FC<SalariesFormProps> = ({
 							}}
 						/>
 					</div>
+					<div>
+						<Label>Категория</Label>
+						<Select
+							defaultValue={String(form.getValues("category_id"))}
+							onValueChange={(value) => form.setValue("category_id", Number(value))}
+						>
+							<SelectTrigger>
+								<SelectValue placeholder="Зарплата" />
+							</SelectTrigger>
+							<SelectContent>
+								{SALARY_CATEGORIES.map((category) => (
+									<SelectItem key={category.id} value={String(category.id)}>
+										{category.name}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
+					</div>
+
 					<FormField
 						control={form.control}
 						name="amount"
@@ -94,7 +119,7 @@ const SalariesForm: FC<SalariesFormProps> = ({
 							<FormItem>
 								<FormLabel>Расход</FormLabel>
 								<FormControl>
-									<Input type="number" placeholder="Сумма" {...field} />
+									<CurrencyInput placeholder="Сумма" {...field} onAccept={(value: any) => field.onChange(value)} />
 								</FormControl>
 								<FormDescription>Сколько вы потратили</FormDescription>
 								<FormMessage />
