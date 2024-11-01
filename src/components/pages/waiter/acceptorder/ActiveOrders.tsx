@@ -10,8 +10,9 @@ import {
 	Select,
 	SelectItem,
 } from "@/components/ui/select";
+import { toast } from "@/hooks/use-toast";
 
-import { useGetActiveOrderQuery } from "@/services/waiter/menu/menu.api";
+import { useAddOrderMutation, useGetActiveOrderQuery } from "@/services/waiter/menu/menu.api";
 import { TOrder } from "@/services/waiter/menu/menu.types";
 import { TBasket, useBasketStore } from "@/store/useBasketStore";
 
@@ -19,12 +20,13 @@ import { ListOrdered, Waypoints, X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 
 const ActiveOrders: FC = () => {
+	const { mutate: addOrder, isPending: isAdding } = useAddOrderMutation();
 	const [open, setOpen] = useState(false);
 	const { data } = useGetActiveOrderQuery({ status_id: 1 });
 	const [activeOrderId, setActiveOrderId] = useState<number>(0);
 	const [activeOrders, setActiveOrders] = useState<{ orderId: number; tableId: number; tableName: string }[]>([]);
 
-	const { items } = useBasketStore();
+	const { items,clearBasket } = useBasketStore();
 	useEffect(() => {
 		if (data?.data) {
 			const activeOrders = data?.data.map((item) => {
@@ -37,6 +39,26 @@ const ActiveOrders: FC = () => {
 			setActiveOrders(activeOrders);
 		}
 	}, [data?.data.length]);
+
+	const onAddOrder = async () => {
+		if (activeOrderId === 0) {
+			toast({ title: "Выберите автивный заказ", description: "Выберите заказ", duration: 5000 });
+			return;
+		}
+		if (items.length === 0) {
+			toast({ title: "Выберите меню", description: "Выберите продукты", duration: 5000 });
+			return;
+		}
+		const basket = items.map((item) => {
+			return {
+				food_id: item.id,
+				quantity: item.quantity,
+			};
+		});
+		await addOrder({ id: activeOrderId, foods: basket });
+		clearBasket();
+		setOpen(false);
+	};
 
 	return (
 		<>
@@ -53,7 +75,9 @@ const ActiveOrders: FC = () => {
 				<OrderList foods={data?.data?.find((item) => item.id == activeOrderId)?.foods || []} />
 				<NewOrderList foods={items || []} />
 				<div className="flex justify-between">
-					<Button>Заказать</Button>
+					<Button disabled={isAdding} onClick={onAddOrder}>
+						Заказать
+					</Button>
 				</div>
 			</MyDialog>
 		</>
@@ -103,7 +127,7 @@ const OrderList = ({ foods }: { foods: TOrder["foods"] }) => {
 			</thead>
 			<tbody>
 				{foods.map((item, index) => (
-					<tr key={item.id} className="border-b">
+					<tr key={item.id + index} className="border-b">
 						<td className="text-left">{index + 1}</td>
 						<td>{item.name}</td>
 						<td className="text-center w-[70px]">{Number(item.quantity)}</td>
@@ -114,7 +138,7 @@ const OrderList = ({ foods }: { foods: TOrder["foods"] }) => {
 	);
 };
 const NewOrderList = ({ foods }: { foods: TBasket["items"] }) => {
-	const {  removeItem } = useBasketStore();
+	const { removeItem } = useBasketStore();
 	return (
 		<table>
 			<thead>
@@ -129,7 +153,7 @@ const NewOrderList = ({ foods }: { foods: TBasket["items"] }) => {
 			</thead>
 			<tbody>
 				{foods.map((item, index) => (
-					<tr key={item.id} className="border-b">
+					<tr key={item.id + index} className="border-b">
 						<td className="text-left">{index + 1}</td>
 						<td>{item.food.name}</td>
 						<td className="text-center w-[70px]">{Number(item.quantity)}</td>

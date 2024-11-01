@@ -22,6 +22,7 @@ export type TGetParams = {
 	sort_price?: "asc" | "desc";
 	status_id?: number;
 	is_takeaway?: number;
+	role_id?: number | string;
 };
 
 export type TFood = {

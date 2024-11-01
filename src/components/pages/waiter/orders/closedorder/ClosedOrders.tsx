@@ -37,7 +37,6 @@ const columns: TColumns<TOrder>[] = [
 		title: "Удалить",
 		render: (_, record) => <DeleteOrder id={record.id} />,
 	},
-
 ];
 
 const ClosedOrders: FC = () => {
@@ -90,7 +89,7 @@ export const ClosedOrderList = ({ foods, price }: { foods: TOrder["foods"]; pric
 					</thead>
 					<tbody>
 						{foods.map((item, index) => (
-							<tr key={item.id} className="border-b">
+							<tr key={item.id + index} className="border-b">
 								<td className="text-left">{index + 1}</td>
 								<td>{item.name}</td>
 								<td className="text-center w-[70px]">{Number(item.quantity)}</td>

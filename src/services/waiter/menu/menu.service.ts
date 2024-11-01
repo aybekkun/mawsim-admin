@@ -1,6 +1,14 @@
 import { api } from "@/api";
 import { TGetParams } from "@/services/types/global.types";
-import { TCreateOrderParams, TOrderResponse, TWaiterMenu, TWaiterTableResponse } from "./menu.types";
+import {
+	TAddOrder,
+	TCreateOrderParams,
+	TOrderResponse,
+	TUpdateOrder,
+	TWaiterMenu,
+	TWaiterTableResponse,
+} from "./menu.types";
+import { uptime } from "process";
 
 export const WaiterMenuService = {
 	async getAll(params: TGetParams) {
@@ -39,9 +47,21 @@ export const WaiterOrderService = {
 		});
 		return data;
 	},
+	async update(params: TUpdateOrder) {
+		const { id, ...obj } = params;
+		const { data } = await api.put<TWaiterTableResponse>(`/officiant/orders/${id}`, {
+			...obj,
+		});
+		return data;
+	},
+	async addOrder(values: TAddOrder) {
+		const { id, ...obj } = values;
+		const { data } = await api.put<TWaiterTableResponse>(`/officiant/append-order/${id}`, { ...obj });
+		return data;
+	},
 	async delete(id: number) {
 		return await api.delete(`/officiant/orders/${id}`);
-	}
+	},
 };
 
 export const OrderService = {

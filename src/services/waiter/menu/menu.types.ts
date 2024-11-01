@@ -50,6 +50,25 @@ export type TOrder = {
 			id: number;
 			name: string;
 		};
+		price:string;
 		quantity: string;
 	}[];
+};
+
+export type TAddOrder = {
+	id: number;
+	foods: {
+		food_id: number; // cola
+		quantity: number;
+	}[];
+};
+
+export type TUpdateOrder = {
+	id: number;
+	cafe_table_id: number;
+	foods: {
+		food_id: number;
+		quantity: number;
+	}[];
+	is_takeaway: boolean;
 };

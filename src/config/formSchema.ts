@@ -162,16 +162,15 @@ export const formUserSchema = z.object({
 			message: "Максимум 50 символов",
 		}),
 
-	phone: z.string().regex(/^998\d{9}$/, {
-		message: "Номер телефона должен начинаться с цифры 998 и сопровождаться 9 цифрами.",
+	phone: z.string().regex(/^\+998 \(\d{2}\) \d{3}-\d{2}-\d{2}$/, {
+		message: "Номер телефона должен быть в формате +998 (ХХ) ХХХ-ХХ-ХХ.",
 	}),
 	password: z
 		.string()
-		.min(4, {
-			message: "Минимум 4 символа",
-		})
-		.max(4, {
-			message: "Максимум 4 символов",
+		.optional()
+		.transform((val) => (val === "" ? undefined : val))
+		.refine((val) => val === undefined || val.length === 4, {
+			message: "Если указано, пароль должен содержать ровно 4 символа",
 		}),
-	role_id: z.any(),
+	role_id: z.string({ message: "Выберите должность" }),
 });

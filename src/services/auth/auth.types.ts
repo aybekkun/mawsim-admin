@@ -1,3 +1,5 @@
+import { TPaginationResponse } from "../types/global.types";
+
 export interface IAuthRegister {
 	fullName: string;
 	phone: string;
@@ -43,8 +45,24 @@ export interface IAuthGetAllResponse {
 }
 
 export interface TUserUpdate {
+	id?: number;
 	name: string;
 	phone: string;
-	password: string;
+	password?: string;
 	role_id: number;
 }
+
+export type TUserResponse = {
+	data: TUser[];
+	meta: TPaginationResponse;
+};
+
+export type TUser = {
+	id: number;
+	name: string;
+	phone: string;
+	role: {
+		id: number;
+		name: string;
+	};
+};

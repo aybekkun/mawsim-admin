@@ -32,7 +32,10 @@ const OrderListItem: FC<OrderListItemProps> = ({ order, className = `` }) => {
 		<Card className={" " + className}>
 			<CardHeader className="flex flex-row items-center justify-between pb-2">
 				<CardTitle>{order.cafe_table.name}</CardTitle>
-				<Badge>{order.status.name}</Badge>
+				<div className="gap-2 flex">
+					<Badge>{order.status.name}</Badge>
+					{order.is_takeaway ? <Badge className="bg-slate-900">Собой</Badge> : null}
+				</div>
 			</CardHeader>
 			<CardContent className="pb-0">
 				<div className="text-sm font-bold">№{order.id} заказ</div>
@@ -58,7 +61,9 @@ const OrderListItem: FC<OrderListItemProps> = ({ order, className = `` }) => {
 					</DialogContent>
 				</Dialog>
 				<div className="flex gap-2">
-					<Button onClick={onCancelOrder} size={"sm"}>Отменить</Button>
+					<Button onClick={onCancelOrder} size={"sm"}>
+						Отменить
+					</Button>
 					<Button onClick={onCloseOrder} variant={"destructive"} size={"sm"}>
 						<X /> Закрыть
 					</Button>
@@ -69,6 +74,21 @@ const OrderListItem: FC<OrderListItemProps> = ({ order, className = `` }) => {
 };
 
 export const OrderList = ({ foods, price }: { foods: TOrder["foods"]; price: string }) => {
+	const groupedItems = foods.reduce<Record<number, { name: string; quantity: number; price: number }>>((acc, item) => {
+		const { id, name, quantity, price } = item;
+		if (!acc[id]) {
+			acc[id] = { name, quantity: 0, price: parseFloat(price) }; // Инициализируем новую запись
+		}
+		acc[id].quantity += parseFloat(quantity); // Суммируем количество
+		return acc;
+	}, {});
+	const resultItems = Object.entries(groupedItems).map(([id, item]) => ({
+		id: id,
+		name: item.name,
+		quantity: item.quantity.toFixed(2),
+		totalPrice: (item.quantity * item.price).toFixed(2), // Рассчитываем общую цену как quantity * price
+	}));
+
 	return (
 		<table>
 			<thead>
@@ -79,8 +99,8 @@ export const OrderList = ({ foods, price }: { foods: TOrder["foods"]; price: str
 				</tr>
 			</thead>
 			<tbody>
-				{foods.map((item, index) => (
-					<tr key={item.id} className="border-b">
+				{resultItems.map((item, index) => (
+					<tr key={index} className="border-b">
 						<td className="text-left">{index + 1}</td>
 						<td>{item.name}</td>
 						<td className="text-center w-[70px]">{Number(item.quantity)}</td>

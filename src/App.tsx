@@ -60,7 +60,7 @@ function App() {
 					{/* Администратор */}
 					{user?.role_id === 1 && (
 						<>
-							<Route path="/settings" element={<Settings />} />
+							<Route path={ROUTES.USERS.route} element={<Settings />} />
 							<Route path={ROUTES.PRODUCT.route} element={<Product />} />
 							<Route path={ROUTES.MENU_LIST.route} element={<MenuList />} />
 							<Route path={ROUTES.EXPENSE.route} element={<Expense />} />

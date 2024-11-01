@@ -25,4 +25,5 @@ export const ROUTES = {
 	PRODUCT: createRoute("/product", "Товары"),
 	WAREHOUSE: createRoute("/warehouse", "Склад"),
 	MENU_LIST: createRoute("/menu-list", "Список меню"),
+	USERS: createRoute("/users", "Работники"),
 };

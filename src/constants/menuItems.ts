@@ -13,6 +13,7 @@ import {
 	ChartNoAxesCombined,
 	Handshake,
 	Archive,
+	UsersRound,
 } from "lucide-react";
 import { ReactNode } from "react";
 
@@ -132,6 +133,11 @@ export const menuItems: TMenuItem[] = [
 				icon: TrendingDown,
 				text: ROUTES.EXPENSE.name,
 			},
+			{
+				link: ROUTES.USERS.route,
+				icon: UsersRound,
+				text: ROUTES.USERS.name,
+			}
 		],
 	},
 ];
