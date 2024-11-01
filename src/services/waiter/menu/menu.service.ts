@@ -8,7 +8,6 @@ import {
 	TWaiterMenu,
 	TWaiterTableResponse,
 } from "./menu.types";
-import { uptime } from "process";
 
 export const WaiterMenuService = {
 	async getAll(params: TGetParams) {

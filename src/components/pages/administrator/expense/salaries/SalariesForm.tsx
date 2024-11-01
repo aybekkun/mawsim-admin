@@ -28,7 +28,7 @@ const SalariesForm: FC<SalariesFormProps> = ({
 	open = false,
 	setOpen = () => undefined,
 }) => {
-	const { data } = useGetAllUsersQuery();
+	const { data } = useGetAllUsersQuery({});
 	const transformData = data?.data.map((item) => ({ id: item.id, value: item.name, label: item.name }));
 
 	const { mutate: createSalary, isPending: isCreating, isSuccess: isCreated } = useCreateSalaryMutation();
