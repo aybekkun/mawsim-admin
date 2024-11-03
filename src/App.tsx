@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import MainLayout from "./components/layout/main/MainLayout";
 import { ROUTES } from "./constants/routes";
-import Finance from "./components/pages/director/finance/Finance";
+
 import WarehouseStats from "./components/pages/director/warehousestats/WarehouseStats";
 import OrderStats from "./components/pages/director/orderstats/OrderStats";
 import ProductList from "./components/pages/director/prroductlist/ProductList";
@@ -51,7 +51,7 @@ function App() {
 					{/* Кассир */}
 					{user?.role_id === 4 && <Route path={ROUTES.PAYMENT.route} element={<Payment />} />}
 					{/* Официант */}
-					{user?.role_id === 3 && (
+					{(user?.role_id === 3 || user?.role_id === 5) && (
 						<>
 							<Route path={ROUTES.ACCEPT_ORDER.route} element={<AcceptOrder />} />
 							<Route path={ROUTES.ORDERS.route} element={<Orders />} />

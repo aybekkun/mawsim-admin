@@ -76,3 +76,31 @@
 body {
   font-family: "Nunito", sans-serif;
 }
+
+
+.print {
+  padding-top: 10px;
+ padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 80mm;
+  font-size: 12px;
+  margin: 0;
+  table {
+    padding: 4px;
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 4px;
+    word-break: break-word;
+    /* Перенос слов для длинных данных */
+  }
+
+  th {
+    background-color: #f3f3f3;
+    /* Цвет фона для заголовков */
+  }
+}

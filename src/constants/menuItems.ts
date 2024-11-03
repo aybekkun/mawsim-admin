@@ -103,6 +103,22 @@ export const menuItems: TMenuItem[] = [
 		],
 	},
 	{
+		title: "Заказы",
+		role: 5,
+		items: [
+			{
+				link: ROUTES.ACCEPT_ORDER.route,
+				icon: ArrowRightToLine,
+				text: ROUTES.ACCEPT_ORDER.name,
+			},
+			{
+				link: ROUTES.ORDERS.route,
+				icon: Logs,
+				text: ROUTES.ORDERS.name,
+			},
+		],
+	},
+	{
 		title: "Админстараторская",
 		role: 1,
 		items: [
@@ -137,7 +153,7 @@ export const menuItems: TMenuItem[] = [
 				link: ROUTES.USERS.route,
 				icon: UsersRound,
 				text: ROUTES.USERS.name,
-			}
+			},
 		],
 	},
 ];

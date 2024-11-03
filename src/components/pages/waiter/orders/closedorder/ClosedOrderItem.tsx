@@ -11,6 +11,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { groupAndCalculate } from "@/utils/groupAndCalculate";
 
 interface ClosedOrderItemProps {
 	className?: string;
@@ -52,6 +53,7 @@ const ClosedOrderItem: FC<ClosedOrderItemProps> = ({ order, className = `` }) =>
 };
 
 const ClosedOrderList = ({ foods, price }: { foods: TOrder["foods"]; price: string }) => {
+	const resultItems = groupAndCalculate(foods);
 	return (
 		<table>
 			<thead>
@@ -59,14 +61,16 @@ const ClosedOrderList = ({ foods, price }: { foods: TOrder["foods"]; price: stri
 					<th className="text-left">№</th>
 					<th className="text-left">Название</th>
 					<th className="text-center w-[70px]">Количество</th>
+					<th className="text-right">Цена</th>
 				</tr>
 			</thead>
 			<tbody>
-				{foods.map((item, index) => (
+				{resultItems.map((item, index) => (
 					<tr key={item.id} className="border-b">
 						<td className="text-left">{index + 1}</td>
 						<td>{item.name}</td>
 						<td className="text-center w-[70px]">{Number(item.quantity)}</td>
+						<td className="text-right">{Number(item.totalPrice).toLocaleString("ru-Ru")}</td>
 					</tr>
 				))}
 

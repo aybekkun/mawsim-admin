@@ -21,7 +21,7 @@ const columns: TColumns<TOrder>[] = [
 
 const CancelOrders = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data, isLoading, isFetching } = useGetAllOrderQuery({ status_id: 3, page: currentPage });
+	const { data, isLoading, isFetching } = useGetAllOrderQuery({ status_id: 3, page: currentPage, limit: 10 });
 	return (
 		<div className={"space-y-4"}>
 			<h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Закрытые заказы: {data?.meta.total}</h2>

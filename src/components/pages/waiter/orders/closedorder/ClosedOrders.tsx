@@ -15,6 +15,7 @@ import { FC, useState } from "react";
 
 import { ClipboardList, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { groupAndCalculate } from "@/utils/groupAndCalculate";
 
 const columns: TColumns<TOrder>[] = [
 	{
@@ -24,6 +25,10 @@ const columns: TColumns<TOrder>[] = [
 	{
 		title: "Номер стола",
 		render: (_, record) => <>{record.cafe_table.name}</>,
+	},
+	{
+		title: "Тип",
+		render: (_, record) => <>{record.is_takeaway ? "Собой" : "Заказ"}</>,
 	},
 	{
 		title: "Статус",
@@ -41,7 +46,7 @@ const columns: TColumns<TOrder>[] = [
 
 const ClosedOrders: FC = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data, isLoading, isFetching } = useGetAllOrderQuery({ status_id: 2, page: currentPage });
+	const { data, isLoading, isFetching } = useGetAllOrderQuery({ status_id: 2, page: currentPage, limit: 10 });
 	return (
 		<div className={"space-y-4"}>
 			<h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Закрытые заказы: {data?.meta.total}</h2>
@@ -66,7 +71,8 @@ const ClosedOrders: FC = () => {
 		</div>
 	);
 };
-export const ClosedOrderList = ({ foods, price }: { foods: TOrder["foods"]; price: string }) => {
+const ClosedOrderList = ({ foods, price }: { foods: TOrder["foods"]; price: string }) => {
+	const resultItems = groupAndCalculate(foods);
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -85,14 +91,16 @@ export const ClosedOrderList = ({ foods, price }: { foods: TOrder["foods"]; pric
 							<th className="text-left">№</th>
 							<th className="text-left">Название</th>
 							<th className="text-center w-[70px]">Количество</th>
+							<th className="text-right">Цена</th>
 						</tr>
 					</thead>
 					<tbody>
-						{foods.map((item, index) => (
-							<tr key={item.id + index} className="border-b">
+						{resultItems.map((item, index) => (
+							<tr key={item.id} className="border-b">
 								<td className="text-left">{index + 1}</td>
 								<td>{item.name}</td>
 								<td className="text-center w-[70px]">{Number(item.quantity)}</td>
+								<td className="text-right">{Number(item.totalPrice).toLocaleString("ru-Ru")}</td>
 							</tr>
 						))}
 

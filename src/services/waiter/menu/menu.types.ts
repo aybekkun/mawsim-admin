@@ -6,6 +6,7 @@ export type TWaiterMenu = {
 };
 
 export type TWaiterTableResponse = {
+
 	data: {
 		id: number;
 		name: string;
@@ -14,6 +15,7 @@ export type TWaiterTableResponse = {
 
 export type TCreateOrderParams = {
 	cafe_table_id: number;
+	is_takeaway: boolean;
 	foods: {
 		food_id: number;
 		quantity: number;
@@ -50,7 +52,7 @@ export type TOrder = {
 			id: number;
 			name: string;
 		};
-		price:string;
+		price: string;
 		quantity: string;
 	}[];
 };
@@ -70,5 +72,6 @@ export type TUpdateOrder = {
 		food_id: number;
 		quantity: number;
 	}[];
+	status_id: number;
 	is_takeaway: boolean;
 };

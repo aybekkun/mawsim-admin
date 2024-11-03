@@ -6,7 +6,7 @@ import MyPagination from "@/components/shared/MyPagination/MyPagination";
 
 const ActiveOrderList: FC = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { data, isLoading } = useGetActiveOrderQuery({ status_id: 1, page: currentPage });
+	const { data, isLoading } = useGetActiveOrderQuery({ status_id: 1, page: currentPage, limit: 10 });
 
 	const skeleton = [1, 2, 3, 4].map((item) => <Skeleton key={item} className="w-full h-40" />);
 	return (

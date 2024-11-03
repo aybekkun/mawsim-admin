@@ -15,11 +15,13 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
+import { useAuthPersistStore } from "@/store";
 interface ShopCartProps {
 	className?: string;
 }
 
 const ShopCart: FC<ShopCartProps> = () => {
+	const { user } = useAuthPersistStore();
 	const [open, setOpen] = useState(false);
 	const [tableId, setTableId] = useState(0);
 	const { items, clearBasket } = useBasketStore();
@@ -36,15 +38,27 @@ const ShopCart: FC<ShopCartProps> = () => {
 			toast({
 				description: "Выберите стол",
 				duration: 1500,
-				variant:"destructive"
+				variant: "destructive",
 			});
 			return;
 		}
-		
+		if (items.length == 0) {
+			toast({
+				description: "Выберите заказы",
+				duration: 1500,
+				variant: "destructive",
+			});
+			return;
+		}
+
 		const foods = items.map((item) => {
 			return { food_id: item.id, quantity: item.quantity };
 		});
-		await createOrder({ cafe_table_id: tableId, foods: foods });
+		if (user?.role_id === 5) {
+			await createOrder({ cafe_table_id: tableId, foods: foods, is_takeaway: true });
+		} else {
+			await createOrder({ cafe_table_id: tableId, foods: foods, is_takeaway: false });
+		}
 		onClear();
 	};
 
@@ -57,7 +71,6 @@ const ShopCart: FC<ShopCartProps> = () => {
 			<MyDialog title="Корзина" open={open} onOpenChange={(open) => setOpen(open)}>
 				<TableList defaultValue={String(tableId)} setTableId={setTableId} />
 				{items.length > 0 ? <OrderList /> : <h2 className="font-bold text-lg">Добавьте в корзину что-нибудь</h2>}
-
 				<div className="flex justify-between">
 					<Button onClick={onClear} variant={"destructive"}>
 						Очистить
@@ -72,6 +85,7 @@ const ShopCart: FC<ShopCartProps> = () => {
 };
 
 const OrderList = () => {
+	const { user } = useAuthPersistStore();
 	const { items, removeItem, totalPrice } = useBasketStore();
 	const price = totalPrice.toLocaleString("ru-Ru");
 	const total = (totalPrice + totalPrice * 0.1).toLocaleString("ru-Ru");
@@ -106,9 +120,15 @@ const OrderList = () => {
 				<tr>
 					<td colSpan={1}></td>
 					<td className="text-right" colSpan={3}>
-						<b>
-							Итого: {price} + 10% = {total}
-						</b>
+						{user?.role_id === 5 ? (
+							<b>
+								<Badge className="bg-slate-900">Собой</Badge> Итого: {price}{" "}
+							</b>
+						) : (
+							<b>
+								Итого: {price} + 10% = {total}
+							</b>
+						)}
 					</td>
 				</tr>
 			</tbody>

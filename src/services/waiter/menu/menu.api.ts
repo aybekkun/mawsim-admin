@@ -55,7 +55,7 @@ export const useGetAllOrderQuery = (params: TGetParams) => {
 
 export const useGetActiveOrderQuery = (data: TGetParams) => {
 	return useQuery({
-		queryKey: ["order officiant active"],
+		queryKey: ["order officiant active", ...Object.values(data)],
 		queryFn: () => WaiterOrderService.getAll(data),
 		placeholderData: keepPreviousData,
 		staleTime: 5000,

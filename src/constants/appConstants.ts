@@ -5,7 +5,7 @@ export const STASTUS_ORDER = [
 	},
 	{
 		id: 2,
-		name: "оплачен",
+		name: "завершен",
 	},
 	{
 		id: 3,

@@ -42,7 +42,6 @@ export const WaiterOrderService = {
 		const { data } = await api.post<TWaiterTableResponse>("/officiant/orders", {
 			...params,
 			status_id: 1,
-			is_takeaway: false,
 		});
 		return data;
 	},
