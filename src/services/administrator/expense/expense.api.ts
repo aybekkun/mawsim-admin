@@ -2,7 +2,6 @@ import { toast } from "@/hooks/use-toast";
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { OtherExpenseService, SalaryService } from "./expense.service";
 import { TGetParams } from "@/services/types/global.types";
-import { da } from "date-fns/locale";
 
 export const useGetAllOtherExpenseQuery = (page: number = 1) => {
 	return useQuery({

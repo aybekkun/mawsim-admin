@@ -1,24 +1,39 @@
 import { addMonths, format } from "date-fns";
 import { DateRange } from "react-day-picker";
-
 import { ru } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-import { useState } from "react";
-const SelectFromToDate = () => {
+import { useEffect, useState } from "react";
+const SelectFromToDate = ({
+	selectDate = () => {},
+	setCurrentPage = () => {},
+}: {
+	selectDate?: (value: { from: string; to: string }) => void;
+	setCurrentPage?: (page: number) => void;
+}) => {
 	const [date, setDate] = useState<DateRange | undefined>({
-		from: addMonths(new Date(), -6),
+		from: addMonths(new Date(), -1),
 		to: addMonths(new Date(), 0),
 	});
 	const [open, setOpen] = useState(false);
+	useEffect(() => {
+		selectDate({
+			from: String(format(addMonths(new Date(), -1), "yyyy-MM-dd")),
+			to: String(format(addMonths(new Date(), 0), "yyyy-MM-dd")),
+		});
+	}, []);
 	const onSelect = (value: DateRange | undefined) => {
 		setDate(value);
 
 		if (value?.from && value?.to) {
-			setOpen(false);
+			selectDate({
+				from: String(format(value.from, "yyyy-MM-dd")),
+				to: String(format(value.to, "yyyy-MM-dd")),
+			});
+			setCurrentPage(1);
 		}
 	};
 	return (

@@ -6,6 +6,7 @@ import OtherExpense from "./charts/OtherExpense";
 import SalaryExpense from "./charts/SalaryExpense";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import ProductsExpense from "./charts/ProductsExpense";
 
 const ExpenseStats: FC = () => {
 	return (
@@ -22,7 +23,7 @@ const ExpenseStats: FC = () => {
 						<TabsTrigger value="other">Другие расходы</TabsTrigger>
 						<TabsTrigger value="salary">Зарплаты</TabsTrigger>
 						<TabsTrigger value="raw">Заготовка</TabsTrigger>
-						<TabsTrigger value="items">Товары</TabsTrigger>
+						<TabsTrigger value="products">Товары</TabsTrigger>
 					</TabsList>
 					<ScrollBar orientation="horizontal" />
 				</ScrollArea>
@@ -33,7 +34,9 @@ const ExpenseStats: FC = () => {
 					<SalaryExpense />
 				</TabsContent>
 				<TabsContent value="raw">ТАБЛЦИА РАСХОДОВ</TabsContent>
-				<TabsContent value="items">ТАБЛЦИА РАСХОДОВ</TabsContent>
+				<TabsContent value="products">
+					<ProductsExpense/>
+				</TabsContent>
 			</Tabs>
 		</div>
 	);

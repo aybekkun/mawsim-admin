@@ -18,3 +18,7 @@ export const handleAmountChange =
 		const valueAsNumber = stringToNumber(value);
 		field.onChange(currencyFormat(valueAsNumber));
 	};
+
+export const formatToLocale = (number: string) => {
+	return Number(number).toLocaleString("ru-Ru");
+};

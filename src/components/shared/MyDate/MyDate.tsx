@@ -10,13 +10,17 @@ import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 const MyDate = () => {
 	const [date, setDate] = useState<DateRange | undefined>({
-		from: addMonths(new Date(), -6),
+		from: new Date("2024-09-01"),
 		to: addMonths(new Date(), 0),
 	});
 
+	const onSelect = (value: DateRange | undefined) => {
+		setDate(value);
+	};
+
 	return (
 		<div className={cn("grid gap-2 mb-4")}>
-			<Popover>
+			<Popover on>
 				<PopoverTrigger asChild>
 					<Button
 						id="date"
@@ -27,17 +31,17 @@ const MyDate = () => {
 						{date?.from ? (
 							date.to ? (
 								<>
-									{format(date.from, "dd-MM-yyyy")} - {format(date.to, "dd-MM-yyyy")}
+									{format(date.from, "yyyy-MM-dd")} - {format(date.to, "yyyy-MM-dd")}
 								</>
 							) : (
-								format(date.from, "dd-MM-yyyy")
+								format(date.from, "yyyy-MM-dd")
 							)
 						) : (
 							<span>Pick a date</span>
 						)}
 					</Button>
 				</PopoverTrigger>
-				<PopoverContent className="w-auto p-0" align="start">
+				<PopoverContent  className="w-auto p-0" align="start">
 					<Calendar
 						locale={ru}
 						initialFocus
