@@ -3,22 +3,9 @@ import { Bar, BarChart, CartesianGrid, LabelList, XAxis, ResponsiveContainer, YA
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { useMediaQuery } from "react-responsive";
+import { useGetOrderStatsQuery } from "@/services/director/director.api";
+import { useState } from "react";
 export const description = "A bar chart with a label";
-
-const chartData = [
-	{ month: "January", order: 186 },
-	{ month: "February", order: 305 },
-	{ month: "March", order: 237 },
-	{ month: "April", order: 73 },
-	{ month: "May", order: 209 },
-	{ month: "June", order: 214 },
-	{ month: "July", order: 186 },
-	{ month: "August", order: 305 },
-	{ month: "September", order: 237 },
-	{ month: "October", order: 73 },
-	{ month: "November", order: 209 },
-	{ month: "December", order: 214 },
-];
 
 const chartConfig = {
 	order: {
@@ -29,13 +16,14 @@ const chartConfig = {
 
 export default function Chart1({ className = " " }: { className?: string }) {
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-
+	const [currentPage, setCurrentPage] = useState(1);
+	const { data } = useGetOrderStatsQuery({ page: currentPage, from: "2024-01-01", to: "2024-12-31" });
+	const chartData = data?.data || [];
 	if (isMobile) {
 		return (
 			<Card>
 				<CardHeader>
 					<CardTitle>Статиска по заказам</CardTitle>
-					<CardDescription>январь - декабрь 2024</CardDescription>
 				</CardHeader>
 				<CardContent>
 					<ChartContainer config={chartConfig}>
@@ -47,7 +35,7 @@ export default function Chart1({ className = " " }: { className?: string }) {
 								left: -20,
 							}}
 						>
-							<XAxis type="number" dataKey="order" hide />
+							<XAxis type="number" dataKey="total_orders" hide />
 							<YAxis
 								dataKey="month"
 								type="category"
@@ -57,7 +45,7 @@ export default function Chart1({ className = " " }: { className?: string }) {
 								tickFormatter={(value) => value.slice(0, 3)}
 							/>
 							<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-							<Bar dataKey="order" fill="var(--color-order)" radius={5} />
+							<Bar dataKey="total_orders" fill="var(--color-order)" radius={5} />
 						</BarChart>
 					</ChartContainer>
 				</CardContent>
@@ -72,7 +60,6 @@ export default function Chart1({ className = " " }: { className?: string }) {
 		<Card className={className}>
 			<CardHeader>
 				<CardTitle>Статиска по заказам</CardTitle>
-				<CardDescription>январь - декабрь 2024</CardDescription>
 			</CardHeader>
 			<CardContent>
 				<ResponsiveContainer height={320}>
@@ -93,7 +80,7 @@ export default function Chart1({ className = " " }: { className?: string }) {
 								tickFormatter={(value) => value.slice(0, 3)}
 							/>
 							<ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-							<Bar dataKey="order" fill="var(--color-order)" radius={8}>
+							<Bar name="Заказы" dataKey="total_orders" fill="var(--color-order)" radius={8}>
 								<LabelList position="top" offset={12} className="fill-foreground" fontSize={12} />
 							</Bar>
 						</BarChart>
@@ -101,7 +88,7 @@ export default function Chart1({ className = " " }: { className?: string }) {
 				</ResponsiveContainer>
 			</CardContent>
 			<CardFooter className="flex-col items-start gap-2 text-sm">
-				<div className="leading-none text-muted-foreground">Показаны общие заказы за последние 12 месяцев</div>
+				<div className="leading-none text-muted-foreground">Показаны общие заказы</div>
 			</CardFooter>
 		</Card>
 	);

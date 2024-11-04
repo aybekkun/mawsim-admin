@@ -59,19 +59,20 @@ export const menuItems: TMenuItem[] = [
 
 			{
 				link: ROUTES.WAREHOUSE_STATS.route,
-				icon: Package,
+				icon: Warehouse,
+
 				text: ROUTES.WAREHOUSE_STATS.name,
+			},
+
+			{
+				link: ROUTES.PRODUCT_LIST.route,
+				icon: Package,
+				text: ROUTES.PRODUCT_LIST.name,
 			},
 			{
 				link: ROUTES.ORDER_STATS.route,
 				icon: Logs,
 				text: ROUTES.ORDER_STATS.name,
-			},
-
-			{
-				link: ROUTES.PRODUCT_LIST.route,
-				icon: AlignJustify,
-				text: ROUTES.PRODUCT_LIST.name,
 			},
 		],
 	},

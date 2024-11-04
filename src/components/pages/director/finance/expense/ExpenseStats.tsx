@@ -2,11 +2,13 @@ import { FC } from "react";
 //import ExpenseCards from "./charts/ExpenseCards";
 import ExpenseOverview from "./charts/ExpenseOverview";
 import ExpenseYear from "./charts/ExpenseYear";
-import OtherExpense from "./charts/OtherExpense";
+
 import SalaryExpense from "./charts/SalaryExpense";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import ProductsExpense from "./charts/ProductsExpense";
+import FoodExpense from "./charts/FoodExpense";
+import OtherExpense from "./charts/OtherExpense";
 
 const ExpenseStats: FC = () => {
 	return (
@@ -21,8 +23,7 @@ const ExpenseStats: FC = () => {
 				<ScrollArea>
 					<TabsList>
 						<TabsTrigger value="other">Другие расходы</TabsTrigger>
-						<TabsTrigger value="salary">Зарплаты</TabsTrigger>
-						<TabsTrigger value="raw">Заготовка</TabsTrigger>
+						<TabsTrigger value="food">Заготовка</TabsTrigger>
 						<TabsTrigger value="products">Товары</TabsTrigger>
 					</TabsList>
 					<ScrollBar orientation="horizontal" />
@@ -30,12 +31,12 @@ const ExpenseStats: FC = () => {
 				<TabsContent value="other">
 					<OtherExpense />
 				</TabsContent>
-				<TabsContent value="salary">
-					<SalaryExpense />
+
+				<TabsContent value="food">
+					<FoodExpense />
 				</TabsContent>
-				<TabsContent value="raw">ТАБЛЦИА РАСХОДОВ</TabsContent>
 				<TabsContent value="products">
-					<ProductsExpense/>
+					<ProductsExpense />
 				</TabsContent>
 			</Tabs>
 		</div>

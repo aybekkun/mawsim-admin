@@ -11,7 +11,7 @@ export const ROUTES = {
 	PROFIT_STATS: createRoute("/profit-stats", "Прибыль"),
 	SALARY_STATS: createRoute("/salary-stats", "Зарплата"),
 
-	WAREHOUSE_STATS: createRoute("/warehouse-stats", "Товары на складе"),
+	WAREHOUSE_STATS: createRoute("/warehouse-stats", "Склад"),
 	EXPENSE_STATS: createRoute("/expense-stats", "Статистика расходов"),
 	ORDER_STATS: createRoute("/order-stats", "Статистика заказов"),
 	PRODUCT_LIST: createRoute("/product-list", "Список товаров"),

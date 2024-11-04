@@ -4,7 +4,7 @@ import SearchInput from "@/components/shared/SearchInput/SearchInput";
 
 import { Card, CardContent } from "@/components/ui/card";
 
-import { TProductsExpense } from "@/services/director/director.types";
+import { TFoodExpense } from "@/services/director/director.types";
 import { FC, useState } from "react";
 
 import { SelectDate } from "@/components/shared/SelectDate/SelectDate";
@@ -15,20 +15,20 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useDateRange } from "@/hooks/useDateRange.hook";
-import { useDetailProductsExpenseQuery, useGetProductsExpenseQuery } from "@/services/director/director.api";
+import { useDetailFoodExpenseQuery, useGetFoodExpenseQuery } from "@/services/director/director.api";
 import { formatToLocale } from "@/utils/currencyFormat";
 
-const ProductsExpense: FC = () => {
+const FoodExpense: FC = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const { date, updateFromDate, updateToDate } = useDateRange();
 	const [debouncedValue, setDebouncedValue] = useState<string>("");
-	const { data, isLoading } = useGetProductsExpenseQuery({
+	const { data, isLoading } = useGetFoodExpenseQuery({
 		from: date.from,
 		to: date.to,
 		search: debouncedValue,
 		page: currentPage,
 	});
-	const columns: TColumns<TProductsExpense>[] = [
+	const columns: TColumns<TFoodExpense>[] = [
 		{
 			title: "Склад",
 			render: (_, record) => <>{record.name}</>,
@@ -42,8 +42,12 @@ const ProductsExpense: FC = () => {
 			render: (_, record) => <>{record.format.name}</>,
 		},
 		{
+			title: "Категория",
+			render: (_, record) => <>{record.category.name}</>,
+		},
+		{
 			title: "Детально",
-			render: (_, record) => <ProductsDetail record={record} id={record.id} from={date.from} to={date.to} />,
+			render: (_, record) => <FoodDetail record={record} id={record.id} from={date.from} to={date.to} />,
 		},
 	];
 	return (
@@ -71,17 +75,17 @@ const ProductsExpense: FC = () => {
 	);
 };
 
-type TProductsDetailProps = {
+type TFoodDetailProps = {
 	from?: string;
 	id: number;
 	to?: string;
-	record: TProductsExpense;
+	record: TFoodExpense;
 };
-const ProductsDetail = ({ id, from = "", to = "", record }: TProductsDetailProps) => {
+const FoodDetail = ({ id, from = "", to = "", record }: TFoodDetailProps) => {
 	const [open, setOpen] = useState(false);
-	const { data } = useDetailProductsExpenseQuery({ from, id, to,},open);
-    console.log(data);
-    
+	const { data } = useDetailFoodExpenseQuery({ from, id, to }, open);
+	console.log(data);
+
 	return (
 		<>
 			<Button size={"icon"} onClick={() => setOpen(true)} variant={"ghost"}>
@@ -114,14 +118,14 @@ const ProductsDetail = ({ id, from = "", to = "", record }: TProductsDetailProps
 									</TableRow>
 								</TableHeader>
 								<TableBody>
-								{data?.data.expenses.map((item) => (
+									{data?.data.expenses.map((item) => (
 										<TableRow key={item.id}>
 											<TableCell>{formatToLocale(String(item.quantity))}</TableCell>
 											<TableCell>{formatToLocale(String(item.per_price))}</TableCell>
 											<TableCell>{formatToLocale(String(item.price))}</TableCell>
 											<TableCell>{item.date}</TableCell>
 										</TableRow>
-									))} 
+									))}
 								</TableBody>
 							</Table>
 						</div>
@@ -132,4 +136,4 @@ const ProductsDetail = ({ id, from = "", to = "", record }: TProductsDetailProps
 	);
 };
 
-export default ProductsExpense;
+export default FoodExpense;

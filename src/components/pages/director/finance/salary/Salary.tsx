@@ -93,7 +93,7 @@ type TSalaryDetailProps = {
 };
 const SalaryDetail = ({ id, from = "", to = "", record }: TSalaryDetailProps) => {
 	const [open, setOpen] = useState(false);
-	const { data } = useDetailSalaryQuery({ from, id, to, enabled: open });
+	const { data } = useDetailSalaryQuery({ from, id, to }, open);
 	return (
 		<>
 			<Button size={"icon"} onClick={() => setOpen(true)} variant={"ghost"}>

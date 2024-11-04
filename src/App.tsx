@@ -6,7 +6,6 @@ import { ROUTES } from "./constants/routes";
 
 import WarehouseStats from "./components/pages/director/warehousestats/WarehouseStats";
 import OrderStats from "./components/pages/director/orderstats/OrderStats";
-import ProductList from "./components/pages/director/prroductlist/ProductList";
 import Warehouse from "./components/pages/administrator/warehouse/Warehouse";
 import Expense from "./components/pages/administrator/expense/Expense";
 import Product from "./components/pages/administrator/product/Product";
@@ -22,6 +21,7 @@ import ExpenseStats from "./components/pages/director/finance/expense/ExpenseSta
 import Salary from "./components/pages/director/finance/salary/Salary";
 import Profit from "./components/pages/director/finance/profit/Profit";
 import Home from "./components/pages/home/Home";
+import FoodStats from "./components/pages/director/warehousestats/FoodStats";
 
 function App() {
 	const navigate = useNavigate();
@@ -45,7 +45,7 @@ function App() {
 							<Route path={ROUTES.PROFIT_STATS.route} element={<Profit />} />
 							<Route path={ROUTES.WAREHOUSE_STATS.route} element={<WarehouseStats />} />
 							<Route path={ROUTES.ORDER_STATS.route} element={<OrderStats />} />
-							<Route path={ROUTES.PRODUCT_LIST.route} element={<ProductList />} />
+							<Route path={ROUTES.PRODUCT_LIST.route} element={<FoodStats />} />
 						</>
 					)}
 					{/* Кассир */}

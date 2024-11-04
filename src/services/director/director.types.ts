@@ -1,3 +1,4 @@
+import { TOtherExpense } from "./../administrator/expense/expense.types";
 import { TPaginationResponse } from "../types/global.types";
 
 export type TDirectorSalaryResponse = {
@@ -6,6 +7,8 @@ export type TDirectorSalaryResponse = {
 };
 
 export type TDirectorParams = {
+	sort_amount?: "asc" | "desc";
+	sort_date?: "asc" | "desc";
 	id?: number;
 	page?: number;
 	limit?: number;
@@ -15,7 +18,6 @@ export type TDirectorParams = {
 	search?: string;
 	expense_limit?: number;
 	category_id?: number;
-	enabled?: boolean;
 	format_id?: number;
 };
 
@@ -66,4 +68,55 @@ export type TProductsExpense = {
 		price: string;
 		date: string;
 	}[];
+};
+
+export type TFoodExpenseResponse = {
+	data: TFoodExpense[];
+	meta: TPaginationResponse;
+};
+
+export type TFoodDetailExpenseResponse = {
+	data: TFoodExpense;
+};
+export type TFoodExpense = {
+	id: number;
+	name: string;
+	stock: string;
+	format: {
+		id: number;
+		name: string;
+	};
+	category: {
+		id: number;
+		name: string;
+	};
+	expenses: {
+		id: number;
+		quantity: string;
+		per_price: string;
+		price: string;
+		date: string;
+	}[];
+};
+
+export type TOtherExpenseResponse = {
+	data: TOtherExpense[];
+	meta: TPaginationResponse;
+};
+
+export type TWareHouseResponse = {
+	data: TFoodExpense[];
+	meta: TPaginationResponse;
+};
+
+export type TOrderStatsResponse = {
+	data: TOrderStats[];
+	meta: TPaginationResponse;
+};
+
+export type TOrderStats = {
+	year: number;
+	month: string;
+	total_orders: number;
+	total_income: string;
 };
