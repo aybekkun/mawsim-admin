@@ -1,10 +1,11 @@
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, ResponsiveContainer, YAxis } from "recharts";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { useMediaQuery } from "react-responsive";
 import { useGetOrderStatsQuery } from "@/services/director/director.api";
 import { useState } from "react";
+import SelectYear from "@/components/shared/SelectDate/SelectYear";
 export const description = "A bar chart with a label";
 
 const chartConfig = {
@@ -16,14 +17,17 @@ const chartConfig = {
 
 export default function Chart1({ className = " " }: { className?: string }) {
 	const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-	const [currentPage, setCurrentPage] = useState(1);
-	const { data } = useGetOrderStatsQuery({ page: currentPage, from: "2024-01-01", to: "2024-12-31" });
+	const [year, setYear] = useState(new Date().getFullYear().toString());
+	const { data } = useGetOrderStatsQuery({ year: year });
+
 	const chartData = data?.data || [];
+	const selectYear = <SelectYear setSelectYear={setYear} />;
 	if (isMobile) {
 		return (
 			<Card>
-				<CardHeader>
+				<CardHeader >
 					<CardTitle>Статиска по заказам</CardTitle>
+					{selectYear}
 				</CardHeader>
 				<CardContent>
 					<ChartContainer config={chartConfig}>
@@ -60,6 +64,7 @@ export default function Chart1({ className = " " }: { className?: string }) {
 		<Card className={className}>
 			<CardHeader>
 				<CardTitle>Статиска по заказам</CardTitle>
+				{selectYear}
 			</CardHeader>
 			<CardContent>
 				<ResponsiveContainer height={320}>

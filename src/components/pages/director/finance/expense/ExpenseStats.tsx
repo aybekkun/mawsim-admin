@@ -15,10 +15,7 @@ const ExpenseStats: FC = () => {
 		<div className={"space-y-4"}>
 			<h2 className="text-3xl font-bold tracking-tight">Расходы</h2>
 			{/* 			<ExpenseCards /> */}
-			<div className="grid gap-4 grid-cols-12">
-				<ExpenseOverview className="col-span-12 xl:col-span-4" />
-				<ExpenseYear className="col-span-12 xl:col-span-8" />
-			</div>
+
 			<Tabs defaultValue="other">
 				<ScrollArea>
 					<TabsList>
@@ -39,6 +36,9 @@ const ExpenseStats: FC = () => {
 					<ProductsExpense />
 				</TabsContent>
 			</Tabs>
+			<div className="grid gap-4 grid-cols-12">
+				<ExpenseOverview className="col-span-12 xl:col-span-4" />
+			</div>
 		</div>
 	);
 };

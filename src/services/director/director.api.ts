@@ -1,6 +1,12 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { TDirectorParams } from "./director.types";
-import { DirectorExpenseService, DirectorSalaryService, OrderStatsService, WarehouseService } from "./director.service";
+import {
+	DirectorExpenseService,
+	DirectorSalaryService,
+	GrossService,
+	OrderStatsService,
+	WarehouseService,
+} from "./director.service";
 
 export const useGetAllDirectorSalaryQuery = (params: TDirectorParams) => {
 	return useQuery({
@@ -78,7 +84,31 @@ export const useGetAllWarehouseFoodQuery = (params: TDirectorParams) => {
 export const useGetOrderStatsQuery = (params: TDirectorParams) => {
 	return useQuery({
 		queryKey: ["director order stats", ...Object.values(params)],
+		queryFn: () => OrderStatsService.getStats(params),
+		placeholderData: keepPreviousData,
+	});
+};
+
+export const useGetAllOrderQuery = (params: TDirectorParams) => {
+	return useQuery({
+		queryKey: ["director order", ...Object.values(params)],
 		queryFn: () => OrderStatsService.getAll(params),
+		placeholderData: keepPreviousData,
+	});
+};
+
+export const useGetProfitQuery = (params: TDirectorParams) => {
+	return useQuery({
+		queryKey: ["director profit", ...Object.values(params)],
+		queryFn: () => GrossService.getProfit(params),
+		placeholderData: keepPreviousData,
+	});
+};
+
+export const useGetExpenseQuery = (params: TDirectorParams) => {
+	return useQuery({
+		queryKey: ["director expense", ...Object.values(params)],
+		queryFn: () => GrossService.getExpense(params),
 		placeholderData: keepPreviousData,
 	});
 };

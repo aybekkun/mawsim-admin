@@ -7,6 +7,7 @@ export type TDirectorSalaryResponse = {
 };
 
 export type TDirectorParams = {
+	year?: string;
 	sort_amount?: "asc" | "desc";
 	sort_date?: "asc" | "desc";
 	id?: number;
@@ -119,4 +120,16 @@ export type TOrderStats = {
 	month: string;
 	total_orders: number;
 	total_income: string;
+};
+
+export type TGrossResponse = {
+	data: {
+		expenses_product: string;
+		expenses_food: string;
+		other_expenses: string;
+		salaries: string;
+		orders: string;
+		gross_profit: 9479238.6;
+		date?: string;
+	};
 };

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CalendarIcon } from "lucide-react";
 
 export function SelectDate({
@@ -18,7 +18,7 @@ export function SelectDate({
 	selectDate?: (value: string) => void;
 	setCurrentPage?: (page: number) => void;
 }) {
-	const [date, setDate] = useState<Date>(addMonths(new Date(), month));
+	const [date, setDate] = useState<Date>();
 	const [open, setOpen] = useState(false);
 	const onSelect = (value: Date | undefined) => {
 		if (value) {
@@ -28,6 +28,9 @@ export function SelectDate({
 		}
 		setOpen(false);
 	};
+	useEffect(() => {
+		setDate(addMonths(new Date(), month));
+	}, []);
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>

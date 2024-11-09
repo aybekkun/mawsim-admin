@@ -5,6 +5,7 @@ import {
 	TDirectorSalaryResponse,
 	TFoodDetailExpenseResponse,
 	TFoodExpenseResponse,
+	TGrossResponse,
 	TOrderStatsResponse,
 	TOtherExpenseResponse,
 	TProductsDetailExpenseResponse,
@@ -12,6 +13,7 @@ import {
 	TWareHouseResponse,
 } from "./director.types";
 import { get } from "http";
+import { TOrderResponse } from "../waiter/menu/menu.types";
 
 export const DirectorSalaryService = {
 	async getAll(params: TDirectorParams) {
@@ -100,7 +102,40 @@ export const OrderStatsService = {
 	async getAll(params: TDirectorParams) {
 		const { from, to, ...obj } = params;
 		const date = from && to ? `?date[]=${from}&date[]=${to}` : "";
+		const { data } = await api.get<TOrderResponse>(`/dashboard/orders${date}`, {
+			params: {
+				...obj,
+			},
+		});
+		return data;
+	},
+	async getStats(params: TDirectorParams) {
+		const { year, ...obj } = params;
+		const date = year ? `?year=${year}` : "";
 		const { data } = await api.get<TOrderStatsResponse>(`/dashboard/orders/statistics${date}`, {
+			params: {
+				...obj,
+			},
+		});
+		return data;
+	},
+};
+
+export const GrossService = {
+	async getProfit(params: TDirectorParams) {
+		const { from, to, ...obj } = params;
+		const date = from && to ? `?date[]=${from}&date[]=${to}` : "";
+		const { data } = await api.get<TGrossResponse>(`/dashboard/gross-profit${date}`, {
+			params: {
+				...obj,
+			},
+		});
+		return data;
+	},
+	async getExpense(params: TDirectorParams) {
+		const { from, ...obj } = params;
+		const date = from ? `?date=${from}` : "";
+		const { data } = await api.get<TGrossResponse>(`/dashboard/get-expenses${date}`, {
 			params: {
 				...obj,
 			},

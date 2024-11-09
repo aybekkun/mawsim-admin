@@ -2,6 +2,11 @@ import { Cell, Pie, PieChart } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { SelectDate } from "@/components/shared/SelectDate/SelectDate";
+import { useState } from "react";
+import { useGetExpenseQuery } from "@/services/director/director.api";
+import { format } from "date-fns";
+import { TGrossResponse } from "@/services/director/director.types";
+
 export const description = "A pie chart with a label list";
 const chartData = [
 	{ expense: "salary", amount: 275, fill: "var(--color-salary)" },
@@ -14,31 +19,37 @@ const chartConfig = {
 	expense: {
 		label: "expense",
 	},
-	salary: {
+	salaries: {
 		label: "Зарплата",
 		color: "hsl(var(--chart-1))",
 	},
-	items: {
+	expenses_food: {
 		label: "Товары",
 		color: "hsl(var(--chart-2))",
 	},
-	raw: {
+	expenses_product: {
 		label: "Заготовка",
 		color: "hsl(var(--chart-3))",
 	},
-	other: {
+	other_expenses: {
 		label: "Другие",
 		color: "hsl(var(--chart-5))",
 	},
 } satisfies ChartConfig;
 
 export default function ExpenseOverview({ className = "" }) {
+	const [date, setDate] = useState("");
+	const { data } = useGetExpenseQuery({
+		from: date,
+	});
+	const chartData = transformExpenses(data?.data);
+
 	return (
 		<Card className={"flex flex-col " + className}>
 			<CardHeader className="">
 				<CardTitle>Распределение Финансов</CardTitle>
 				<CardDescription>За этот день</CardDescription>
-				<SelectDate/>
+				<SelectDate title="День" month={0} setCurrentPage={() => {}} selectDate={setDate} />
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
@@ -61,4 +72,34 @@ export default function ExpenseOverview({ className = "" }) {
 			</CardContent>
 		</Card>
 	);
+}
+type TransformedExpense = {
+	expense: string;
+	amount: number;
+	fill: string;
+};
+type Expenses = {
+	expenses_product: number;
+	expenses_food: number;
+	other_expenses: number;
+	salaries: number;
+	date: string;
+};
+
+function transformExpenses(expenses: TGrossResponse["data"] | undefined) {
+	if (!expenses) return [];
+	const fillColors = {
+		expenses_product: "var(--color-expenses_product)",
+		expenses_food: "var(--color-expenses_food)",
+		other_expenses: "var(--color-other_expenses)",
+		salaries: "var(--color-salaries)",
+	};
+
+	return Object.keys(expenses)
+		.filter((key) => key !== "date") // Исключаем поле даты
+		.map((key) => ({
+			expense: key,
+			amount: Number(expenses[key as keyof TGrossResponse["data"]]),
+			fill: fillColors[key as keyof typeof fillColors] || "var(--color-default)", // Используем цвет или значение по умолчанию
+		}));
 }
