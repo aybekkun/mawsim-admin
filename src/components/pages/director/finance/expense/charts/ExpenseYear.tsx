@@ -2,7 +2,6 @@ import { FC } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { useMediaQuery } from "react-responsive";
-import SelectYear from "@/components/shared/SelectDate/SelectYear";
 
 interface ExpenseYearProps {
 	className?: string;
@@ -31,7 +30,6 @@ const ExpenseYear: FC<ExpenseYearProps> = ({ className = `` }) => {
 			<Card className={className}>
 				<CardHeader>
 					<CardTitle>Распределение затрат</CardTitle>
-					<SelectYear />
 				</CardHeader>
 				<CardContent className="h-[500px]">
 					<ResponsiveContainer width="100%" height="100%">
@@ -56,7 +54,6 @@ const ExpenseYear: FC<ExpenseYearProps> = ({ className = `` }) => {
 		<Card className={className}>
 			<CardHeader>
 				<CardTitle>Распределение затрат</CardTitle>
-				<SelectYear />
 			</CardHeader>
 			<CardContent className="h-[300px]">
 				<ResponsiveContainer width="100%" height="100%">
