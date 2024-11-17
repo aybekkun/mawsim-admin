@@ -11,6 +11,10 @@ import { z } from "zod";
 // 		.refine((val) => !/^\s/.test(val), { message: "Поле не должно начинаться с пробела" }),
 // 	format_id: z.enum(["unit", "kg", "liter"]),
 // });
+
+export const formCafeTablesSchema = z.object({
+	name: z.string(),
+});
 export const formSalaryExpenseSchema = z.object({
 	user_id: z.number(),
 	amount: z.string().refine(

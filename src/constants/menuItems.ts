@@ -4,7 +4,7 @@ import {
 	Warehouse,
 	TrendingDown,
 	Package,
-	AlignJustify,
+	Table,
 	Logs,
 	LucideIcon,
 	ReceiptText,
@@ -15,7 +15,6 @@ import {
 	Archive,
 	UsersRound,
 } from "lucide-react";
-import { ReactNode } from "react";
 
 export type TMenuItem = {
 	title: string;
@@ -154,6 +153,11 @@ export const menuItems: TMenuItem[] = [
 				link: ROUTES.USERS.route,
 				icon: UsersRound,
 				text: ROUTES.USERS.name,
+			},
+			{
+				link: ROUTES.CAFE_TABLES.route,
+				icon: Table ,
+				text: ROUTES.CAFE_TABLES.name,
 			},
 		],
 	},

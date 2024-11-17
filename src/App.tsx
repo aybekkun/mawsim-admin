@@ -22,6 +22,7 @@ import Salary from "./components/pages/director/finance/salary/Salary";
 import Profit from "./components/pages/director/finance/profit/Profit";
 import Home from "./components/pages/home/Home";
 import FoodStats from "./components/pages/director/warehousestats/FoodStats";
+import CafeTables from "./components/pages/administrator/cafetables/CafeTables";
 
 function App() {
 	const navigate = useNavigate();
@@ -65,6 +66,7 @@ function App() {
 							<Route path={ROUTES.MENU_LIST.route} element={<MenuList />} />
 							<Route path={ROUTES.EXPENSE.route} element={<Expense />} />
 							<Route path={ROUTES.WAREHOUSE.route} element={<Warehouse />} />
+							<Route path={ROUTES.CAFE_TABLES.route} element={<CafeTables />} />
 						</>
 					)}
 				</Route>

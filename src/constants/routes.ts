@@ -26,4 +26,5 @@ export const ROUTES = {
 	WAREHOUSE: createRoute("/warehouse", "Склад"),
 	MENU_LIST: createRoute("/menu-list", "Список меню"),
 	USERS: createRoute("/users", "Работники"),
+	CAFE_TABLES: createRoute("/cafe-tables", "Столы"),
 };
