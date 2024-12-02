@@ -36,7 +36,7 @@ const ExpenseStats: FC = () => {
 					<ProductsExpense />
 				</TabsContent>
 			</Tabs>
-			<div className="grid gap-4 grid-cols-12">
+			<div className="grid gap-4 grid-cols-12 mb-40">
 				<ExpenseOverview className="col-span-12 xl:col-span-4" />
 			</div>
 		</div>

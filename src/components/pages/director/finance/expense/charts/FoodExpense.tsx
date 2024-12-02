@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useDateRange } from "@/hooks/useDateRange.hook";
-import { useDetailFoodExpenseQuery, useGetFoodExpenseQuery } from "@/services/director/director.api";
+import { useDetailFoodExpenseQuery, useGetFoodExpenseQuery, useGetProfitQuery } from "@/services/director/director.api";
 import { formatToLocale } from "@/utils/currencyFormat";
 
 const FoodExpense: FC = () => {
@@ -28,6 +28,7 @@ const FoodExpense: FC = () => {
 		search: debouncedValue,
 		page: currentPage,
 	});
+	const { data: expense } = useGetProfitQuery({ from: date.from, to: date.to });
 	const columns: TColumns<TFoodExpense>[] = [
 		{
 			title: "Склад",
@@ -53,12 +54,13 @@ const FoodExpense: FC = () => {
 	return (
 		<div className="space-y-4">
 			<div className="flex flex-wrap gap-4 justify-between">
-				<h2 className="text-3xl font-bold tracking-tight">Товары</h2>
+				<h2 className="text-3xl font-bold tracking-tight">Заготовка</h2>
 			</div>
-			<div className="flex flex-wrap gap-4">
+			<div className="flex flex-wrap gap-4 items-center">
 				<SearchInput setCurrentPage={setCurrentPage} setDebouncedValue={setDebouncedValue} delay={500} />
 				<SelectDate title="от" month={-1} setCurrentPage={setCurrentPage} selectDate={updateFromDate} />
 				<SelectDate title="до" month={0} setCurrentPage={setCurrentPage} selectDate={updateToDate} />
+				<b>Общий: {expense && formatToLocale(String(expense.data.expenses_food))} сум</b>
 			</div>
 			<Card>
 				<CardContent>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useGetExpenseQuery } from "@/services/director/director.api";
 import { format } from "date-fns";
 import { TGrossResponse } from "@/services/director/director.types";
+import { useDateRange } from "@/hooks/useDateRange.hook";
 
 export const description = "A pie chart with a label list";
 const chartData = [
@@ -38,18 +39,23 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export default function ExpenseOverview({ className = "" }) {
-	const [date, setDate] = useState("");
+	const { date, updateFromDate, updateToDate } = useDateRange();
 	const { data } = useGetExpenseQuery({
-		from: date,
+		from: date.from,
+		to: date.to,
 	});
 	const chartData = transformExpenses(data?.data);
 
+
 	return (
-		<Card className={"flex flex-col " + className}>
+		<Card className={"flex flex-col mb-40" + className}>
 			<CardHeader className="">
 				<CardTitle>Распределение Финансов</CardTitle>
 				<CardDescription>За этот день</CardDescription>
-				<SelectDate title="День" month={0} setCurrentPage={() => {}} selectDate={setDate} />
+				<div className="flex gap-1 items-center">
+					<SelectDate title="От" month={-1} setCurrentPage={() => {}} selectDate={updateFromDate} />
+					<SelectDate title="До" month={0} setCurrentPage={() => {}} selectDate={updateToDate} />
+				</div>
 			</CardHeader>
 			<CardContent className="flex-1 pb-0">
 				<ChartContainer config={chartConfig} className="mx-auto aspect-square max-h-[250px]">
@@ -96,7 +102,7 @@ function transformExpenses(expenses: TGrossResponse["data"] | undefined) {
 	};
 
 	return Object.keys(expenses)
-		.filter((key) => key !== "date") // Исключаем поле даты
+		.filter((key) => key !== "date"&& key !== "gross_profit"&& key !== "orders") // Исключаем поле даты
 		.map((key) => ({
 			expense: key,
 			amount: Number(expenses[key as keyof TGrossResponse["data"]]),

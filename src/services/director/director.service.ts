@@ -133,9 +133,9 @@ export const GrossService = {
 		return data;
 	},
 	async getExpense(params: TDirectorParams) {
-		const { from, ...obj } = params;
-		const date = from ? `?date=${from}` : "";
-		const { data } = await api.get<TGrossResponse>(`/dashboard/get-expenses${date}`, {
+		const { from,to, ...obj } = params;
+		const date = from && to ? `?date[]=${from}&date[]=${to}` : "";
+		const { data } = await api.get<TGrossResponse>(`/dashboard/gross-profit${date}`, {
 			params: {
 				...obj,
 			},

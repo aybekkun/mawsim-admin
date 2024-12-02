@@ -9,7 +9,7 @@ import { FC, useState } from "react";
 import { SelectDate } from "@/components/shared/SelectDate/SelectDate";
 
 import { useDateRange } from "@/hooks/useDateRange.hook";
-import { useGetAllOtherExpenseQuery } from "@/services/director/director.api";
+import { useGetAllOtherExpenseQuery, useGetProfitQuery } from "@/services/director/director.api";
 import { formatToLocale } from "@/utils/currencyFormat";
 import { TOtherExpense } from "@/services/administrator/expense/expense.types";
 import SelectAscDesc from "@/components/shared/SearchInput/SelectAscDesc";
@@ -26,6 +26,7 @@ const OtherExpense: FC = () => {
 		page: currentPage,
 		sort_date: sortDate,
 	});
+	const { data: expense } = useGetProfitQuery({ from: date.from, to: date.to });
 
 	const columns: TColumns<TOtherExpense>[] = [
 		{
@@ -44,11 +45,12 @@ const OtherExpense: FC = () => {
 	return (
 		<div className="space-y-4">
 			<div className="flex flex-wrap gap-4 justify-between">
-				<h2 className="text-3xl font-bold tracking-tight">Товары</h2>
+				<h2 className="text-3xl font-bold tracking-tight">Другие расходы</h2>
 			</div>
-			<div className="flex flex-wrap gap-4">
+			<div className="flex flex-wrap gap-4 items-center">
 				<SelectDate title="от" month={-1} setCurrentPage={setCurrentPage} selectDate={updateFromDate} />
 				<SelectDate title="до" month={0} setCurrentPage={setCurrentPage} selectDate={updateToDate} />
+				<b>Общий: {expense && formatToLocale(String(expense.data.other_expenses))} сум</b>
 			</div>
 			<Card>
 				<CardContent>
