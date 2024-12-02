@@ -26,6 +26,10 @@ const columns: TColumns<TOrder>[] = [
 		render: (_, record) => <div className="whitespace-nowrap">№ {record.id}</div>,
 	},
 	{
+		title: "Стол",
+		render: (_, record) => <div className="whitespace-nowrap">№ {record.cafe_table.name}</div>,
+	},
+	{
 		title: "Сумма",
 		dataIndex: "price",
 		render: (value) => <div className="whitespace-nowrap">{Number(value).toLocaleString("ru-Ru")}</div>,

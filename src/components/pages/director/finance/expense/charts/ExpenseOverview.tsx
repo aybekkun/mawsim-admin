@@ -2,19 +2,14 @@ import { Cell, Pie, PieChart } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { SelectDate } from "@/components/shared/SelectDate/SelectDate";
-import { useState } from "react";
+
 import { useGetExpenseQuery } from "@/services/director/director.api";
-import { format } from "date-fns";
+
 import { TGrossResponse } from "@/services/director/director.types";
 import { useDateRange } from "@/hooks/useDateRange.hook";
 
 export const description = "A pie chart with a label list";
-const chartData = [
-	{ expense: "salary", amount: 275, fill: "var(--color-salary)" },
-	{ expense: "items", amount: 200, fill: "var(--color-items)" },
-	{ expense: "raw", amount: 173, fill: "var(--color-raw)" },
-	{ expense: "other", amount: 90, fill: "var(--color-other)" },
-];
+
 
 const chartConfig = {
 	expense: {
@@ -79,18 +74,6 @@ export default function ExpenseOverview({ className = "" }) {
 		</Card>
 	);
 }
-type TransformedExpense = {
-	expense: string;
-	amount: number;
-	fill: string;
-};
-type Expenses = {
-	expenses_product: number;
-	expenses_food: number;
-	other_expenses: number;
-	salaries: number;
-	date: string;
-};
 
 function transformExpenses(expenses: TGrossResponse["data"] | undefined) {
 	if (!expenses) return [];
