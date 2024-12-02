@@ -34,7 +34,7 @@ const ShopCart: FC<ShopCartProps> = () => {
 		setTableId(0);
 	};
 	const onCreateOrder = async () => {
-		if (tableId == 0) {
+		if (tableId == 0 && user?.role_id !== 5) {
 			toast({
 				description: "Выберите стол",
 				duration: 1500,
@@ -55,7 +55,7 @@ const ShopCart: FC<ShopCartProps> = () => {
 			return { food_id: item.id, quantity: item.quantity };
 		});
 		if (user?.role_id === 5) {
-			await createOrder({ cafe_table_id: tableId, foods: foods, is_takeaway: true });
+			await createOrder({ cafe_table_id: 1, foods: foods, is_takeaway: true });
 		} else {
 			await createOrder({ cafe_table_id: tableId, foods: foods, is_takeaway: false });
 		}
@@ -69,7 +69,8 @@ const ShopCart: FC<ShopCartProps> = () => {
 				{badge}
 			</Button>
 			<MyDialog title="Корзина" open={open} onOpenChange={(open) => setOpen(open)}>
-				<TableList defaultValue={String(tableId)} setTableId={setTableId} />
+				{user?.role_id !== 5 && <TableList defaultValue={String(tableId)} setTableId={setTableId} />}
+
 				{items.length > 0 ? <OrderList /> : <h2 className="font-bold text-lg">Добавьте в корзину что-нибудь</h2>}
 				<div className="flex justify-between">
 					<Button onClick={onClear} variant={"destructive"}>
