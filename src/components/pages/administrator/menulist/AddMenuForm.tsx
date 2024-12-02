@@ -30,7 +30,7 @@ const AddMenuForm: FC<AddMenuFormProps> = ({
 	const { mutate: createMenu, isPending: isCreating, isSuccess: isCreated } = useCreateMenuMutation();
 	const { mutate: updateMenu, isPending: isUpdating, isSuccess: isUpdated } = useUpdateMenuMutation();
 
-	const { data } = useGetAllFoodQuery();
+	const { data } = useGetAllFoodQuery({});
 	const transformData = data?.data.map((item) => ({
 		id: item.id,
 		value: item.name,
