@@ -4,6 +4,7 @@ import { useGetAllFoodQuery, useGetOneFoodQuery } from "@/services/administrator
 import { TFood } from "@/services/administrator/food/food.types";
 import { useState } from "react";
 import StockSheet from "@/components/shared/StockSheet/StockSheet";
+import MyPagination from "@/components/shared/MyPagination/MyPagination";
 
 const columns: TColumns<TFood>[] = [
 	{
@@ -29,8 +30,19 @@ const columns: TColumns<TFood>[] = [
 ];
 
 const AddFoodTable = () => {
-	const { data, isLoading } = useGetAllFoodQuery();
-	return <MyTable source={data?.data || []} columns={columns} loading={isLoading} />;
+	const [currentPage, setCurrentPage] = useState(1);
+	const { data, isLoading, isFetching } = useGetAllFoodQuery({ page: currentPage });
+	return (
+		<>
+			<MyTable source={data?.data || []} columns={columns} loading={isLoading} fetching={isFetching} />
+			<MyPagination
+				totalPosts={data?.meta?.total || 1}
+				postsPerPage={10}
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+			/>
+		</>
+	);
 };
 
 const Actions = ({ record }: { record: TFood }) => {

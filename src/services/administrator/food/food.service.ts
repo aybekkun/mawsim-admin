@@ -1,5 +1,6 @@
 import { api } from "@/api";
 import { TFoodNameResponse, TFoodOne, TFoodResponse } from "./food.types";
+import { TGetParams } from "@/services/types/global.types";
 
 export const FoodNameService = {
 	async getAll() {
@@ -27,7 +28,7 @@ export const FoodNameService = {
 		format_id: number,
 		category_id: number
 	) {
-		return api.put(`/admin/food-items/${id}`, { name, format_id, category_id,  description });
+		return api.put(`/admin/food-items/${id}`, { name, format_id, category_id, description });
 	},
 
 	async delete(id: number) {
@@ -36,8 +37,10 @@ export const FoodNameService = {
 };
 
 export const FoodService = {
-	async getAll() {
-		const { data } = await api.get<TFoodResponse>("/admin/warehouses/food-items");
+	async getAll(params: TGetParams) {
+		const { data } = await api.get<TFoodResponse>("/admin/warehouses/food-items", {
+			params,
+		});
 		return data;
 	},
 	async getOne(id: number) {

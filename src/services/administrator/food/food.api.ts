@@ -2,6 +2,7 @@ import { toast } from "@/hooks/use-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FoodNameService, FoodService } from "./food.service";
 import { AxiosError } from "axios";
+import { TGetParams } from "@/services/types/global.types";
 
 export const useGetAllFoodNameQuery = () => {
 	return useQuery({
@@ -56,10 +57,10 @@ export const useUpdateFoodNameMutation = () => {
 	});
 };
 
-export const useGetAllFoodQuery = () => {
+export const useGetAllFoodQuery = (params: TGetParams) => {
 	return useQuery({
-		queryKey: ["food"],
-		queryFn: () => FoodService.getAll(),
+		queryKey: ["food all", ...Object.values(params)],
+		queryFn: () => FoodService.getAll(params),
 	});
 };
 

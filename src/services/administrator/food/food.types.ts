@@ -1,3 +1,4 @@
+import { TPaginationResponse } from "@/services/types/global.types";
 
 export type TFoodNameResponse = {
 	data: TFoodName[];
@@ -23,6 +24,7 @@ export type TFoodName = {
 
 export type TFoodResponse = {
 	data: TFood[];
+	meta:TPaginationResponse
 };
 
 export type TFood = {
