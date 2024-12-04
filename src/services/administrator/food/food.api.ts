@@ -77,6 +77,22 @@ export const useCreateFoodMutation = () => {
 		mutationFn: (data: { quantity: number; price: number; food_id: number }) =>
 			FoodService.create(data.food_id, data.quantity, data.price),
 		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["food all"] });
+			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
+		},
+		onError: (error: AxiosError<any, any>) => {
+			const errorMessage = error.response?.data?.message || "An unexpected error occurred";
+			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
+		},
+	});
+};
+
+export const useUpdateFoodExpenseMutation = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (data: { id: number; quantity: number; price: number; expense_id: number }) =>
+			FoodService.updateExpense(data.id, data.price, data.quantity, data.expense_id),
+		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["food"] });
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
 		},

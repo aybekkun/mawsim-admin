@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { useGetAllFoodQuery, useGetOneFoodQuery } from "@/services/administrator/food/food.api";
 import { TFood } from "@/services/administrator/food/food.types";
 import { useState } from "react";
-import StockSheet from "@/components/shared/StockSheet/StockSheet";
+
 import MyPagination from "@/components/shared/MyPagination/MyPagination";
+import StockSheetFood from "@/components/shared/StockSheet/StockSheetFood";
 
 const columns: TColumns<TFood>[] = [
 	{
@@ -34,7 +35,13 @@ const AddFoodTable = () => {
 	const { data, isLoading, isFetching } = useGetAllFoodQuery({ page: currentPage });
 	return (
 		<>
-			<MyTable source={data?.data || []} columns={columns} loading={isLoading} fetching={isFetching} />
+			<MyTable
+				currentPage={currentPage}
+				source={data?.data || []}
+				columns={columns}
+				loading={isLoading}
+				fetching={isFetching}
+			/>
 			<MyPagination
 				totalPosts={data?.meta?.total || 1}
 				postsPerPage={10}
@@ -57,9 +64,9 @@ const Actions = ({ record }: { record: TFood }) => {
 			<Button onClick={() => setOpen(true)} variant={"outline"} size={"sm"}>
 				История
 			</Button>
-			<StockSheet data={data?.data.expense} open={open} onOpenChange={(val) => setOpen(val)}>
+			<StockSheetFood food_id={record.id} data={data?.data.expense} open={open} onOpenChange={(val) => setOpen(val)}>
 				<></>
-			</StockSheet>
+			</StockSheetFood>
 		</>
 	);
 };

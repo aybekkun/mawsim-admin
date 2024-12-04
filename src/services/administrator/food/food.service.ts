@@ -47,8 +47,11 @@ export const FoodService = {
 		const { data } = await api.get<TFoodOne>("/admin/warehouses/food-items/" + id);
 		return data;
 	},
+	async updateExpense(id: number, price: number, quantity: number,expense_id:number) {
+		return await api.put(`/admin/warehouses/food-items/${id}`, { warehouse_id: 1, expense_id, price, quantity });
+	},
 	async create(food_id: number, quantity: number, price: number) {
-		return api.post("/admin/warehouses/food-items", {
+		return await api.post("/admin/warehouses/food-items", {
 			food_id,
 			price,
 			quantity,
@@ -57,6 +60,6 @@ export const FoodService = {
 		});
 	},
 	async update(id: number, name: string, format_id: number) {
-		return api.put(`/admin/warehouses/food-items/${id}`, { name, format_id });
+		return await api.put(`/admin/warehouses/food-items/${id}`, { name, format_id });
 	},
 };
