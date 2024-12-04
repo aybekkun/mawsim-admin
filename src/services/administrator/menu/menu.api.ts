@@ -1,11 +1,12 @@
 import { toast } from "@/hooks/use-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { MenuService } from "./menu.service";
+import { TGetParams } from "@/services/types/global.types";
 
-export const useGetAllMenuQuery = () => {
+export const useGetAllMenuQuery = (params: TGetParams) => {
 	return useQuery({
-		queryKey: ["menu"],
-		queryFn: () => MenuService.getAll(),
+		queryKey: ["menu", ...Object.values(params)],
+		queryFn: () => MenuService.getAll(params),
 	});
 };
 

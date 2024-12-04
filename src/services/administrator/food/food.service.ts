@@ -3,8 +3,8 @@ import { TFoodNameResponse, TFoodOne, TFoodResponse } from "./food.types";
 import { TGetParams } from "@/services/types/global.types";
 
 export const FoodNameService = {
-	async getAll() {
-		const { data } = await api.get<TFoodNameResponse>("/admin/food-items");
+	async getAll(params: TGetParams) {
+		const { data } = await api.get<TFoodNameResponse>("/admin/food-items", { params });
 		return data;
 	},
 	async getOne(id: number) {

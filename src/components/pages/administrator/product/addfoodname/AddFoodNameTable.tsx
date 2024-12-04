@@ -5,6 +5,7 @@ import { TFoodName } from "@/services/administrator/food/food.types";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import AddFoodNameForm from "./AddFoodNameForm";
+import MyPagination from "@/components/shared/MyPagination/MyPagination";
 
 const columns: TColumns<TFoodName>[] = [
 	{
@@ -30,9 +31,20 @@ const columns: TColumns<TFoodName>[] = [
 	},
 ];
 const AddFoodNameTable = () => {
-	const { data, isLoading } = useGetAllFoodNameQuery();
+	const [currentPage, setCurrentPage] = useState(1);
+	const { data, isLoading } = useGetAllFoodNameQuery({ page: currentPage, limit: 10 });
 
-	return <MyTable source={data?.data || []} columns={columns} loading={isLoading} />;
+	return (
+		<>
+			<MyTable currentPage={currentPage} source={data?.data || []} columns={columns} loading={isLoading} />
+			<MyPagination
+				totalPosts={data?.meta.total || 0}
+				postsPerPage={10}
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+			/>
+		</>
+	);
 };
 
 export default AddFoodNameTable;

@@ -7,6 +7,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { useState } from "react";
 import AddMenuForm from "./AddMenuForm";
+import MyPagination from "@/components/shared/MyPagination/MyPagination";
 const columns: TColumns<TMenu>[] = [
 	{
 		title: "Название",
@@ -34,10 +35,17 @@ const columns: TColumns<TMenu>[] = [
 	},
 ];
 const MenuListTable = () => {
-	const { data, isLoading } = useGetAllMenuQuery();
+	const [currentPage, setCurrentPage] = useState(1);
+	const { data, isLoading } = useGetAllMenuQuery({ page: currentPage, limit: 10 });
 	return (
 		<>
-			<MyTable source={data?.data || []} columns={columns} loading={isLoading} />
+			<MyTable currentPage={currentPage} source={data?.data || []} columns={columns} loading={isLoading} />
+			<MyPagination
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+				totalPosts={data?.meta.total || 0}
+				postsPerPage={10}
+			/>
 		</>
 	);
 };

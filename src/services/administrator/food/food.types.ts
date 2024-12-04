@@ -2,6 +2,7 @@ import { TPaginationResponse } from "@/services/types/global.types";
 
 export type TFoodNameResponse = {
 	data: TFoodName[];
+	meta: TPaginationResponse;
 };
 
 export type TFoodName = {
@@ -24,7 +25,7 @@ export type TFoodName = {
 
 export type TFoodResponse = {
 	data: TFood[];
-	meta:TPaginationResponse
+	meta: TPaginationResponse;
 };
 
 export type TFood = {
@@ -38,14 +39,14 @@ export type TFood = {
 		id: number;
 		name: string;
 	};
-	stock: string ;
+	stock: string;
 };
 
 export type TFoodOne = {
 	data: {
 		id: number;
 		name: string;
-		stock: string ;
+		stock: string;
 		format: {
 			id: number;
 			name: string;

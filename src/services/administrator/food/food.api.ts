@@ -4,10 +4,10 @@ import { FoodNameService, FoodService } from "./food.service";
 import { AxiosError } from "axios";
 import { TGetParams } from "@/services/types/global.types";
 
-export const useGetAllFoodNameQuery = () => {
+export const useGetAllFoodNameQuery = (params: TGetParams) => {
 	return useQuery({
-		queryKey: ["foodname"],
-		queryFn: () => FoodNameService.getAll(),
+		queryKey: ["foodname", ...Object.values(params)],
+		queryFn: () => FoodNameService.getAll(params),
 	});
 };
 

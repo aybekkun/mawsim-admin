@@ -1,9 +1,10 @@
 import { api } from "@/api";
 import { TMenuResponse } from "./menu.types";
+import { TGetParams } from "@/services/types/global.types";
 
 export const MenuService = {
-	async getAll() {
-		const { data } = await api.get<TMenuResponse>("/admin/menu");
+	async getAll(params: TGetParams) {
+		const { data } = await api.get<TMenuResponse>("/admin/menu", { params });
 		return data;
 	},
 	async getOne(id: number) {

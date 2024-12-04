@@ -17,7 +17,7 @@ interface AddFoodFormProps {
 }
 
 const AddFoodForm: FC<AddFoodFormProps> = ({ open = false, setOpen = () => undefined }) => {
-	const { data } = useGetAllFoodNameQuery();
+	const { data } = useGetAllFoodNameQuery({ limit: 1000 });
 	const { mutate: createFood, isPending, isSuccess } = useCreateFoodMutation();
 	const transformData = data?.data.map((item) => ({
 		id: item.id,
