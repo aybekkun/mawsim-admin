@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { formatToLocale } from "@/utils/currencyFormat";
 
 import { ReactNode } from "react";
-import PopupEdit from "./PopupEdit";
+import PopupEditFood from "./PopupEditFood";
 
 interface StockDialogProps {
 	food_id: number;
@@ -53,7 +53,7 @@ const StockSheetFood = ({ food_id, data, children = <></>, open, onOpenChange }:
 												<TableCell>{formatToLocale(item.price)}</TableCell>
 												<TableCell>{formatToLocale(item.per_price)}</TableCell>
 												<TableCell>
-													<PopupEdit
+													<PopupEditFood
 														values={{
 															id: food_id,
 															price: Number(item.price),

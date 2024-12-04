@@ -28,8 +28,8 @@ export const ProductsService = {
 		const { data } = await api.get<TProductsOne>("/admin/warehouses/products/" + id);
 		return data;
 	},
-	async updateExpense(id: number, price: number, quantity: number) {
-		return await api.put(`/admin/warehouses/food-items/${id}`, { warehouse_id: 2, expense_id: 3, price, quantity });
+	async updateExpense(id: number, price: number, quantity: number,expense_id:number) {
+		return await api.put(`/admin/warehouses/products/${id}`, { warehouse_id: 2, expense_id, price, quantity });
 	},
 	async create(product_id: number, quantity: number, price: number) {
 		return api.post("/admin/warehouses/products", { product_id, price, quantity, warehouse_id: 2, expense_id: 2 });

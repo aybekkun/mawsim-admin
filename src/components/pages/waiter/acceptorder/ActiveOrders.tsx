@@ -22,11 +22,11 @@ import { FC, useEffect, useState } from "react";
 const ActiveOrders: FC = () => {
 	const { mutate: addOrder, isPending: isAdding } = useAddOrderMutation();
 	const [open, setOpen] = useState(false);
-	const { data } = useGetActiveOrderQuery({ status_id: 1 });
+	const { data } = useGetActiveOrderQuery({ status_id: 1, limit: 1000 });
 	const [activeOrderId, setActiveOrderId] = useState<number>(0);
 	const [activeOrders, setActiveOrders] = useState<{ orderId: number; tableId: number; tableName: string }[]>([]);
 
-	const { items,clearBasket } = useBasketStore();
+	const { items, clearBasket } = useBasketStore();
 	useEffect(() => {
 		if (data?.data) {
 			const activeOrders = data?.data.map((item) => {

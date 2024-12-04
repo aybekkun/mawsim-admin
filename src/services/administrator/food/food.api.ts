@@ -94,6 +94,7 @@ export const useUpdateFoodExpenseMutation = () => {
 			FoodService.updateExpense(data.id, data.price, data.quantity, data.expense_id),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["food"] });
+			queryClient.invalidateQueries({ queryKey: ["food all"] });
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
 		},
 		onError: (error: AxiosError<any, any>) => {

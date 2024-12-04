@@ -48,7 +48,7 @@ const Profit: FC<ProfitProps> = ({ className = `` }) => {
 			</div> */}
 			<Card>
 				<CardHeader className="pb-0">
-					<h2 className="text-3xl font-bold tracking-tight">Прибыль</h2>
+					<h2 className="text-3xl font-bold tracking-tight">Баланс</h2>
 				</CardHeader>
 				<CardContent className="flex items-center justify-between pt-5 gap-4 flex-wrap-reverse">
 					<div className="text-2xl gap-4 flex items-center font-bold text-nowrap">

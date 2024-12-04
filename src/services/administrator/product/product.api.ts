@@ -134,3 +134,20 @@ export const useDeleteRawMaterialsExpenseMutation = () => {
 		},
 	});
 };
+
+
+export const useUpdateProductExpenseMutation = () => { 
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (data: { id: number; quantity: number; price: number; expense_id: number }) =>
+			ProductsService.updateExpense(data.id, data.price, data.quantity, data.expense_id),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ["food"] });
+			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
+		},
+		onError: (error: AxiosError<any, any>) => {
+			const errorMessage = error.response?.data?.message || "An unexpected error occurred";
+			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
+		},
+	});
+};
