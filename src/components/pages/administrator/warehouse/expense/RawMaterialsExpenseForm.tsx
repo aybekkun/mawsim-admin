@@ -26,7 +26,7 @@ const RawMaterialsExpenseForm: FC<RawMaterialsExpenseFormProps> = ({
 	setOpen = () => undefined,
 }) => {
 	const [product_id, setProductId] = useState(1);
-	const { data } = useGetAllProductsNameQuery();
+	const { data } = useGetAllProductsNameQuery({ page: 1, limit: 1000 });
 	const { mutate: createRaw, isPending, isSuccess } = useCreateRawMaterialsExpenseMutation();
 	// const { mutate: updateRaw, isPending: isUpdating, isSuccess: isUpdated } = useRawMaterialsExpenseMutation();
 	const transformData = data?.data.map((item) => ({

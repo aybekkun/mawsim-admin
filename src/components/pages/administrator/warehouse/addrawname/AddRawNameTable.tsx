@@ -8,6 +8,7 @@ import { TProductsName } from "@/services/administrator/product/product.types";
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import AddRawNameForm from "./AddRawNameForm";
+import MyPagination from "@/components/shared/MyPagination/MyPagination";
 
 const columns: TColumns<TProductsName>[] = [
 	{
@@ -24,9 +25,20 @@ const columns: TColumns<TProductsName>[] = [
 	},
 ];
 const AddRawNameTable = () => {
-	const { data, isLoading } = useGetAllProductsNameQuery();
+	const [currentPage, setCurrentPage] = useState(1);
+	const { data, isLoading } = useGetAllProductsNameQuery({ page: currentPage, limit: 10 });
 
-	return <MyTable loading={isLoading} columns={columns} source={data?.data || []} />;
+	return (
+		<>
+			<MyTable currentPage={currentPage} loading={isLoading} columns={columns} source={data?.data || []} />
+			<MyPagination
+				totalPosts={data?.meta.total || 0}
+				postsPerPage={10}
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
+			/>
+		</>
+	);
 };
 
 export default AddRawNameTable;

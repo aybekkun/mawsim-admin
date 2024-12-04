@@ -1,9 +1,10 @@
 import { api } from "@/api";
 import { TProductsNameResponse, TProductsOne, TProductsResponse, TRawMaterialsResponse } from "./product.types";
+import { TGetParams } from "@/services/types/global.types";
 
 export const ProdcutsNameService = {
-	async getAll() {
-		const { data } = await api.get<TProductsNameResponse>("/admin/products");
+	async getAll(params: TGetParams) {
+		const { data } = await api.get<TProductsNameResponse>("/admin/products", { params });
 		return data;
 	},
 
@@ -19,8 +20,8 @@ export const ProdcutsNameService = {
 };
 
 export const ProductsService = {
-	async getAll() {
-		const { data } = await api.get<TProductsResponse>("/admin/warehouses/products");
+	async getAll(params: TGetParams) {
+		const { data } = await api.get<TProductsResponse>("/admin/warehouses/products", { params });
 		return data;
 	},
 	async getOne(id: number) {

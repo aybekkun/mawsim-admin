@@ -2,6 +2,7 @@ import { TPaginationResponse } from "@/services/types/global.types";
 
 export type TProductsNameResponse = {
 	data: TProductsName[];
+	meta:TPaginationResponse;
 };
 
 export type TProductsName = {
@@ -18,6 +19,7 @@ export type TProductsName = {
 
 export type TProductsResponse = {
 	data: TProducts[];
+	meta: TPaginationResponse;
 };
 
 export type TProducts = {

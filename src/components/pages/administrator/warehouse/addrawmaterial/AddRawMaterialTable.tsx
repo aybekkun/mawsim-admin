@@ -1,3 +1,4 @@
+import MyPagination from "@/components/shared/MyPagination/MyPagination";
 import MyTable, { TColumns } from "@/components/shared/MyTable/MyTable";
 import StockSheet from "@/components/shared/StockSheet/StockSheet";
 import { Button } from "@/components/ui/button";
@@ -27,10 +28,17 @@ const columns: TColumns<TProducts>[] = [
 ];
 
 const AddRawMaterialTable: FC = () => {
-	const { data, isLoading } = useGetAllProductsQuery();
+	const [currentPAge, setCurrentPage] = useState(1);
+	const { data, isLoading } = useGetAllProductsQuery({ page: currentPAge, limit: 10 });
 	return (
 		<>
-			<MyTable loading={isLoading} columns={columns} source={data?.data || []} />
+			<MyTable currentPage={currentPAge} loading={isLoading} columns={columns} source={data?.data || []} />
+			<MyPagination
+				totalPosts={data?.meta.total || 0}
+				postsPerPage={10}
+				currentPage={currentPAge}
+				setCurrentPage={setCurrentPage}
+			/>
 		</>
 	);
 };

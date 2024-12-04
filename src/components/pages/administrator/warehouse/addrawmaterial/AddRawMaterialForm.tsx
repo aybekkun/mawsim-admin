@@ -17,7 +17,7 @@ interface AddRawMaterialFormProps {
 }
 
 const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen = () => undefined }) => {
-	const { data } = useGetAllProductsNameQuery();
+	const { data } = useGetAllProductsNameQuery({ page: 1, limit: 1000 });
 	const { mutate: createProduct, isPending, isSuccess } = useCreateProductsMutation();
 	const transformData = data?.data.map((item) => ({
 		id: item.id,
@@ -82,7 +82,7 @@ const AddRawMaterialForm: FC<AddRawMaterialFormProps> = ({ open = false, setOpen
 							<FormItem>
 								<FormLabel>Общая цена</FormLabel>
 								<FormControl>
-									<CurrencyInput placeholder="Цена" {...field} onAccept={(value: any) => field.onChange(value)}/>
+									<CurrencyInput placeholder="Цена" {...field} onAccept={(value: any) => field.onChange(value)} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>

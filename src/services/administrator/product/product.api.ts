@@ -2,11 +2,12 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tansta
 import { ProdcutsNameService, ProductsService, RawMaterialsService } from "./product.service";
 import { toast } from "../../../hooks/use-toast";
 import { AxiosError } from "axios";
+import { TGetParams } from "@/services/types/global.types";
 
-export const useGetAllProductsNameQuery = () => {
+export const useGetAllProductsNameQuery = (params: TGetParams) => {
 	return useQuery({
-		queryKey: ["productsname"],
-		queryFn: () => ProdcutsNameService.getAll(),
+		queryKey: ["productsname", ...Object.values(params)],
+		queryFn: () => ProdcutsNameService.getAll(params),
 	});
 };
 
@@ -52,10 +53,10 @@ export const useUpdateProductsNameMutation = () => {
 	});
 };
 
-export const useGetAllProductsQuery = () => {
+export const useGetAllProductsQuery = (params: TGetParams) => {
 	return useQuery({
-		queryKey: ["products"],
-		queryFn: () => ProductsService.getAll(),
+		queryKey: ["products", ...Object.values(params)],
+		queryFn: () => ProductsService.getAll(params),
 	});
 };
 
