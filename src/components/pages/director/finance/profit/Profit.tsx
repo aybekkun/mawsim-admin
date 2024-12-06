@@ -1,4 +1,3 @@
-import InfoCard from "@/components/shared/InfoCard/InfoCard";
 import SelectFromToDate from "@/components/shared/SelectDate/SelectFromToDate";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useGetProfitQuery } from "@/services/director/director.api";

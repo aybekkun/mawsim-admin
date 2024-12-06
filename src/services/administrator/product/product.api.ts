@@ -142,8 +142,8 @@ export const useUpdateProductExpenseMutation = () => {
 		mutationFn: (data: { id: number; quantity: number; price: number; expense_id: number }) =>
 			ProductsService.updateExpense(data.id, data.price, data.quantity, data.expense_id),
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ["food"] });
-			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
+			queryClient.invalidateQueries({ queryKey: ["products"] });
+			toast({ title: "Добавлено", description: "Проудукт был успешно изменен", duration: 500 });
 		},
 		onError: (error: AxiosError<any, any>) => {
 			const errorMessage = error.response?.data?.message || "An unexpected error occurred";

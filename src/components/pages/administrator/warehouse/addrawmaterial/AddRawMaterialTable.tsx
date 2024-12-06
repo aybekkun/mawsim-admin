@@ -55,7 +55,7 @@ const Actions = ({ record }: { record: TProducts }) => {
 			<Button onClick={() => setOpen(true)} variant={"outline"} size={"sm"}>
 				История
 			</Button>
-			<StockSheet data={data?.data.expenses} open={open} onOpenChange={(val) => setOpen(val)}>
+			<StockSheet product_id={record.id} data={data?.data.expenses} open={open} onOpenChange={(val) => setOpen(val)}>
 				<></>
 			</StockSheet>
 		</>

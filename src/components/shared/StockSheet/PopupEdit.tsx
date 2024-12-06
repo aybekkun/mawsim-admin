@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Pencil } from "lucide-react";
 import { Label } from "@/components/ui/label";
-import { useUpdateFoodExpenseMutation } from "@/services/administrator/food/food.api";
+import { useUpdateProductExpenseMutation } from "@/services/administrator/product/product.api";
 interface Props {
 	className?: string;
 	values?: { id: number; expense_id: number; price: number; quantity: number };
@@ -15,7 +15,7 @@ const PopupEditFood: FC<Props> = ({ values = { id: 0, price: 0, quantity: 0, exp
 	const [open, setOpen] = useState(false);
 	const [input1, setInput1] = useState(0);
 	const [input2, setInput2] = useState(0);
-	const { mutate, isPending } = useUpdateFoodExpenseMutation();
+	const { mutate, isPending } = useUpdateProductExpenseMutation();
 	useEffect(() => {
 		setInput1(values.price);
 		setInput2(values.quantity);

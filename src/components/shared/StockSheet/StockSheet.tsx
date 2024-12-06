@@ -5,8 +5,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { formatToLocale } from "@/utils/currencyFormat";
 
 import { ReactNode } from "react";
+import PopupEditFood from "./PopupEdit";
 
 interface StockDialogProps {
+	product_id: number;
 	data?: {
 		id: number;
 		quantity: string;
@@ -19,7 +21,8 @@ interface StockDialogProps {
 	children: ReactNode;
 }
 
-const StockDialog = ({ data, children = <></>, open, onOpenChange }: StockDialogProps) => {
+const StockDialog = ({product_id, data, children = <></>, open, onOpenChange }: StockDialogProps) => {
+
 	return (
 		<Dialog open={open} onOpenChange={() => onOpenChange(!open)}>
 			<DialogDescription></DialogDescription>
@@ -39,6 +42,7 @@ const StockDialog = ({ data, children = <></>, open, onOpenChange }: StockDialog
 											<TableHead>Количество</TableHead>
 											<TableHead>Цена</TableHead>
 											<TableHead>Цена за штуку</TableHead>
+											<TableHead>Действие</TableHead>
 										</TableRow>
 									</TableHeader>
 									<TableBody>
@@ -48,6 +52,16 @@ const StockDialog = ({ data, children = <></>, open, onOpenChange }: StockDialog
 												<TableCell>{formatToLocale(item.quantity)}</TableCell>
 												<TableCell>{formatToLocale(item.price)}</TableCell>
 												<TableCell>{formatToLocale(item.per_price)}</TableCell>
+												<TableCell>
+													<PopupEditFood
+														values={{
+															id: product_id,
+															price: Number(item.price),
+															quantity: Number(item.quantity),
+															expense_id: item.id,
+														}}
+													/>
+												</TableCell>
 											</TableRow>
 										))}
 									</TableBody>

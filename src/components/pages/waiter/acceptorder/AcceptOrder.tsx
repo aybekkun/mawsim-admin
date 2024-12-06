@@ -13,10 +13,10 @@ const AcceptOrder: FC<AcceptOrderProps> = ({ className = `` }) => {
 	const { data } = useGetAllWaiterMenuQuery({});
 
 	const food = data?.data
-		.filter((item) => item.food.category.name === "еда" && Number(item.quantity) > 0)
+		.filter((item) => item.food.category.name === "еда" && Number(item.food.stock) > 0)
 		.map((item) => <MenuCard key={item.id} {...item} />);
 	const drinks = data?.data
-		.filter((item) => item.food.category.name === "напитки" && Number(item.quantity) > 0)
+		.filter((item) => item.food.category.name === "напитки" && Number(item.food.stock) > 0)
 		.map((item) => <MenuCard key={item.id} {...item} />);
 	return (
 		<div className={className}>
