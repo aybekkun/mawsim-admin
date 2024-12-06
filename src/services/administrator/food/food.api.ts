@@ -20,7 +20,7 @@ export const useCreateFoodNameMutation = () => {
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
 		},
 		onError: (error: AxiosError<any, any>) => {
-			const errorMessage = error.response?.data?.message || "An unexpected error occurred";
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
 			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
 		},
 	});
@@ -81,7 +81,7 @@ export const useCreateFoodMutation = () => {
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
 		},
 		onError: (error: AxiosError<any, any>) => {
-			const errorMessage = error.response?.data?.message || "An unexpected error occurred";
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
 			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
 		},
 	});
@@ -98,7 +98,7 @@ export const useUpdateFoodExpenseMutation = () => {
 			toast({ title: "Добавлено", description: "Проудукт был успешно добавлен", duration: 500 });
 		},
 		onError: (error: AxiosError<any, any>) => {
-			const errorMessage = error.response?.data?.message || "An unexpected error occurred";
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
 			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
 		},
 	});

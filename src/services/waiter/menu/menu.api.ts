@@ -4,6 +4,7 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tansta
 import { OrderService, WaiterMenuService, WaiterOrderService, WaiterTableService } from "./menu.service";
 import { toast } from "@/hooks/use-toast";
 import { TAddOrder, TCreateOrderParams, TUpdateOrder } from "./menu.types";
+import { AxiosError } from "axios";
 
 export const useGetAllWaiterMenuQuery = (params: TGetParams) => {
 	return useQuery({
@@ -29,8 +30,9 @@ export const useCreateOrderMutation = () => {
 			queryClient.invalidateQueries({ queryKey: ["menu officiant"] });
 			toast({ title: "Добавлено", description: "Заказ был успешно добавлен", duration: 500 });
 		},
-		onError: (error) => {
-			toast({ title: "Ошибка", description: error.message, variant: "destructive", duration: 1500 });
+		onError: (error: AxiosError<any, any>) => {
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
+			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
 		},
 	});
 };
@@ -71,8 +73,9 @@ export const useAddOrderMutation = () => {
 			queryClient.invalidateQueries({ queryKey: ["order officiant active"] });
 			toast({ title: "Добавлено", description: "Заказ был успешно добавлен", duration: 500 });
 		},
-		onError: (error) => {
-			toast({ title: "Ошибка", description: error.message, variant: "destructive", duration: 1500 });
+		onError: (error: AxiosError<any, any>) => {
+			const errorMessage = error.response?.data?.error || "An unexpected error occurred";
+			toast({ title: "Create", description: errorMessage, variant: "destructive", duration: 1500 });
 		},
 	});
 };
