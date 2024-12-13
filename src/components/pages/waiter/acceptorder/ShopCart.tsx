@@ -22,6 +22,7 @@ interface ShopCartProps {
 
 const ShopCart: FC<ShopCartProps> = () => {
 	const { user } = useAuthPersistStore();
+	const [isTake, setIsTake] = useState(false);
 	const [open, setOpen] = useState(false);
 	const [tableId, setTableId] = useState(0);
 	const { items, clearBasket } = useBasketStore();
@@ -55,9 +56,9 @@ const ShopCart: FC<ShopCartProps> = () => {
 			return { food_id: item.id, quantity: item.quantity };
 		});
 		if (user?.role_id === 5) {
-			await createOrder({ cafe_table_id: 1, foods: foods, is_takeaway: true });
+			await createOrder({ cafe_table_id: 1, foods: foods, is_takeaway: isTake });
 		} else {
-			await createOrder({ cafe_table_id: tableId, foods: foods, is_takeaway: false });
+			await createOrder({ cafe_table_id: tableId, foods: foods, is_takeaway: isTake });
 		}
 		onClear();
 	};
@@ -70,7 +71,9 @@ const ShopCart: FC<ShopCartProps> = () => {
 			</Button>
 			<MyDialog title="Корзина" open={open} onOpenChange={(open) => setOpen(open)}>
 				{user?.role_id !== 5 && <TableList defaultValue={String(tableId)} setTableId={setTableId} />}
-
+				<div>
+					<Button  onClick={() => setIsTake((prev) => !prev)}>{isTake ? "Доставка" : "Самовывоз"}</Button>
+				</div>
 				{items.length > 0 ? <OrderList /> : <h2 className="font-bold text-lg">Добавьте в корзину что-нибудь</h2>}
 				<div className="flex justify-between">
 					<Button onClick={onClear} variant={"destructive"}>

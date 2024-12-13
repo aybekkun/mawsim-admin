@@ -24,13 +24,18 @@ const Aside: FC = () => {
 				<div className="aside__content">
 					<nav>
 						<ul>
-							{menuItems
+							{menuItems.map(({ title, items }, index) => (
+								<li key={title + index}>
+									<AsideMenuItem title={title} items={items} />
+								</li>
+							))}
+							{/* 		{menuItems
 								.filter((item) => item.role === user?.role_id)
 								.map(({ title, items }, index) => (
 									<li key={title + index}>
 										<AsideMenuItem title={title} items={items} />
 									</li>
-								))}
+								))} */}
 						</ul>
 					</nav>
 				</div>

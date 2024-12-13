@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 import { api } from "../api";
 import { IAuthLogin, IAuthRegister, IAuthResponse } from "../services/auth/auth.types";
+import { toast } from "@/hooks/use-toast";
 
 interface AuthState {
 	user: IAuthResponse["data"]["user"] | null;
@@ -45,7 +46,6 @@ export const useAuthPersistStore = create(
 					}
 				},
 				fetchLogin: async (params) => {
-			
 					try {
 						const { data } = await api.post<IAuthResponse>("/auth/login", params);
 						const token = data.data.token;
@@ -53,6 +53,11 @@ export const useAuthPersistStore = create(
 						set({ isAuth: true, token: token, user: data.data.user });
 					} catch (error) {
 						console.log(error);
+						toast({
+							title: "Error",
+							description: "Логин или пароль не верен",
+							variant: "destructive",
+						});
 						set({ isAuth: false, token: null, user: null });
 					}
 				},

@@ -59,7 +59,6 @@ export const menuItems: TMenuItem[] = [
 			{
 				link: ROUTES.WAREHOUSE_STATS.route,
 				icon: Warehouse,
-
 				text: ROUTES.WAREHOUSE_STATS.name,
 			},
 
@@ -84,12 +83,27 @@ export const menuItems: TMenuItem[] = [
 				icon: ReceiptText,
 				text: ROUTES.PAYMENT.name,
 			},
+			{
+				link: ROUTES.ACCEPT_ORDER.route,
+				icon: ArrowRightToLine,
+				text: ROUTES.ACCEPT_ORDER.name,
+			},
+			{
+				link: ROUTES.ORDERS.route,
+				icon: Logs,
+				text: ROUTES.ORDERS.name,
+			},
 		],
 	},
 	{
 		title: "Заказы",
 		role: 3,
 		items: [
+			{
+				link: ROUTES.PAYMENT.route,
+				icon: ReceiptText,
+				text: ROUTES.PAYMENT.name,
+			},
 			{
 				link: ROUTES.ACCEPT_ORDER.route,
 				icon: ArrowRightToLine,
@@ -106,6 +120,11 @@ export const menuItems: TMenuItem[] = [
 		title: "Заказы",
 		role: 5,
 		items: [
+			{
+				link: ROUTES.PAYMENT.route,
+				icon: ReceiptText,
+				text: ROUTES.PAYMENT.name,
+			},
 			{
 				link: ROUTES.ACCEPT_ORDER.route,
 				icon: ArrowRightToLine,
@@ -138,7 +157,6 @@ export const menuItems: TMenuItem[] = [
 					},
 				],
 			},
-
 			{
 				link: ROUTES.WAREHOUSE.route,
 				icon: Warehouse,
@@ -156,8 +174,23 @@ export const menuItems: TMenuItem[] = [
 			},
 			{
 				link: ROUTES.CAFE_TABLES.route,
-				icon: Table ,
+				icon: Table,
 				text: ROUTES.CAFE_TABLES.name,
+			},
+			{
+				link: ROUTES.PAYMENT.route,
+				icon: ReceiptText,
+				text: ROUTES.PAYMENT.name,
+			},
+			{
+				link: ROUTES.ACCEPT_ORDER.route,
+				icon: ArrowRightToLine,
+				text: ROUTES.ACCEPT_ORDER.name,
+			},
+			{
+				link: ROUTES.ORDERS.route,
+				icon: Logs,
+				text: ROUTES.ORDERS.name,
 			},
 		],
 	},

@@ -28,8 +28,8 @@ function App() {
 	const navigate = useNavigate();
 	const { isAuth, fetchCheckAuthMe, user } = useAuthPersistStore();
 	useEffect(() => {
-		fetchCheckAuthMe();
-		if (!isAuth) navigate("/login");
+		// fetchCheckAuthMe();
+		// if (!isAuth) navigate("/login");
 	}, [isAuth]);
 
 	return (
@@ -50,12 +50,19 @@ function App() {
 						</>
 					)}
 					{/* Кассир */}
-					{user?.role_id === 4 && <Route path={ROUTES.PAYMENT.route} element={<Payment />} />}
+					{user?.role_id === 4 && (
+						<>
+							<Route path={ROUTES.ACCEPT_ORDER.route} element={<AcceptOrder />} />
+							<Route path={ROUTES.ORDERS.route} element={<Orders />} />
+							<Route path={ROUTES.PAYMENT.route} element={<Payment />} />
+						</>
+					)}
 					{/* Официант */}
 					{(user?.role_id === 3 || user?.role_id === 5) && (
 						<>
 							<Route path={ROUTES.ACCEPT_ORDER.route} element={<AcceptOrder />} />
 							<Route path={ROUTES.ORDERS.route} element={<Orders />} />
+							<Route path={ROUTES.PAYMENT.route} element={<Payment />} />
 						</>
 					)}
 					{/* Администратор */}
@@ -67,6 +74,9 @@ function App() {
 							<Route path={ROUTES.EXPENSE.route} element={<Expense />} />
 							<Route path={ROUTES.WAREHOUSE.route} element={<Warehouse />} />
 							<Route path={ROUTES.CAFE_TABLES.route} element={<CafeTables />} />
+							<Route path={ROUTES.ACCEPT_ORDER.route} element={<AcceptOrder />} />
+							<Route path={ROUTES.ORDERS.route} element={<Orders />} />
+							<Route path={ROUTES.PAYMENT.route} element={<Payment />} />
 						</>
 					)}
 				</Route>
