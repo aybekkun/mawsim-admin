@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { useAuthPersistStore } from "@/store";
+import { Checkbox } from "@/components/ui/checkbox";
 interface ShopCartProps {
 	className?: string;
 }
@@ -62,6 +63,8 @@ const ShopCart: FC<ShopCartProps> = () => {
 		}
 		onClear();
 	};
+	console.log(isTake);
+	
 
 	return (
 		<>
@@ -71,8 +74,9 @@ const ShopCart: FC<ShopCartProps> = () => {
 			</Button>
 			<MyDialog title="Корзина" open={open} onOpenChange={(open) => setOpen(open)}>
 				{user?.role_id !== 5 && <TableList defaultValue={String(tableId)} setTableId={setTableId} />}
-				<div>
-					<Button  onClick={() => setIsTake((prev) => !prev)}>{isTake ? "Доставка" : "Самовывоз"}</Button>
+				<div className="flex items-center gap-2">
+					<label htmlFor="check">Собой</label>
+					<Checkbox id="check" onCheckedChange={(check) => setIsTake(Boolean(check))} checked={isTake} />
 				</div>
 				{items.length > 0 ? <OrderList /> : <h2 className="font-bold text-lg">Добавьте в корзину что-нибудь</h2>}
 				<div className="flex justify-between">
