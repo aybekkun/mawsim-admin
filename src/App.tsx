@@ -28,8 +28,8 @@ function App() {
 	const navigate = useNavigate();
 	const { isAuth, fetchCheckAuthMe, user } = useAuthPersistStore();
 	useEffect(() => {
-		// fetchCheckAuthMe();
-		// if (!isAuth) navigate("/login");
+		fetchCheckAuthMe();
+		if (!isAuth) navigate("/login");
 	}, [isAuth]);
 
 	return (
